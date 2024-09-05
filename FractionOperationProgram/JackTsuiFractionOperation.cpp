@@ -77,25 +77,23 @@ public:
     {
         Fraction added;
         
-        //This does multiplies both fractions to make the fractions
+          //This does multiplies both fractions to make the fractions
         // have the same denominator
-        this->num *= rhs.den;
-        rhs.num   *= this->den;
+        int lnum = this->num * rhs.den;
 
-        int denTemp = this->den;
 
-        this->den *= rhs.den;
+        int rnum = rhs.num   * this->den;
 
-        rhs.den   *= denTemp;
-
+        int lden = this->den * rhs.den;
 
         //This adds the fraction after both of the fractions have a common denominator
-        this->num += rhs.num;
-        
+        //this->num = this->num - rhs.num;
         //This sets the numerator and the denominator of the temporary Fraction object
         // to the values of the added fractions
-        added.num = this->num;
-        added.den = this->den;
+        added.num = lnum + rnum;
+
+        added.den = lden;
+
 
         //this calls the simplify function that will reinitialize the fraction object
         // before it is returned
@@ -125,8 +123,6 @@ public:
 
         //This subtracts the fraction after both of the fractions have a common denominator
         //this->num = this->num - rhs.num;
-
-
         //This sets the numerator and the denominator of the temporary Fraction object
         // to the values of the subtracted fractions
         sub.num = lnum - rnum;
@@ -195,6 +191,35 @@ int main()
 
     Fraction f3;
 
+
+    Fraction ff1(25,5);
+
+    Fraction ff2(3,4);
+
+    Fraction ff3;
+
+    Fraction fgg1(25,5);
+
+    Fraction fgg2(3,4);
+
+    Fraction fgg3;
+
+    Fraction fe1(25,5);
+
+    Fraction fe2(3,4);
+
+    Fraction fe3;
+
     f3 = f1 * f2;
-    cout<< endl << f3 << endl;
+    cout<< "(" << f1 << ") "<< "*" << " (" << f2<< ") " << " = " << f3 << endl;
+
+
+    ff3 = ff1 / ff2;
+    cout<< "(" << ff1 << ") "<< "/" << " (" << ff2<< ") " << " = " << ff3 << endl;
+
+    fgg3 = fgg1 - fgg2;
+    cout<< "(" << fgg1 << ") "<< "-" << " (" << fgg2<< ") " << " = " << fgg3 << endl;
+
+    fe3 = fe1 + fe2;
+    cout<< "(" << fe1 << ") "<< "-" << " (" << fe2<< ") " << " = " << fe3 << endl;
 }
