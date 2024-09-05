@@ -156,6 +156,7 @@ public:
         multi.num = this->num * rhs.num;
         multi.den = this->den * rhs.den;
 
+        multi = simplify(multi);
         return Fraction(multi.num, multi.den);
         
         
@@ -176,9 +177,11 @@ public:
         //The product of the first fraction and the second flipped fraction
         // is stored in the temp Fraction
         // object
-        divi.num = this->den * rhs.num;
+        divi.num = this->num * rhs.den;
 
-        divi.den = this->num * rhs.den;
+        divi.den = this->den * rhs.num;
+
+        divi = simplify(divi);
 
         return Fraction(divi.num, divi.den);
     }
@@ -192,6 +195,6 @@ int main()
 
     Fraction f3;
 
-    f3 = f1 - f2;
+    f3 = f1 * f2;
     cout<< endl << f3 << endl;
 }
