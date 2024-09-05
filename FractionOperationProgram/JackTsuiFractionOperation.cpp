@@ -1,3 +1,15 @@
+//Jack Tsui
+// 2143 OOP
+// Fraction Operation Program 1
+// 9 - 5 - 2024
+
+//This program overrides the cout and +-*/ operators 
+// for doing operations with fractions
+// There is a class Function for creating fractions and doing 
+// math operations with them
+// The program does all four +-*/ operations to the same
+// Two fractions and prints the result in the terminal
+
 #include<iostream>
 
 using namespace std;
