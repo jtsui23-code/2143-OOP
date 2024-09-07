@@ -58,33 +58,35 @@ private:
     int num;
     int den;
 
-    /**
-     * Private: simplify
-     * 
-     * Description:
-     *      Simplifies the fraction by dividing both numerator and denominator by their
-     *      greatest common divisor.
-     * 
-     * Params:
-     *      - Fraction& sim: Fraction object to simplify
-     * 
-     * Returns:
-     *      - Fraction: The simplified fraction
-     */
     Fraction simplify(Fraction& sim);
-
 
 public:
 
-    /**
+    Fraction();
+    Fraction(int n, int d);
+    Fraction operator+(Fraction& other);
+    Fraction operator-(Fraction& other);
+    Fraction operator*(Fraction& other);
+    Fraction operator/(Fraction& other);
+    bool operator==(Fraction& other);
+    friend ostream& operator<<(ostream& os, const Fraction& frac) ;
+
+};
+
+
+     /**
      * Public: Constructor
      * 
      * Description:
      *      Default constructor for the Fraction class. Initializes fraction to 1/1.
      */
-    Fraction();
+     Fraction::Fraction()
+     {
+        num = den = 1;
+     }
 
-    /**
+
+     /**
      * Public: Constructor
      * 
      * Description:
@@ -95,94 +97,15 @@ public:
      *      - int n: Numerator of the fraction
      *      - int d: Denominator of the fraction
      */
-    Fraction(int n, int d);
-    
-    /**
-     * Public: operator+
-     * 
-     * Description:
-     *      Overloads the + operator to add two Fraction objects.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to add
-     * 
-     * Returns:
-     *      - Fraction: The result of the addition
-     */
-    Fraction operator+(Fraction& other);
-
-    /**
-     * Public: operator-
-     * 
-     * Description:
-     *      Overloads the - operator to subtract one Fraction object from another.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to subtract
-     * 
-     * Returns:
-     *      - Fraction: The result of the subtraction
-     */
-    Fraction operator-(Fraction& other);
-
-    /**
-     * Public: operator*
-     * 
-     * Description:
-     *      Overloads the * operator to multiply two Fraction objects.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to multiply
-     * 
-     * Returns:
-     *      - Fraction: The result of the multiplication
-     */
-    Fraction operator*(Fraction& other);
-
-    /**
-     * Public: operator/
-     * 
-     * Description:
-     *      Overloads the / operator to divide one Fraction object by another.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to divide
-     * 
-     * Returns:
-     *      - Fraction: The result of the division
-     */
-    Fraction operator/(Fraction& other);
-
-    /**
-     * Public: operator==
-     * 
-     * Description:
-     *      Overloads the == operator to compare two Fraction objects for equality.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to compare
-     * 
-     * Returns:
-     *      - bool: True if the fractions are equal, false otherwise
-     */
-    bool operator==(Fraction& other);
-
-    /**
-     * Public: operator<<
-     * 
-     * Description:
-     *      Overloads the << operator to print a Fraction object.
-     * 
-     * Params:
-     *      - ostream& os: Output stream object
-     *      - const Fraction& frac: Fraction object to print
-     * 
-     * Returns:
-     *      - ostream&: Output stream with the Fraction object printed
-     */
-    friend ostream& operator<<(ostream& os, const Fraction& frac) ;
-
-};
+    Fraction::Fraction(int n, int d)
+    {
+        if(d==0)
+        {
+            cout << "Invalid denominator.\n";
+        }
+        num = n;
+        den = d;
+    }
     /**
      * Private: simplify
      * 
@@ -371,11 +294,13 @@ public:
 
     bool Fraction:: operator==(Fraction& rhs)
     {   
-        Fraction placeHolder = Fraction(this->num,this->den);
+        Fraction placeHolder(this->num,this->den);
 
-        Fraction simpL = simplify(placeHolder);
+        Fraction simpL;
+        simpL = simplify(placeHolder);
 
-        Fraction simpR = simplify(rhs);
+        Fraction simpR;
+        simpR = simplify(rhs);
 
         return simpL.num == simpR.num && simpL.den == simpR.den;
 
@@ -385,41 +310,25 @@ public:
 
 int main()
 {
-    Fraction f1(25,5);
-    Fraction f2(3,4);
-    Fraction f3;
-    Fraction ff1(25,5);
-    Fraction ff2(3,4);
-    Fraction ff3;
-    Fraction fgg1(25,5);
-    Fraction fgg2(3,4);
-    Fraction fgg3;
-    Fraction fe1(25,5);
-    Fraction fe2(3,4);
-    Fraction fe3;
+    
 
     Fraction fee1(25,5);
     Fraction fee2(3,4);
 
     bool result;
+    string answer;
+
+    if(result==0)
+    {
+        answer = "false";
+    }
+    else
+    {
+        answer = "true";
+    }
 
     result = fee1 == fee2;
 
-    cout<< "(" << f1 << ") "<< "==" << " (" << f2<< ") " << " = " << result << endl;
-
-    
-    f3 = f1 * f2;
-    cout<< "(" << f1 << ") "<< "*" << " (" << f2<< ") " << " = " << f3 << endl;
-
-
-    ff3 = ff1 / ff2;
-    cout<< "(" << ff1 << ") "<< "/" << " (" << ff2<< ") " << " = " << ff3 << endl;
-
-    fgg3 = fgg1 - fgg2;
-    cout<< "(" << fgg1 << ") "<< "-" << " (" << fgg2<< ") " << " = " << fgg3 << endl;
-
-    fe3 = fe1 + fe2;
-    cout<< "(" << fe1 << ") "<< "+" << " (" << fe2<< ") " << " = " << fe3 << endl;
-
+    cout<< "(" << fee1 << ") "<< "==" << " (" << fee2<< ") " << " = " << result << " or " << answer<< endl;
     
 }
