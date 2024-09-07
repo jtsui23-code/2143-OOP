@@ -356,6 +356,19 @@ public:
         return os << rhs.num << "/" << rhs.den;
     }
 
+    /**
+     * Public: operator==
+     * 
+     * Description:
+     *      Overloads the == operator to compare two Fraction objects for equality.
+     * 
+     * Params:
+     *      - Fraction& other: Fraction object to compare
+     * 
+     * Returns:
+     *      - bool: True if the fractions are equal, false otherwise
+     */
+
     bool Fraction:: operator==(Fraction& rhs)
     {   
         Fraction placeHolder = Fraction(this->num,this->den);
