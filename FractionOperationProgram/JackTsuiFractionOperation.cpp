@@ -55,280 +55,268 @@ using namespace std;
 class Fraction
 {
 private:
-    int num;
-    int den;
+    int num;  // Numerator of the fraction
+    int den;  // Denominator of the fraction
 
+    // Helper function to simplify a given Fraction by dividing both
+    // the numerator and denominator by their greatest common divisor.
     Fraction simplify(Fraction& sim);
 
 public:
-
+    // Default constructor: Initializes the fraction as 1/1.
     Fraction();
-    Fraction(int n, int d);
-    Fraction operator+(Fraction& other);
-    Fraction operator-(Fraction& other);
-    Fraction operator*(Fraction& other);
-    Fraction operator/(Fraction& other);
-    bool operator==(Fraction& other);
-    friend ostream& operator<<(ostream& os, const Fraction& frac) ;
 
+    // Constructor: Initializes the fraction with a given numerator and denominator.
+    Fraction(int n, int d);
+
+    // Overloads the + operator to add two Fraction objects.
+    Fraction operator+(Fraction& other);
+
+    // Overloads the - operator to subtract one Fraction object from another.
+    Fraction operator-(Fraction& other);
+
+    // Overloads the * operator to multiply two Fraction objects.
+    Fraction operator*(Fraction& other);
+
+    // Overloads the / operator to divide one Fraction object by another.
+    Fraction operator/(Fraction& other);
+
+    // Overloads the == operator to compare two Fraction objects for equality.
+    bool operator==(Fraction& other);
+
+    // Overloads the << operator to print a Fraction object.
+    friend ostream& operator<<(ostream& os, const Fraction& frac);
 };
 
 
-     /**
-     * Public: Constructor
-     * 
-     * Description:
-     *      Default constructor for the Fraction class. Initializes fraction to 1/1.
-     */
-     Fraction::Fraction()
-     {
-        num = den = 1;
-     }
+/**
+ * Public: Constructor
+ * 
+ * Description:
+ *      Default constructor for the Fraction class. Initializes fraction to 1/1.
+ */
+Fraction::Fraction()
+{
+    num = den = 1;  // Both numerator and denominator set to 1.
+}
 
 
-     /**
-     * Public: Constructor
-     * 
-     * Description:
-     *      Constructor for the Fraction class. Initializes fraction with given numerator
-     *      and denominator.
-     * 
-     * Params:
-     *      - int n: Numerator of the fraction
-     *      - int d: Denominator of the fraction
-     */
-    Fraction::Fraction(int n, int d)
+/**
+ * Public: Constructor
+ * 
+ * Description:
+ *      Constructor for the Fraction class. Initializes fraction with given numerator
+ *      and denominator.
+ * 
+ * Params:
+ *      - int n: Numerator of the fraction
+ *      - int d: Denominator of the fraction
+ */
+Fraction::Fraction(int n, int d)
+{
+    if (d == 0)  // Check for invalid denominator (0).
     {
-        if(d==0)
-        {
-            cout << "Invalid denominator.\n";
-        }
-        num = n;
-        den = d;
+        cout << "Invalid denominator.\n";
     }
-    /**
-     * Private: simplify
-     * 
-     * Description:
-     *      Simplifies the fraction by dividing both numerator and denominator by their
-     *      greatest common divisor.
-     * 
-     * Params:
-     *      - Fraction& sim: Fraction object to simplify
-     * 
-     * Returns:
-     *      - Fraction: The simplified fraction
-     */
-    Fraction Fraction::simplify(Fraction &sim)
+    num = n;   // Initialize numerator.
+    den = d;   // Initialize denominator.
+}
+
+/**
+ * Private: simplify
+ * 
+ * Description:
+ *      Simplifies the fraction by dividing both numerator and denominator by their
+     *      greatest common divisor (GCD).
+ * 
+ * Params:
+ *      - Fraction& sim: Fraction object to simplify.
+ * 
+ * Returns:
+ *      - Fraction: The simplified fraction.
+ */
+Fraction Fraction::simplify(Fraction &sim)
+{
+    // Temporary variables to hold numerator and denominator values.
+    int n = sim.num;
+    int d = sim.den;
+    
+    // Loop to find the greatest common divisor using the Euclidean algorithm.
+    while (d != 0)
     {
-        //These are placeholders for the numerator and denominators
-        int n = sim.num;
-        int d = sim.den;
-        
-        //this loop will keep on dividing n/d until there is no remainder left
-        while(d != 0)
-        {
-            //this variable keeps the previous value of divisor because the divisor will 
-            // eventually hit zero 
-            int hold = d;
-            d = n % d;
-            n = hold;
-        }
-
-        //the second to last divisor got from the loop is the greatest common divisor
-        // both the numerator and denominator are divided by the divisor stored in n
-        sim.num /= n;
-        sim.den /= n;
-
-        // the quotient is then returned as the simplified fraction form
-        return sim;
+        int hold = d;  // Store current denominator value.
+        d = n % d;     // Update denominator with the remainder of n / d.
+        n = hold;      // Set numerator to the previous denominator.
     }
 
-    /**
-     * Public: operator+
-     * 
-     * Description:
-     *      Overloads the + operator to add two Fraction objects.
-     * 
-     * Params:
-     *      - Fraction& rhs: Fraction object to add
-     * 
-     * Returns:
-     *      - Fraction: The result of the addition
-     */
-    Fraction Fraction::operator+(Fraction &rhs)
-    {
-        Fraction added;
-        
-        //This does multiplies both fractions to make the fractions
-        // have the same denominator
-        int lnum = this->num * rhs.den;
-        int rnum = rhs.num   * this->den;
-        int lden = this->den * rhs.den;
+    // Divide both numerator and denominator by the greatest common divisor (n).
+    sim.num /= n;
+    sim.den /= n;
 
-        //This adds the fraction after both of the fractions have a common denominator
-        added.num = lnum + rnum;
-        added.den = lden;
+    // Return the simplified fraction.
+    return sim;
+}
 
-        //this calls the simplify function that will reinitialize the fraction object
-        // before it is returned
-        added = simplify(added);
-        return Fraction(added.num, added.den);
-    }
 
-    /**
-     * Public: operator-
-     * 
-     * Description:
-     *      Overloads the - operator to subtract one Fraction object from another.
-     * 
-     * Params:
-     *      - Fraction& rhs: Fraction object to subtract
-     * 
-     * Returns:
-     *      - Fraction: The result of the subtraction
-     */
-    Fraction Fraction::operator-(Fraction &rhs)
-    {
-        Fraction sub;
-        
-        //This does multiplies both fractions to make the fractions
-        // have the same denominator
-        int lnum = this->num * rhs.den;
-        int rnum = rhs.num   * this->den;
-        int lden = this->den * rhs.den;
+/**
+ * Public: operator+
+ * 
+ * Description:
+ *      Overloads the + operator to add two Fraction objects.
+ * 
+ * Params:
+ *      - Fraction& rhs: Fraction object to add.
+ * 
+ * Returns:
+ *      - Fraction: The result of the addition.
+ */
+Fraction Fraction::operator+(Fraction &rhs)
+{
+    Fraction added;  // Temporary Fraction object to hold the result.
 
-        //This subtracts the fraction after both of the fractions have a common denominator
-        sub.num = lnum - rnum;
-        sub.den = lden;
+    // Compute the new numerator and denominator for the result.
+    int lnum = this->num * rhs.den;  // Left numerator adjusted to common denominator.
+    int rnum = rhs.num * this->den;  // Right numerator adjusted to common denominator.
+    int lden = this->den * rhs.den;  // Common denominator.
 
-        //this calls the simplify function that will reinitialize the fraction object
-        // before it is returned
-        sub = simplify(sub);
-        return Fraction(sub.num, sub.den);
-    }
+    // Add the numerators and assign to the result Fraction.
+    added.num = lnum + rnum;
+    added.den = lden;
 
-    /**
-     * Public: operator*
-     * 
-     * Description:
-     *      Overloads the * operator to multiply two Fraction objects.
-     * 
-     * Params:
-     *      - Fraction& rhs: Fraction object to multiply
-     * 
-     * Returns:
-     *      - Fraction: The result of the multiplication
-     */
-    Fraction Fraction::operator*(Fraction &rhs)
-    {
-        //this creates a temporary Fraction object 
-        Fraction multi;
+    // Simplify the result before returning.
+    added = simplify(added);
+    return Fraction(added.num, added.den);
+}
 
-        //The product of the numerator and denominator is stored in the temp Fraction
-        // object
-        multi.num = this->num * rhs.num;
-        multi.den = this->den * rhs.den;
 
-        multi = simplify(multi);
-        return Fraction(multi.num, multi.den);
-    }
+/**
+ * Public: operator-
+ * 
+ * Description:
+ *      Overloads the - operator to subtract one Fraction object from another.
+ * 
+ * Params:
+ *      - Fraction& rhs: Fraction object to subtract.
+ * 
+ * Returns:
+ *      - Fraction: The result of the subtraction.
+ */
+Fraction Fraction::operator-(Fraction &rhs)
+{
+    Fraction sub;  // Temporary Fraction object to hold the result.
 
-    /**
-     * Public: operator/
-     * 
-     * Description:
-     *      Overloads the / operator to divide one Fraction object by another.
-     * 
-     * Params:
-     *      - Fraction& rhs: Fraction object to divide
-     * 
-     * Returns:
-     *      - Fraction: The result of the division
-     */
-    Fraction Fraction::operator/(Fraction &rhs)
-    {
-        //this creates a temporary Fraction object 
-        Fraction divi;
+    // Compute the new numerator and denominator for the result.
+    int lnum = this->num * rhs.den;  // Left numerator adjusted to common denominator.
+    int rnum = rhs.num * this->den;  // Right numerator adjusted to common denominator.
+    int lden = this->den * rhs.den;  // Common denominator.
 
-        //The product of the first fraction and the second flipped fraction
-        // is stored in the temp Fraction object
-        divi.num = this->num * rhs.den;
-        divi.den = this->den * rhs.num;
+    // Subtract the numerators and assign to the result Fraction.
+    sub.num = lnum - rnum;
+    sub.den = lden;
 
-        divi = simplify(divi);
+    // Simplify the result before returning.
+    sub = simplify(sub);
+    return Fraction(sub.num, sub.den);
+}
 
-        return Fraction(divi.num, divi.den);
-    }
 
-    /**
-     * Public: operator<<
-     * 
-     * Description:
-     *      Overloads the << operator to print a Fraction object.
-     * 
-     * Params:
-     *      - ostream& os: Output stream object
-     *      - const Fraction& frac: Fraction object to print
-     * 
-     * Returns:
-     *      - ostream&: Output stream with the Fraction object printed
-     */
-    std::ostream& operator<<(ostream& os, const Fraction &rhs)
-    {
-        return os << rhs.num << "/" << rhs.den;
-    }
+/**
+ * Public: operator*
+ * 
+ * Description:
+ *      Overloads the * operator to multiply two Fraction objects.
+ * 
+ * Params:
+ *      - Fraction& rhs: Fraction object to multiply.
+ * 
+ * Returns:
+ *      - Fraction: The result of the multiplication.
+ */
+Fraction Fraction::operator*(Fraction &rhs)
+{
+    Fraction multi;  // Temporary Fraction object to hold the result.
 
-    /**
-     * Public: operator==
-     * 
-     * Description:
-     *      Overloads the == operator to compare two Fraction objects for equality.
-     * 
-     * Params:
-     *      - Fraction& other: Fraction object to compare
-     * 
-     * Returns:
-     *      - bool: True if the fractions are equal, false otherwise
-     */
+    // Multiply the numerators and denominators.
+    multi.num = this->num * rhs.num;
+    multi.den = this->den * rhs.den;
 
-    bool Fraction:: operator==(Fraction& rhs)
-    {   
-        Fraction placeHolder(this->num,this->den);
+    // Simplify the result before returning.
+    multi = simplify(multi);
+    return Fraction(multi.num, multi.den);
+}
 
-        Fraction simpL;
-        simpL = simplify(placeHolder);
 
-        Fraction simpR;
-        simpR = simplify(rhs);
+/**
+ * Public: operator/
+ * 
+ * Description:
+ *      Overloads the / operator to divide one Fraction object by another.
+ * 
+ * Params:
+ *      - Fraction& rhs: Fraction object to divide.
+ * 
+ * Returns:
+ *      - Fraction: The result of the division.
+ */
+Fraction Fraction::operator/(Fraction &rhs)
+{
+    Fraction divi;  // Temporary Fraction object to hold the result.
 
-        return simpL.num == simpR.num && simpL.den == simpR.den;
+    // Multiply the first fraction by the reciprocal of the second.
+    divi.num = this->num * rhs.den;
+    divi.den = this->den * rhs.num;
 
-        
-    }
+    // Simplify the result before returning.
+    divi = simplify(divi);
+    return Fraction(divi.num, divi.den);
+}
 
+
+/**
+ * Public: operator<<
+ * 
+ * Description:
+ *      Overloads the << operator to print a Fraction object.
+ * 
+ * Params:
+ *      - ostream& os: Output stream object.
+ *      - const Fraction& frac: Fraction object to print.
+ * 
+ * Returns:
+ *      - ostream&: Output stream with the Fraction object printed.
+ */
+std::ostream& operator<<(ostream& os, const Fraction &rhs)
+{
+    // Output the fraction in the form "numerator/denominator".
+    return os << rhs.num << "/" << rhs.den;
+}
+
+
+/**
+ * Public: operator==
+ * 
+ * Description:
+ *      Overloads the == operator to compare two Fraction objects for equality.
+ * 
+ * Params:
+ *      - Fraction& rhs: Fraction object to compare.
+ * 
+ * Returns:
+ *      - bool: True if the fractions are equal, false otherwise.
+ */
+bool Fraction::operator==(Fraction& rhs)
+{
+    // Simplify both fractions before comparison.
+    Fraction simpL = simplify(*this);
+    Fraction simpR = simplify(rhs);
+
+    // Compare numerators and denominators of the simplified fractions.
+    return simpL.num == simpR.num && simpL.den == simpR.den;
+}
 
 int main()
 {
-    
 
-    Fraction fee1(25,5);
-    Fraction fee2(3,4);
-
-    bool result;
-    string answer;
-
-    if(result==0)
-    {
-        answer = "false";
-    }
-    else
-    {
-        answer = "true";
-    }
-
-    result = fee1 == fee2;
-
-    cout<< "(" << fee1 << ") "<< "==" << " (" << fee2<< ") " << " = " << result << " or " << answer<< endl;
+    return 0;
     
 }
