@@ -314,9 +314,14 @@ bool Fraction::operator==(Fraction& rhs)
     return simpL.num == simpR.num && simpL.den == simpR.den;
 }
 
-int main()
+int main(int argc, char **argv[])
 {
+    // Loop through the command-line arguments starting from the second argument (index 1).
+    // The first argument (index 0) is usually the name of the program.
+    for(int i = 1; i < argc; i++)
+    {
+        // Code to process each argument would go here.
+    }
 
-    return 0;
-    
+    return 0;  // Return 0 to indicate successful program termination.
 }
