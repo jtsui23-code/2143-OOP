@@ -316,12 +316,22 @@ bool Fraction::operator==(Fraction& rhs)
 
 int main(int argc, char **argv[])
 {
-    // Loop through the command-line arguments starting from the second argument (index 1).
-    // The first argument (index 0) is usually the name of the program.
+    // argc (argument count) stores the number of command-line arguments passed, 
+    // including the program's name itself.
+    
+    // argv (argument vector) is an array of C-strings (character arrays) that
+    // holds the command-line arguments. argv[0] is the program name, and argv[1] 
+    // to argv[argc-1] are the additional arguments provided.
+
+    // Loop through all the command-line arguments, starting from index 1 (ignoring
+    // the program's name at index 0).
     for(int i = 1; i < argc; i++)
     {
-        // Code to process each argument would go here.
+        // Placeholder for processing each command-line argument (argv[i]).
+        // You would typically add logic here to handle the arguments.
     }
 
-    return 0;  // Return 0 to indicate successful program termination.
+    // Return 0 to indicate successful execution of the program.
+    return 0;
 }
+
