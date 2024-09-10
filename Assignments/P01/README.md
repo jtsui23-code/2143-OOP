@@ -7,6 +7,7 @@ This program overrides the cout and +-/* operators for doing operations with fra
 |   #   | File            | Description                                        |
 | :---: | --------------- | -------------------------------------------------- |
 |   1   | [main.cpp](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/P01/main.cpp)        | This runs the program for the Fraction Class.      |
+|   2   | [fra.exe](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/P01/fra.exe)          | This is the compiled program                       |
 
 
 ### Instructions:
