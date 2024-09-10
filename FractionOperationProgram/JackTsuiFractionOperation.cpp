@@ -314,24 +314,76 @@ bool Fraction::operator==(Fraction& rhs)
     return simpL.num == simpR.num && simpL.den == simpR.den;
 }
 
-int main(int argc, char **argv[])
+int main(int argc, char *argv[])
 {
-    // argc (argument count) stores the number of command-line arguments passed, 
+    // argc (argument count) stores the number of command-line arguments passed to the program, 
     // including the program's name itself.
     
-    // argv (argument vector) is an array of C-strings (character arrays) that
-    // holds the command-line arguments. argv[0] is the program name, and argv[1] 
-    // to argv[argc-1] are the additional arguments provided.
+    // argv (argument vector) is an array of C-strings (character arrays) holding the command-line 
+    // arguments. argv[0] is the program's name, and argv[1] to argv[argc-1] are the additional arguments.
 
-    // Loop through all the command-line arguments, starting from index 1 (ignoring
-    // the program's name at index 0).
-    for(int i = 1; i < argc; i++)
+    int n1, n2, d1, d2;   // Variables for numerators (n1, n2) and denominators (d1, d2) of the fractions.
+    char slash;           // Variable to store the '/' character between numerators and denominators.
+    string op;            // Variable to store the operator (e.g., "+", "-", "*", "/", "==").
+    bool equal = false;   // Flag to indicate if the two fractions are equal.
+    string convertEqual = "false"; // String version of equality flag to output "True" or "False".
+
+    // Continuously read input in the format: n1 / d1 op n2 / d2 (e.g., "1/2 + 1/3")
+    while(cin >> n1 >> slash >> d1 >> op >> n2 >> slash >> d2)
     {
-        // Placeholder for processing each command-line argument (argv[i]).
-        // You would typically add logic here to handle the arguments.
+        // Create two Fraction objects using the input values for the two fractions.
+        Fraction f1(n1, d1);
+        Fraction f2(n2, d2);
+        Fraction result;  // Variable to store the result of any arithmetic operation.
+
+        // If the operation is "==", compare the two fractions for equality.
+        if(op == "==")
+        {
+            equal = (f1 == f2);  // Call the overloaded == operator.
+            
+            // If the fractions are equal, set convertEqual to "True", otherwise keep it "false".
+            if(equal)
+            {
+                convertEqual = "True";
+            }
+            // Output the result of the equality check.
+            cout << f1 << " " << op << " " << f2 << " = " << equal << " " << convertEqual << endl;
+        }
+        // If the operation is addition.
+        else if(op == "+")
+        {
+            result = f1 + f2;  // Call the overloaded + operator.
+            // Output the result of the addition.
+            cout << f1 << " " << op << " " << f2 << " = " << result << endl;
+        }
+        // If the operation is subtraction.
+        else if(op == "-")
+        {
+            result = f1 - f2;  // Call the overloaded - operator.
+            // Output the result of the subtraction.
+            cout << f1 << " " << op << " " << f2 << " = " << result << endl;
+        }
+        // If the operation is multiplication.
+        else if(op == "*")
+        {
+            result = f1 * f2;  // Call the overloaded * operator.
+            // Output the result of the multiplication.
+            cout << f1 << " " << op << " " << f2 << " = " << result << endl;
+        }
+        // If the operation is division.
+        else if(op == "/")
+        {
+            result = f1 / f2;  // Call the overloaded / operator.
+            // Output the result of the division.
+            cout << f1 << " " << op << " " << f2 << " = " << result << endl;
+        }
+        // Handle invalid input or unrecognized operations.
+        else
+        {
+            cout << "There was an error while extracting input file.\n";
+        }    
     }
 
     // Return 0 to indicate successful execution of the program.
     return 0;
 }
-
