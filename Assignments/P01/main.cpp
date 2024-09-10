@@ -26,6 +26,25 @@
 #include<string>
 using namespace std;
 
+
+
+
+
+/******************************************************************
+ * Declaration of Fraction Class
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ ******************************************************************/
+
+
 /**
  * Fraction
  * 
@@ -69,28 +88,39 @@ private:
 public:
     // Default constructor: Initializes the fraction as 1/1.
     Fraction();
-
     // Constructor: Initializes the fraction with a given numerator and denominator.
     Fraction(int n, int d);
-
     // Overloads the + operator to add two Fraction objects.
     Fraction operator+(Fraction& other);
-
     // Overloads the - operator to subtract one Fraction object from another.
     Fraction operator-(Fraction& other);
-
     // Overloads the * operator to multiply two Fraction objects.
     Fraction operator*(Fraction& other);
-
     // Overloads the / operator to divide one Fraction object by another.
     Fraction operator/(Fraction& other);
-
     // Overloads the == operator to compare two Fraction objects for equality.
     bool operator==(Fraction& other);
-
     // Overloads the << operator to print a Fraction object.
     friend ostream& operator<<(ostream& os, const Fraction& frac);
 };
+
+ /******************************************************************
+ * Implementation of Fraction Class
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ ******************************************************************/
+
+
+
+
 
 
 /**
