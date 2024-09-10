@@ -10,16 +10,20 @@
 *  Description:
 *        This program overrides the cout and +-/* operators for doing operations with 
 *        fractions. There is a class Function name Fraction for creating fractions 
-*        and doing math operations with them.
+*        and doing math operations with them. However, this program can only take
+*        single digit fractions as input for example 5/4, 8/3.
 * 
 *  Usage:
-*        
+*      g++ main.cpp -o fra
+*      ./fra [filename]
 * 
-*  Files:            JackTsuiFractionOperation.cpp
+*  Files:            main.cpp
+*                    fra.exe 
 *****************************************************************************/
 
 #include<iostream>
-
+#include<fstream>
+#include<string>
 using namespace std;
 
 /**
@@ -314,6 +318,7 @@ bool Fraction::operator==(Fraction& rhs)
     return simpL.num == simpR.num && simpL.den == simpR.den;
 }
 
+
 int main(int argc, char *argv[])
 {
     // argc (argument count) stores the number of command-line arguments passed to the program, 
@@ -324,25 +329,35 @@ int main(int argc, char *argv[])
 
     int n1, n2, d1, d2;   // Variables for numerators (n1, n2) and denominators (d1, d2) of the fractions.
     char slash;           // Variable to store the '/' character between numerators and denominators.
-    string op;            // Variable to store the operator (e.g., "+", "-", "*", "/", "==").
+    string op, f1, f2;    // Variables to store the operator (e.g., "+", "-", "*", "/", "==") and fractions (f1, f2).
     bool equal = false;   // Flag to indicate if the two fractions are equal.
     string convertEqual = "false"; // String version of equality flag to output "True" or "False".
 
+    // Open the input file provided as the first command-line argument (argv[1]).
+    ifstream fin;
+    fin.open(argv[1]);
+
     // Continuously read input in the format: n1 / d1 op n2 / d2 (e.g., "1/2 + 1/3")
-    while(cin >> n1 >> slash >> d1 >> op >> n2 >> slash >> d2)
+    while (fin >> f1 >> op >> f2)
     {
-        // Create two Fraction objects using the input values for the two fractions.
+        // Extract numerators and denominators from the string representation of fractions.
+        n1 = f1[0] - '0'; // Convert the first character to an integer (numerator of f1).
+        d1 = f1[2] - '0'; // Convert the third character to an integer (denominator of f1).
+        n2 = f2[0] - '0'; // Convert the first character to an integer (numerator of f2).
+        d2 = f2[2] - '0'; // Convert the third character to an integer (denominator of f2).
+
+        // Create two Fraction objects using the extracted values.
         Fraction f1(n1, d1);
         Fraction f2(n2, d2);
-        Fraction result;  // Variable to store the result of any arithmetic operation.
+        Fraction result; // Variable to store the result of any arithmetic operation.
 
         // If the operation is "==", compare the two fractions for equality.
-        if(op == "==")
+        if (op == "==")
         {
             equal = (f1 == f2);  // Call the overloaded == operator.
             
             // If the fractions are equal, set convertEqual to "True", otherwise keep it "false".
-            if(equal)
+            if (equal)
             {
                 convertEqual = "True";
             }
@@ -350,28 +365,28 @@ int main(int argc, char *argv[])
             cout << f1 << " " << op << " " << f2 << " = " << equal << " " << convertEqual << endl;
         }
         // If the operation is addition.
-        else if(op == "+")
+        else if (op == "+")
         {
             result = f1 + f2;  // Call the overloaded + operator.
             // Output the result of the addition.
             cout << f1 << " " << op << " " << f2 << " = " << result << endl;
         }
         // If the operation is subtraction.
-        else if(op == "-")
+        else if (op == "-")
         {
             result = f1 - f2;  // Call the overloaded - operator.
             // Output the result of the subtraction.
             cout << f1 << " " << op << " " << f2 << " = " << result << endl;
         }
         // If the operation is multiplication.
-        else if(op == "*")
+        else if (op == "*")
         {
             result = f1 * f2;  // Call the overloaded * operator.
             // Output the result of the multiplication.
             cout << f1 << " " << op << " " << f2 << " = " << result << endl;
         }
         // If the operation is division.
-        else if(op == "/")
+        else if (op == "/")
         {
             result = f1 / f2;  // Call the overloaded / operator.
             // Output the result of the division.
@@ -381,11 +396,9 @@ int main(int argc, char *argv[])
         else
         {
             cout << "There was an error while extracting input file.\n";
-        }    
+        }
     }
 
     // Return 0 to indicate successful execution of the program.
     return 0;
 }
-
-
