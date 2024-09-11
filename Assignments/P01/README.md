@@ -1,7 +1,7 @@
 ## P01 - Fraction Class
 ### Jack Tsui
 ### Description:
-This program overrides the cout and +-/* operators for doing operations with fractions. There is a class Function named Fraction for creating fractions and doing math operations with them.
+This program overrides the cout and +-/* operators for doing operations with fractions. There is a class Function named Fraction for creating fractions and doing math operations with them. However, this program can only take single-digit fractions as input for example 5/4, 8/3.
 
 ### Files:
 |   #   | File            | Description                                        |
