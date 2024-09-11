@@ -22,7 +22,6 @@
 *****************************************************************************/
 
 #include<iostream>
-#include<fstream>
 #include<string>
 using namespace std;
 
@@ -363,12 +362,9 @@ int main(int argc, char *argv[])
     bool equal = false;   // Flag to indicate if the two fractions are equal.
     string convertEqual = "false"; // String version of equality flag to output "True" or "False".
 
-    // Open the input file provided as the first command-line argument (argv[1]).
-    ifstream fin;
-    fin.open(argv[1]);
 
     // Continuously read input in the format: n1 / d1 op n2 / d2 (e.g., "1/2 + 1/3")
-    while (fin >> f1 >> op >> f2)
+    while (cin >> f1 >> op >> f2)
     {
         // Extract numerators and denominators from the string representation of fractions.
         n1 = f1[0] - '0'; // Convert the first character to an integer (numerator of f1).
