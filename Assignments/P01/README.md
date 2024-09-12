@@ -17,5 +17,5 @@ This program overrides the cout and +-/* operators for doing operations with fra
 - Enter the name of the input file as an argument
 
 ### Example:
-  g++ main.cpp [write the name of exe you want]
-  ./[name of exe] < [input file]
+  - g++ main.cpp [write the name of exe you want]
+  - ./[name of exe] < [input file]
