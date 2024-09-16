@@ -88,7 +88,7 @@ public:
     // Default constructor: Initializes the fraction as 1/1.
     Fraction();
     // Constructor: Initializes the fraction with a given numerator and denominator.
-    Fraction(int n, int d);
+    Fraction(int, int);
     // Overloads the + operator to add two Fraction objects.
     Fraction operator+(Fraction& other);
     // Overloads the - operator to subtract one Fraction object from another.
