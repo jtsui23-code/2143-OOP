@@ -1,21 +1,21 @@
-## Class Design For Knucklebones
+# Class Design For Knucklebones
 
-# Dice Class
+## Dice Class
   - Data: Sides, Current Value
   - Actions: roll(), getValue()
   - Relationships: Will be used by the Player.
 
-# Player Class
+## Player Class
   - Data: Name, Score, diceSet, playerStats
   - Actions: rollDice(), getScore()
   - Relationships: Each player will get a dice and participate in the game. Use Composition for Dice Class.
 
-# Game Class
+## Game Class
   - Data: Players, Rules, currentRound
   - -Actions: startGame(), endGame(), updateScore()
   - Relationships: Controls Players and their actions. Uses composiiton for Players.
 
-# Knucklebones
+## Knucklebones
   - Data: board(), knuckleboneSpecificRules()
   - Actions: getWinner(), getLoser(), startRound(), endRound(), calculateLeaderBoard(), 
   - Relationships: Inherits from Game Class.
