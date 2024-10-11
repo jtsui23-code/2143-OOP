@@ -2,7 +2,9 @@
 
 ## Dice Class
   - Data: Sides, Current Value
+    
   - Actions: roll(), getValue()
+    
   - Relationships: Will be used by the Player.
 
 ## Player Class
