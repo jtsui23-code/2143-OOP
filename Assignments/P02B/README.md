@@ -24,6 +24,6 @@
 ## Knucklebones
   - Data: board(), knuckleboneSpecificRules()
     
-  - Actions: getWinner(), getLoser(), startRound(), endRound(), calculateLeaderboard(), drawBoard(), animateDice(), countStreak(), getStreak(), getLeaderboard()
+  - Actions: getWinner(), getLoser(), startRound(), endRound(), calculateLeaderboard(), drawBoard(), animateDice(), countStreak(), getStreak(), getLeaderboard(), getOpponent()
     
   - Relationships: Inherits from Game Class.
