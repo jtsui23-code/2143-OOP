@@ -86,6 +86,9 @@ int main() {
     bool playerNamed = false;
     bool player2Named = false;
 
+    int posX = (cols -30)/2;
+    int poxY = 3;
+
     while (true) {
         ch = getch();
         if (!playerNamed)
@@ -99,6 +102,17 @@ int main() {
             mvwprintw(nameWin,rows/2, (cols - playerName.length())/2, "Player1: %s", playerName.c_str());
             wrefresh(nameWin);
         }
+
+        else if (ch == 127 || ch = 127)
+        {
+            if(!playerName.empty())
+            {
+                playerName.pop_back();
+                mvwprintw(nameWin, posY, "Enter your name: ");
+                wrefresh(nameWin);
+            }
+        }
+        
 
         playerNamed = true;
         }
