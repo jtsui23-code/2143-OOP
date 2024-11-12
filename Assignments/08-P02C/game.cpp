@@ -69,6 +69,13 @@ int main() {
 
     dice.setBorderColor(11);
     dice.setDotColor(5);
+    
+    WINDOW *nameWin = newwin(5, cols - 4, rows / 4, 2);  // 5 rows, full width of the terminal minus margins
+    box(nameWin, 0, 0);  // Draw border for the window
+    wrefresh(nameWin);
+    
+    mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter your name:");  // Prompt text centered
+    wrefresh(nameWin);
 
     //This prompts the user to input their name
     Input input("Enter your name: ", 3,30, rows - 2, (cols + 30)/2);
@@ -80,15 +87,17 @@ int main() {
     bool player2Named = false;
 
     while (true) {
+        ch = getch();
         if (!playerNamed)
         {
-        name1 = getch();
         input.captureInput();
         playerName = input.getInput();
 
-        if (name1 == '\n' || name1 == KEY_ENTER)
+        if (ch == '\n' || ch == KEY_ENTER)
         {
             Logger::log("Player's name is: ", playerName);
+            mvwprintw(nameWin,rows/2, (cols - playerName.length())/2, "Player1: %s", playerName.c_str());
+            wrefresh(nameWin);
         }
 
         playerNamed = true;
