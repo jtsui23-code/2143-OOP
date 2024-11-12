@@ -48,6 +48,7 @@ int main() {
 
     int rows, cols, size;
     int ch;
+    int name1,name2;
 
     getmaxyx(stdscr, rows, cols);
 
@@ -75,16 +76,24 @@ int main() {
 
     input.printBorder();
     input.printInput(rows - 2, (cols + 30)/2 + 15);
+    bool playerNamed = false;
+    bool player2Named = false;
 
     while (true) {
-        ch = getch();
+        if (!playerNamed)
+        {
+        name1 = getch();
         input.captureInput();
         playerName = input.getInput();
 
-        if (ch == '\n' || ch == KEY_ENTER)
+        if (name1 == '\n' || name1 == KEY_ENTER)
         {
             Logger::log("Player's name is: ", playerName);
         }
+
+        playerNamed = true;
+        }
+        
         if (ch == 'q' || ch == 'Q') 
         {
             break;
