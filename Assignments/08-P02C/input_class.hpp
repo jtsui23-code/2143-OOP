@@ -56,7 +56,7 @@ class Input {
         Colorly::setColor(box_color);
         Colorly::winColorOn(input_win, box_color);
         box(input_win, 0, 0);                        // Draw a border around the input box
-        mvwprintw(input_win, 1, 1, prompt.c_str());  // Label inside the box
+        mvwprintw(input_win, 1, 1, "%s",prompt.c_str());  // Label inside the box
         wrefresh(input_win);
         Colorly::winColorOff(input_win, box_color);
     }

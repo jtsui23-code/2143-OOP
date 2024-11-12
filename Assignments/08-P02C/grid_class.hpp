@@ -83,7 +83,7 @@ class Grid {
                 int y = ((base_y + cell_height) * i) + 2;
                 int x = ((base_x + cell_width) * j) + 3;
                 if (values[i][j] > 0) {
-                    mvwprintw(win, y, x, to_string(values[i][j]).c_str());
+                    mvwprintw(win, y, x,"%s" ,to_string(values[i][j]).c_str());
                 }
             }
         }

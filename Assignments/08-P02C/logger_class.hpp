@@ -114,7 +114,7 @@ class Logger {
         int h, w;  // height and width of window
         getmaxyx(win, h, w);
         mvwprintw(win, 0, 0, "%-*s", w, " ");  // blank out entire top line
-        mvwprintw(win, 0, 0, lastLine.c_str());
+        mvwprintw(win, 0, 0,"%s" ,lastLine.c_str());
         return;
     }
 

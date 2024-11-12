@@ -45,7 +45,7 @@ class Button {
         // Draw button text centered in the window
         int wmiddle = (frame.w - text.length()) / 2;
         int hmiddle = (frame.h - 1) / 2;
-        mvwprintw(button_win, hmiddle, wmiddle, text.c_str());
+        mvwprintw(button_win, hmiddle, wmiddle,"%s", text.c_str());
         wrefresh(button_win);
     }
 

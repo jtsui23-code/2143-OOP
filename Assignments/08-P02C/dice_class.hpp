@@ -2,6 +2,7 @@
 // #include <locale.h>
 #include <ncurses.h>
 #include <unistd.h>  // For usleep()
+#include <locale.h>
 
 #include "logger_class.hpp"
 #include <map>
@@ -9,6 +10,7 @@
 #include <utility>
 
 using namespace std;
+
 
 class DiceViz {
     WINDOW *win;
@@ -21,6 +23,8 @@ class DiceViz {
 
    public:
     DiceViz(int y, int x) : y(y), x(x) {
+        setlocale(LC_ALL, "");  // Enable Unicode support
+
         win             = newwin(5, 7, y, x);
         border_color    = 1;
         dot_color       = 1;
@@ -50,37 +54,37 @@ class DiceViz {
         // Print dots based on the number on the dice
         switch (number) {
             case 1:
-                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "●");
+                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "*");
                 break;
             case 2:
-                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "●");
-                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "●");
+                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "*");
+                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "*");
                 break;
             case 3:
-                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "●");
-                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "●");
-                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "●");
+                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "*");
+                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "*");
+                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "*");
                 break;
             case 4:
-                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "●");
-                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "●");
-                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "●");
-                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "●");
+                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "*");
+                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "*");
+                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "*");
+                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "*");
                 break;
             case 5:
-                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "●");
-                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "●");
-                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "●");
-                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "●");
-                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "●");
+                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "*");
+                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "*");
+                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "*");
+                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "*");
+                mvwprintw(win, dot_pos["mm"].first, dot_pos["mm"].second, "*");
                 break;
             case 6:
-                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "●");
-                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "●");
-                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "●");
-                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "●");
-                mvwprintw(win, dot_pos["ml"].first, dot_pos["ml"].second, "●");
-                mvwprintw(win, dot_pos["mr"].first, dot_pos["mr"].second, "●");
+                mvwprintw(win, dot_pos["ul"].first, dot_pos["ul"].second, "*");
+                mvwprintw(win, dot_pos["ur"].first, dot_pos["ur"].second, "*");
+                mvwprintw(win, dot_pos["lr"].first, dot_pos["lr"].second, "*");
+                mvwprintw(win, dot_pos["ll"].first, dot_pos["ll"].second, "*");
+                mvwprintw(win, dot_pos["ml"].first, dot_pos["ml"].second, "*");
+                mvwprintw(win, dot_pos["mr"].first, dot_pos["mr"].second, "*");
                 break;
         }
         wattroff(win, COLOR_PAIR(dot_color));  // Turn off the color
