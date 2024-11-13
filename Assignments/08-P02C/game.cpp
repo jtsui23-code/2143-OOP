@@ -103,19 +103,33 @@ int main() {
             Logger::log("Player's name is: ", playerName[i]);
             mvwprintw(nameWin,rows/2, (cols - playerName[i].length())/2, "Player1: %s", playerName[i].c_str());
             wrefresh(nameWin);
-            playerNamed[i] = true;
+            if(!playerNamed[1])
+            {
             delwin(nameWin);
+            nameWin = nullptr; 
             refresh();
+            playerNamed[i] = true;
+
 
             nameWin = newwin(5, cols - 4, rows / 4, 2);
             box(nameWin, 0, 0);
             mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter Player2's name:");
             wrefresh(nameWin);
         
-        // Reset input variables if needed
-        i++;
-        posX = (cols - 30) / 2 + 26;
+            // Reset input variables if needed
+            i++;
+            posX = (cols - 30) / 2 + 26;
 
+                
+            }
+            else if (i == 1)
+            {
+            delwin(nameWin);
+            nameWin = nullptr; 
+            refresh();
+
+            }
+            
         }
 
         else if (ch == 127 || ch == KEY_BACKSPACE || ch == 8)
