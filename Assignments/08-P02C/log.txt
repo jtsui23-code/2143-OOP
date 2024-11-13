@@ -1264,3 +1264,183 @@ Key pressed: 263
 Mouse pressed: true
 clicked: [6, 49]
 Key pressed: 409
+vals: [6, 3, 2, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [2, 49]
+Key pressed: 409
+Key pressed: 74
+Key pressed: 97
+Key pressed: 99
+Key pressed: 107
+Key pressed: 32
+Key pressed: 84
+Key pressed: 263
+Key pressed: 84
+Mouse pressed: true
+clicked: [1, 52]
+Key pressed: 409
+vals: [6, 3, 8, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [5, 47]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 97
+Key pressed: 99
+Key pressed: 107
+Key pressed: 32
+Key pressed: 116
+Key pressed: 263
+Key pressed: 263
+Key pressed: 106
+Key pressed: 263
+Player's name is: : 
+vals: [6, 3, 9, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [4, 48]
+Key pressed: 409
+Mouse pressed: true
+clicked: [5, 48]
+Key pressed: 409
+Key pressed: 106
+Player's name is: : 
+vals: [6, 3, 9, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [5, 47]
+Key pressed: 409
+Key pressed: 74
+Player's name is: : 
+vals: [6, 3, 8, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [5, 49]
+Key pressed: 409
+Key pressed: 106
+Player's name is: : 
+Key pressed: 10
+Mouse pressed: true
+clicked: [5, 51]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 106
+Key pressed: 106
+Key pressed: 106
+Key pressed: 106
+Key pressed: 106
+Mouse pressed: true
+clicked: [8, 50]
+Key pressed: 409
+vals: [6, 3, 8, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [5, 50]
+Key pressed: 409
+Key pressed: 106
+Player's name is: : 
+Key pressed: 10
+Key pressed: 410
+Key pressed: 410
+Key pressed: 410
+Key pressed: 410
+Key pressed: 410
+Key pressed: 410
+Mouse pressed: true
+clicked: [2, 50]
+Key pressed: 409
+vals: [6, 3, 2, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [2, 48]
+Key pressed: 409
+Key pressed: 97
+Player's name is: : 
+Key pressed: 10
+Mouse pressed: true
+clicked: [1, 57]
+Key pressed: 409
+vals: [6, 3, 7, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [4, 54]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 263
+Mouse pressed: true
+clicked: [5, 51]
+Key pressed: 409
+vals: [6, 3, 3, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [2, 53]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 263
+vals: [6, 3, 3, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [2, 54]
+Key pressed: 409
+Key pressed: 106
+Mouse pressed: true
+clicked: [2, 54]
+Key pressed: 409
+vals: [6, 3, 3, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [2, 58]
+Key pressed: 409
+Key pressed: 74
+Key pressed: 97
+Key pressed: 120
+Player's name is: : 
+Key pressed: 10
+Key pressed: 106
+Mouse pressed: true
+clicked: [2, 58]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 106
+Key pressed: 108
+Key pressed: 107
+Key pressed: 106
+Mouse pressed: true
+clicked: [2, 54]
+Key pressed: 409
+vals: [6, 3, 8, 34]
+yx: [1, 10]
+Initializing grid: true
+height: [7, 13, 1, 3]
+Mouse pressed: true
+clicked: [5, 52]
+Key pressed: 409
+Key pressed: 106
+Key pressed: 97
+Key pressed: 120
+Player's name is: : 
+Key pressed: 10
+Key pressed: 106

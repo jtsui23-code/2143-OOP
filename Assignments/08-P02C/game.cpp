@@ -75,7 +75,7 @@ int main() {
     box(nameWin, 0, 0);  // Draw border for the window
     wrefresh(nameWin);
     
-    mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter your name:");  // Prompt text centered
+    mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter Player1's name:");  // Prompt text centered
     wrefresh(nameWin);
 
     //This prompts the user to input their name
@@ -87,7 +87,7 @@ int main() {
     bool playerNamed = false;
     bool player2Named = false;
 
-    int posX = (cols -30)/2 + 21;
+    int posX = (cols -30)/2 + 26;
     int posY = 1;
 
     while (true) {
@@ -103,6 +103,17 @@ int main() {
             mvwprintw(nameWin,rows/2, (cols - playerName.length())/2, "Player1: %s", playerName.c_str());
             wrefresh(nameWin);
             playerNamed = true;
+            delwin(nameWin);
+            refresh();
+
+            nameWin = newwin(5, cols - 4, rows / 4, 2);
+            box(nameWin, 0, 0);
+            mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter Player 2's name:");
+            wrefresh(nameWin);
+        
+        // Reset input variables if needed
+        playerName.clear();
+        posX = (cols - 30) / 2 + 21;
 
         }
 
