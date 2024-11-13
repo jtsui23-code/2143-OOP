@@ -1,7 +1,7 @@
 ## 08-P02C - Knucklebone With Ncurses
 ### Jack Tsui
 ### Description:
-I have implemented a popup window that prompts for the names of both the first and second players. However, I have a segmentation fault error when I enter the second player's name in the input window. 
+I have implemented a popup window that prompts for the names of both the first and second players. However, I have a segmentation fault error when I enter the second player's name in the input window. Also, the player names are not properly saved in the log file it shows 'player name:: instead of the typed-in name in the input window.
 
 ### Files:
 |   #   | File            | Description                                        |
