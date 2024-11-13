@@ -80,64 +80,65 @@ int main() {
 
     //This prompts the user to input their name
     Input input("Enter your name: ", 3,30, rows - 2, (cols + 30)/2);
-    string playerName;
+    string playerName[2];
 
     input.printBorder();
     input.printInput(rows - 2, (cols + 30)/2 + 15);
-    bool playerNamed = false;
-    bool player2Named = false;
+    bool playerNamed[] = {false, false};
+    
 
     int posX = (cols -30)/2 + 26;
     int posY = 1;
+    int i = 0;
 
     while (true) {
         ch = getch();
 
-        if (!playerNamed)
+        if (!playerNamed[i])
         {
-        playerName = input.getInput();
+        playerName[i] = input.getInput();
 
         if (ch == '\n' || ch == KEY_ENTER)
         {
-            Logger::log("Player's name is: ", playerName);
-            mvwprintw(nameWin,rows/2, (cols - playerName.length())/2, "Player1: %s", playerName.c_str());
+            Logger::log("Player's name is: ", playerName[i]);
+            mvwprintw(nameWin,rows/2, (cols - playerName[i].length())/2, "Player1: %s", playerName[i].c_str());
             wrefresh(nameWin);
-            playerNamed = true;
+            playerNamed[i] = true;
             delwin(nameWin);
             refresh();
 
             nameWin = newwin(5, cols - 4, rows / 4, 2);
             box(nameWin, 0, 0);
-            mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter Player 2's name:");
+            mvwprintw(nameWin, 1, (cols - 18) / 2, "Enter Player2's name:");
             wrefresh(nameWin);
         
         // Reset input variables if needed
-        playerName.clear();
-        posX = (cols - 30) / 2 + 21;
+        i++;
+        posX = (cols - 30) / 2 + 26;
 
         }
 
         else if (ch == 127 || ch == KEY_BACKSPACE || ch == 8)
         {
-            if(!playerName.empty())
+            if(!playerName[i].empty())
             {
-                playerName.pop_back();
+                playerName[i].pop_back();
                 posX--;
                 
             }
 
                 mvwaddch(nameWin, posY, posX, ' ');
-                mvwprintw(nameWin, posY, (cols - playerName.length())/ 2, "%s", playerName.c_str());
+                mvwprintw(nameWin, posY, (cols - playerName[i].length())/ 2, "%s", playerName[i].c_str());
                 wrefresh(nameWin);
                 posX--;
         }
 
         else if (ch >= 32 && ch <= 126)
         {
-            playerName += static_cast<char>(ch);
+            playerName[i] += static_cast<char>(ch);
             posX++;
         }
-            mvwprintw(nameWin, posY, posX, "%s", playerName.c_str());
+            mvwprintw(nameWin, posY, posX, "%s", playerName[i].c_str());
             wrefresh(nameWin);
         }
         
