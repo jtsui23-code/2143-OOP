@@ -112,12 +112,12 @@ int main() {
             {
                 playerName.pop_back();
                 posX--;
-
-                mvwaddch(nameWin, posY, (cols - playerName.length()) / 2, ' ');
-                mvwprintw(nameWin, posY, (cols - playerName.length())/ 2, "%s", playerName.c_str());
-                wrefresh(nameWin);
                 
             }
+
+                mvwaddch(nameWin, posY, posX, ' ');
+                mvwprintw(nameWin, posY, (cols - playerName.length())/ 2, "%s", playerName.c_str());
+                wrefresh(nameWin);
         }
 
         else if (ch >= 32 && ch <= 126)
