@@ -1,3 +1,4 @@
+
 #include <locale.h>
 #include <ncurses.h>
 #include <cstring>
@@ -86,7 +87,7 @@ int main() {
     bool playerNamed = false;
     bool player2Named = false;
 
-    int posX = (cols -30)/2 + 20;
+    int posX = (cols -30)/2 + 21;
     int posY = 1;
 
     while (true) {
@@ -105,12 +106,16 @@ int main() {
 
         }
 
-        else if (ch == 127 || ch == 127)
+        else if (ch == 127 || ch == KEY_BACKSPACE || ch == 8)
         {
             if(!playerName.empty())
             {
                 playerName.pop_back();
                 posX--;
+
+                mvwaddch(nameWin, posY, (cols - playerName.length()) / 2, ' ');
+                mvwprintw(nameWin, posY, (cols - playerName.length())/ 2, "%s", playerName.c_str());
+                wrefresh(nameWin);
                 
             }
         }
@@ -158,7 +163,6 @@ int main() {
         Logger::log("Key pressed", to_string(ch));
         button.draw_button();
         refresh();
-        ch = getch();
     }
 
     // while (true) {
