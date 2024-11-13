@@ -87,10 +87,11 @@ int main() {
     bool player2Named = false;
 
     int posX = (cols -30)/2;
-    int poxY = 3;
+    int posY = 3;
 
     while (true) {
         ch = getch();
+
         if (!playerNamed)
         {
         input.captureInput();
@@ -101,20 +102,25 @@ int main() {
             Logger::log("Player's name is: ", playerName);
             mvwprintw(nameWin,rows/2, (cols - playerName.length())/2, "Player1: %s", playerName.c_str());
             wrefresh(nameWin);
+            playerNamed = true;
+
         }
 
-        else if (ch == 127 || ch = 127)
+        else if (ch == 127 || ch == 127)
         {
             if(!playerName.empty())
             {
                 playerName.pop_back();
-                mvwprintw(nameWin, posY, "Enter your name: ");
-                wrefresh(nameWin);
+                
             }
         }
-        
 
-        playerNamed = true;
+        else if (ch >= 32 && ch <= 126)
+        {
+            playerName += static_cast<char>ch;
+        }
+            mvwprintw(nameWin, posY, posX, "Enter your name: %s", playerName.c_str());
+            wrefresh(nameWin);
         }
         
         if (ch == 'q' || ch == 'Q') 
