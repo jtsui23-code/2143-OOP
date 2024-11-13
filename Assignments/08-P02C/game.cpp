@@ -86,15 +86,14 @@ int main() {
     bool playerNamed = false;
     bool player2Named = false;
 
-    int posX = (cols -30)/2;
-    int posY = 3;
+    int posX = (cols -30)/2 + 20;
+    int posY = 1;
 
     while (true) {
         ch = getch();
 
         if (!playerNamed)
         {
-        input.captureInput();
         playerName = input.getInput();
 
         if (ch == '\n' || ch == KEY_ENTER)
@@ -111,15 +110,17 @@ int main() {
             if(!playerName.empty())
             {
                 playerName.pop_back();
+                posX--;
                 
             }
         }
 
         else if (ch >= 32 && ch <= 126)
         {
-            playerName += static_cast<char>ch;
+            playerName += static_cast<char>(ch);
+            posX++;
         }
-            mvwprintw(nameWin, posY, posX, "Enter your name: %s", playerName.c_str());
+            mvwprintw(nameWin, posY, posX, "%s", playerName.c_str());
             wrefresh(nameWin);
         }
         
