@@ -129,8 +129,13 @@ int main() {
 
                 mvwaddch(nameWin, posY, posX, ' ');
                 mvwprintw(nameWin, posY, (cols - playerName[i].length())/ 2, "%s", playerName[i].c_str());
+                if (!playerNamed[1])
+                {
                 wrefresh(nameWin);
                 posX--;
+
+                }
+                
         }
 
         else if (ch >= 32 && ch <= 126)
