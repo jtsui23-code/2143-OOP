@@ -3,7 +3,7 @@
 
 int main() {
 // Create a window with a title and dimensions (800x600)
-sf::RenderWindow window(sf::VideoMode(800, 600), "Knucklebones Game");
+sf::RenderWindow window(sf::VideoMode(1024, 768), "Jack Tsui's KnuckleBones");
 
     // Main game loop
     while (window.isOpen()) {
