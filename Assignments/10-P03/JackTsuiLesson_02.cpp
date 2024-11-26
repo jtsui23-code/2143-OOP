@@ -5,7 +5,7 @@ int main() {
 // Create a window
 sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
 
-    sf::ConvexShape convex(sf::Vector);
+    sf::ConvexShape convex;
 
     convex.setPointCount(5);
 
@@ -13,7 +13,7 @@ sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
     convex.setPoint(1,sf::Vector2f(200.f, 300.f));
     convex.setPoint(2,sf::Vector2f(200.f, 400.f));
     convex.setPoint(3,sf::Vector2f(500.f, 200.f));
-    convext.setPoint(4,sf::Vector2f(500.f, 400.f));
+    convex.setPoint(4,sf::Vector2f(500.f, 400.f));
 
     convex.setFillColor(sf::Color::Red);
 
@@ -25,7 +25,7 @@ sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
     // Create a circle
     sf::CircleShape circle(50.f); // Circle with radius 50
     circle.setFillColor(sf::Color::Green);
-    circle.setPosition(400.f, 100.f);
+    circle.setPosition(100.f, 200.f);
 
     // Load a texture
     sf::Texture texture;
