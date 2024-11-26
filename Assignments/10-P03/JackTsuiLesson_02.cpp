@@ -5,6 +5,18 @@ int main() {
 // Create a window
 sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
 
+    sf::ConvexShape convex(sf::Vector);
+
+    convex.setPointCount(5);
+
+    convex.setPoint(0, sf:: Vector2f(200.f, 200.f));
+    convex.setPoint(1,sf::Vector2f(200.f, 300.f));
+    convex.setPoint(2,sf::Vector2f(200.f, 400.f));
+    convex.setPoint(3,sf::Vector2f(500.f, 200.f));
+    convext.setPoint(4,sf::Vector2f(500.f, 400.f));
+
+    convex.setFillColor(sf::Color::Red);
+
     // Create a rectangle
     sf::RectangleShape rectangle(sf::Vector2f(200.f, 100.f)); // 200x100 rectangle
     rectangle.setFillColor(sf::Color::Blue);                  // Set the fill color
@@ -39,6 +51,7 @@ sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
         window.clear(sf::Color::White);
 
         // Draw the shapes and sprite
+        window.draw(convex);
         window.draw(rectangle);
         window.draw(circle);
         window.draw(sprite);
