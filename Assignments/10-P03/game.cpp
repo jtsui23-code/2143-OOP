@@ -15,7 +15,8 @@ int main() {
 
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
     button.setFillColor(sf::Color::Red);
-    button.setPosition(300.f,450.f);
+    button.setPosition(275.f,450.f);
+
 
     // Load font
     sf::Font font;
@@ -23,6 +24,10 @@ int main() {
         // Handle error
         return -1;
     }
+
+    sf::Text roll("Space", font, 50);
+    roll.setPosition(305.f, 465.f);
+    roll.setFillColor(sf::Color::Blue);
 
     sf::Text instructionText("Enter your Players name:", font, 24);
     instructionText.setPosition(50, 200);
@@ -127,6 +132,7 @@ int main() {
             grid1.draw(window);
             grid2.draw(window);
             window.draw(button);
+            window.draw(roll);
             window.draw(displayName);
             window.draw(displayName2);
             diceRoll.draw(window);           // Draw the dice animation
