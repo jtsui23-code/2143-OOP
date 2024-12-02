@@ -20,7 +20,7 @@ int main() {
     instructionText.setFillColor(sf::Color::White);
 
     sf::Text nameText("", font, 24);
-    nameText.setPosition(50, 250);
+    nameText.setPosition(250, 200);
     nameText.setFillColor(sf::Color::Green);
 
     sf::Text displayName("", font, 30);
