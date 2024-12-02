@@ -32,16 +32,30 @@ int main() {
     const sf::Time frameDuration = sf::milliseconds(12); // 200ms per frame
     size_t currentFrame = 0;
     bool fullAnimation = false;
+    bool pressed = false;
+
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event)) 
+        {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-        }
+        
 
-        if (!fullAnimation)
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Space)
+                {
+
+                    pressed = true;
+                    fullAnimation = false;
+                    currentFrame = 0;
+                }
+            }
+        }
+        if (!fullAnimation && pressed)
         {
 // Update animation frame
             if (clock.getElapsedTime() >= frameDuration) 
@@ -54,7 +68,9 @@ int main() {
                     if (currentFrame == 24) 
                     { // Stop after 24 frames
                         fullAnimation = true;
-                        sprite.setTexture(textures[0]);
+                        currentFrame = 0;
+                        sprite.setTexture(textures[currentFrame]);
+                        pressed = false;
                     } 
                     else 
                     {
