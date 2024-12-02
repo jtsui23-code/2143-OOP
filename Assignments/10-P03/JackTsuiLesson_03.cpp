@@ -100,19 +100,19 @@ int main() {
             switch (event.key.code) {
                 case 71:  // Left arrow
                     std::cout << "Left arrow pressed!" << std::endl;
-                    circle.move(-1.f, 0.f);
+                    circle.move(-2.f, 0.f);
                     break;
                 case 72:  // Right arrow
                     std::cout << "Right arrow pressed!" << std::endl;
-                    circle.move(1.f, 0.f);
+                    circle.move(2.f, 0.f);
                     break;
                 case 73:  // Up arrow
                     std::cout << "Up arrow pressed!" << std::endl;
-                    circle.move(0.f, -1.f);
+                    circle.move(0.f, -2.f);
                     break;
                 case 74:  // Down arrow
                     std::cout << "Down arrow pressed!" << std::endl;
-                    circle.move(0.f, 1.f);
+                    circle.move(0.f, 2.f);
                     break;
                 default:
                     break;
