@@ -8,7 +8,7 @@ int main() {
 
     sf:: Font font;
 
-    if(!font.loadFromFile("fonts/Arial.ttf"))
+    if(!font.loadFromFile("media/fonts/Bebas.ttf"))
     {
         std:: cerr << "Error loading font" << std::endl;
         return -1;
@@ -17,7 +17,6 @@ int main() {
 
     sf:: Text text;
     text.setFont(font);
-    text.setFillColor(sf::Color::Black);
 
 
     // Grid configuration
@@ -44,6 +43,14 @@ int main() {
             float y = gridStartY + row * (cellSize + cellSpacing);
             cell.setPosition(x, y);
 
+
+            text.setFillColor(sf::Color::Black);
+            text.setCharacterSize(24);
+
+            text.setString(std:: to_string(row + 1) + ", " + std:: to_string(col + 1));
+            text.setPosition(x + 30.f, y + 30.f);
+
+
             // Add the cell to the grid
             grid.push_back(cell);
         }
@@ -62,6 +69,8 @@ int main() {
         window.clear(sf::Color::White);
         for (const auto& cell : grid) {
             window.draw(cell);
+            window.draw(text);
+
         }
         window.display();
     }
