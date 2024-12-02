@@ -31,7 +31,7 @@ int main() {
     sf::Clock clock;
     const sf::Time frameDuration = sf::milliseconds(12); // 200ms per frame
     size_t currentFrame = 0;
-
+    bool fullAnimation = false;
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
@@ -41,14 +41,28 @@ int main() {
             }
         }
 
-        // Update animation frame
-        if (clock.getElapsedTime() >= frameDuration) {
-            clock.restart(); // Reset the clock
+        if (!fullAnimation)
+        {
+// Update animation frame
+            if (clock.getElapsedTime() >= frameDuration) 
+            {
+                clock.restart(); // Reset the clock
 
-            // Advance to the next frame
-            currentFrame = (currentFrame + 1) % textures.size();
-            sprite.setTexture(textures[currentFrame]);
+                // Advance to the next frame
+                currentFrame++;
+
+                    if (currentFrame == 24) 
+                    { // Stop after 24 frames
+                        fullAnimation = true;
+                        sprite.setTexture(textures[0]);
+                    } 
+                    else 
+                    {
+                    sprite.setTexture(textures[currentFrame]);
+                    }
+            }
         }
+        
 
         // Render
         window.clear(sf::Color::White);
