@@ -22,6 +22,7 @@ int main() {
     circle.setPosition(100.f, 100.f);
 
     bool toggle = false;
+    bool toggle2 = false;
 
     // Main game loop
     while (window.isOpen()) {
@@ -31,6 +32,7 @@ int main() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            
 
             // Detect mouse clicks
             if (event.type == sf::Event::MouseButtonPressed) {
@@ -40,7 +42,8 @@ int main() {
                     std::cout << "Mouse clicked at: " << mousePos.x << ", " << mousePos.y << std::endl;
 
                     // Check if the rectangle was clicked
-                    if (rectangle.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
+                    if (rectangle.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) 
+                    {
                         toggle = !toggle;
                         
                         if (toggle)
@@ -52,6 +55,20 @@ int main() {
                         else
                         {
                             rectangle.setFillColor(sf::Color::Blue); // Changes rectangle back to blue if clicked again.
+                        }
+                    }
+
+                    if (anotherRect.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y)))
+                    {
+                        toggle2 = !toggle2;
+
+                        if (toggle2)
+                        {
+                            anotherRect.setPosition(600.f, 200.f);
+                        }
+                        else
+                        {
+                            anotherRect.setPosition(100.f, 200.f);
                         }
                     }
                 }
@@ -106,6 +123,7 @@ int main() {
         window.clear(sf::Color::White);
         window.draw(rectangle);
         window.draw(circle);
+        window.draw(anotherRect);
         window.display();
     }
 
