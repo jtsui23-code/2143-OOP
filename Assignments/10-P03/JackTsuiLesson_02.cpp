@@ -16,7 +16,7 @@ sf::RenderWindow window(sf::VideoMode(800, 600), "Knuckle Bones 02");
     convex.setPoint(4,sf::Vector2f(500.f, 400.f));
 
     convex.setFillColor(sf::Color::Red);
-
+    
     // Create a rectangle
     sf::RectangleShape rectangle(sf::Vector2f(200.f, 100.f)); // 200x100 rectangle
     rectangle.setFillColor(sf::Color::Blue);                  // Set the fill color
