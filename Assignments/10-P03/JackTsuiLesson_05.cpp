@@ -6,13 +6,27 @@ int main() {
     // Create a window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Lesson 5: Drawing the Game Grid");
 
+    sf:: Font font;
+
+    if(!font.loadFromFile("fonts/Arial.ttf"))
+    {
+        std:: cerr << "Error loading font" << std::endl;
+        return -1;
+
+    }
+
+    sf:: Text text;
+    text.setFont(font);
+    text.setFillColor(sf::Color::Black);
+
+
     // Grid configuration
-    const int rows = 3;
-    const int cols = 3;
+    const int rows = 5;
+    const int cols = 5;
     const float cellSize = 100.f; // Width and height of each cell
     const float gridStartX = 200.f; // Starting X position of the grid
     const float gridStartY = 100.f; // Starting Y position of the grid
-    const float cellSpacing = 10.f; // Spacing between cells
+    const float cellSpacing = 0.f; // Spacing between cells
 
     // Vector to hold grid cells
     std::vector<sf::RectangleShape> grid;
