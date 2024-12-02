@@ -13,9 +13,19 @@ int main() {
     Grid grid1(3,3, 75.f, 45.f, 80.f);
     Grid grid2(3,3, 75.f, 500.f, 80.f);
 
+
+     // Load a texture
+    sf::Texture buttonTexture;
+
+    if (!buttonTexture.loadFromFile("media/Buttons/Red.png")) {
+        std::cerr << "Error: Could not load texture 'Red.png'\n";
+        return -1;
+    }
+
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
-    button.setFillColor(sf::Color::Red);
     button.setPosition(275.f,450.f);
+
+    button.setTexture(&buttonTexture);
 
 
     // Load font
@@ -26,8 +36,8 @@ int main() {
     }
 
     sf::Text roll("Space", font, 50);
-    roll.setPosition(305.f, 465.f);
-    roll.setFillColor(sf::Color::Blue);
+    roll.setPosition(302.f, 468.f);
+    roll.setFillColor(sf::Color::White);
 
     sf::Text instructionText("Enter your Players name:", font, 24);
     instructionText.setPosition(50, 200);
