@@ -13,6 +13,10 @@ int main() {
     Grid grid1(3,3, 75.f, 45.f, 80.f);
     Grid grid2(3,3, 75.f, 500.f, 80.f);
 
+    sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
+    button.setFillColor(sf::Color::Red);
+    button.setPosition(300.f,450.f);
+
     // Load font
     sf::Font font;
     if (!font.loadFromFile("media/fonts/arial.ttf")) {
@@ -25,7 +29,7 @@ int main() {
     instructionText.setFillColor(sf::Color::White);
 
     sf::Text nameText("", font, 24);
-    nameText.setPosition(300, 200);
+    nameText.setPosition(350, 200);
     nameText.setFillColor(sf::Color::Green);
 
     sf::Text displayName("", font, 30);
@@ -33,7 +37,7 @@ int main() {
     displayName.setFillColor(sf::Color::Yellow);
 
     sf::Text displayName2("", font, 30);
-    displayName2.setPosition(550, 25);
+    displayName2.setPosition(525, 25);
     displayName2.setFillColor(sf::Color::Yellow);
 
     // Variables for input handling
@@ -86,7 +90,10 @@ int main() {
                                 displayName2.setString(userInput[1]);
                             }
 
-                            i++;
+                            if (i < 1)
+                            {
+                                i++;
+                            }
                         } else if (event.text.unicode < 128) {
                             // Handle valid characters
                             userInput[i] += static_cast<char>(event.text.unicode);
@@ -119,7 +126,9 @@ int main() {
         {
             grid1.draw(window);
             grid2.draw(window);
+            window.draw(button);
             window.draw(displayName);
+            window.draw(displayName2);
             diceRoll.draw(window);           // Draw the dice animation
             window.display(); 
         }
