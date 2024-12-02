@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <cstdlib>  // For std::rand and std::srand
+#include <ctime>    // For seeding random number generator
 
 class DiceRollAnimation {
 private:
@@ -12,11 +14,14 @@ private:
     bool isAnimating;                  // Is the animation playing?
     std::string framePrefix;           // Prefix for frame files
     std::string folderPath;            // Path to the folder containing frames
+    size_t randomFrame;                // Random dice side (1-6)
+    sf:: Texture ranText;
+
 
 public:
     // Constructor
-    DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration = sf::milliseconds(12))
-        : folderPath(folderPath), framePrefix(framePrefix), frameDuration(frameDuration), currentFrame(0), isAnimating(false) {}
+    DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration)
+        : folderPath(folderPath), framePrefix(framePrefix), frameDuration(frameDuration), currentFrame(0), isAnimating(false), randomFrame(0) {}
 
     // Load frames into textures
     bool loadFrames(int start, int end) {
@@ -44,6 +49,7 @@ public:
             isAnimating = true;
             currentFrame = 0;
             clock.restart();
+            randomFrame = std::rand() % 6 + 1; // Generate a random frame (1-6)
         }
     }
 
@@ -55,18 +61,14 @@ public:
 
             if (currentFrame >= textures.size()) {
                 isAnimating = false; // Stop the animation after the last frame
-                currentFrame = 0;   // Reset to the first frame
-                sprite.setTexture(textures[currentFrame]);
 
+                ranText.loadFromFile("media/images/" + std:: to_string(randomFrame) + ".png");
+
+                sprite.setTexture(ranText); // Set to the random dice frame
             } else {
                 sprite.setTexture(textures[currentFrame]);
             }
         }
-    }
-
-    // Check if animation is playing
-    bool isPlaying() const {
-        return isAnimating;
     }
 
     // Set sprite position
@@ -84,8 +86,11 @@ public:
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice Roll Animation");
 
+    // Seed the random number generator
+    std::srand(static_cast<unsigned>(std::time(nullptr)));
+
     // Create a DiceRollAnimation instance
-    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_");
+    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(12));
     if (!diceRoll.loadFrames(1, 24)) {
         return -1; // Exit if frame loading fails
     }
