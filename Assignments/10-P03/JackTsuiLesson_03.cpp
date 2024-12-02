@@ -5,6 +5,12 @@ int main() {
     // Create a window
     sf::RenderWindow window(sf::VideoMode(800, 600), "Lesson 3: User Input");
 
+    // Creating another rectangle for activty
+    sf:: RectangleShape anotherRect(sf::Vector2f(100.f, 200.f));
+    anotherRect.setFillColor(sf::Color::Red);
+    anotherRect.setPosition(100.f, 200.f);
+
+
     // Create a rectangle
     sf::RectangleShape rectangle(sf::Vector2f(200.f, 100.f)); // 200x100 rectangle
     rectangle.setFillColor(sf::Color::Blue);                  // Initial color
@@ -14,6 +20,8 @@ int main() {
     sf::CircleShape circle(50.f); // Circle with radius 50
     circle.setFillColor(sf::Color::Green);
     circle.setPosition(100.f, 100.f);
+
+    bool toggle = false;
 
     // Main game loop
     while (window.isOpen()) {
@@ -33,7 +41,18 @@ int main() {
 
                     // Check if the rectangle was clicked
                     if (rectangle.getGlobalBounds().contains(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y))) {
-                        rectangle.setFillColor(sf::Color::Red); // Change rectangle color
+                        toggle = !toggle;
+                        
+                        if (toggle)
+                        {
+
+                            rectangle.setFillColor(sf::Color::Red); // Change rectangle color
+                        
+                        }
+                        else
+                        {
+                            rectangle.setFillColor(sf::Color::Blue); // Changes rectangle back to blue if clicked again.
+                        }
                     }
                 }
             }
