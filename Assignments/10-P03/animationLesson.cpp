@@ -2,87 +2,113 @@
 #include <iostream>
 #include <vector>
 
-int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Lesson 4: Animations");
+class DiceRollAnimation {
+private:
+    std::vector<sf::Texture> textures; // Stores textures for animation frames
+    sf::Sprite sprite;                 // Sprite to display the current frame
+    sf::Clock clock;                   // Timer for frame updates
+    sf::Time frameDuration;            // Duration of each frame
+    size_t currentFrame;               // Index of the current frame
+    bool isAnimating;                  // Is the animation playing?
+    std::string framePrefix;           // Prefix for frame files
+    std::string folderPath;            // Path to the folder containing frames
 
-    // Load textures for animation frames
-    std:: string frameNum[2] = {"00", "0"};
-    int g = 0;
-    std::vector<sf::Texture> textures;
-    for (int i = 1; i <= 24; ++i) { // Assume dice frames are named frame1.png to frame6.png
-        sf::Texture texture;
-        if (i > 9)
-        {
-            g = 1;
+public:
+    // Constructor
+    DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration = sf::milliseconds(12))
+        : folderPath(folderPath), framePrefix(framePrefix), frameDuration(frameDuration), currentFrame(0), isAnimating(false) {}
+
+    // Load frames into textures
+    bool loadFrames(int start, int end) {
+        std::string frameNum[2] = {"00", "0"};
+        int g = 0;
+
+        for (int i = start; i <= end; ++i) {
+            sf::Texture texture;
+            if (i > 9) g = 1;
+            std::string fileName = folderPath + framePrefix + frameNum[g] + std::to_string(i) + ".png";
+
+            if (!texture.loadFromFile(fileName)) {
+                std::cerr << "Error loading " << fileName << std::endl;
+                return false;
+            }
+            textures.push_back(texture);
         }
-        if (!texture.loadFromFile("media/animations/dice_roll/frame_" + frameNum[g] +  std::to_string(i) + ".png")) {
-            std::cerr << "Error loading frame_" << frameNum[g] << i << ".png" << std::endl;
-            return -1;
-        }
-        textures.push_back(texture);
+        sprite.setTexture(textures[0]); // Start with the first frame
+        return true;
     }
 
-    // Create a sprite to display the current frame
-    sf::Sprite sprite;
-    sprite.setTexture(textures[0]); // Start with the first frame
-    sprite.setPosition(300.f, 200.f);
+    // Start the animation
+    void startAnimation() {
+        if (!textures.empty()) {
+            isAnimating = true;
+            currentFrame = 0;
+            clock.restart();
+        }
+    }
 
-    // Timing variables
-    sf::Clock clock;
-    const sf::Time frameDuration = sf::milliseconds(12); // 200ms per frame
-    size_t currentFrame = 0;
-    bool fullAnimation = false;
-    bool pressed = false;
+    // Update the animation state
+    void update() {
+        if (isAnimating && clock.getElapsedTime() >= frameDuration) {
+            clock.restart();
+            ++currentFrame;
+
+            if (currentFrame >= textures.size()) {
+                isAnimating = false; // Stop the animation after the last frame
+                currentFrame = 0;   // Reset to the first frame
+                sprite.setTexture(textures[currentFrame]);
+
+            } else {
+                sprite.setTexture(textures[currentFrame]);
+            }
+        }
+    }
+
+    // Check if animation is playing
+    bool isPlaying() const {
+        return isAnimating;
+    }
+
+    // Set sprite position
+    void setPosition(float x, float y) {
+        sprite.setPosition(x, y);
+    }
+
+    // Draw the sprite
+    void draw(sf::RenderWindow& window) {
+        window.draw(sprite);
+    }
+};
+
+// Main function to demonstrate usage
+int main() {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Dice Roll Animation");
+
+    // Create a DiceRollAnimation instance
+    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_");
+    if (!diceRoll.loadFrames(1, 24)) {
+        return -1; // Exit if frame loading fails
+    }
+    diceRoll.setPosition(300.f, 200.f);
 
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) 
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-        
-
-            if (event.type == sf::Event::KeyPressed)
-            {
-                if (event.key.code == sf::Keyboard::Space)
-                {
-
-                    pressed = true;
-                    fullAnimation = false;
-                    currentFrame = 0;
-                }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                diceRoll.startAnimation(); // Start animation on Space key press
             }
         }
-        if (!fullAnimation && pressed)
-        {
-// Update animation frame
-            if (clock.getElapsedTime() >= frameDuration) 
-            {
-                clock.restart(); // Reset the clock
 
-                // Advance to the next frame
-                currentFrame++;
-
-                    if (currentFrame == 24) 
-                    { // Stop after 24 frames
-                        fullAnimation = true;
-                        currentFrame = 0;
-                        sprite.setTexture(textures[currentFrame]);
-                        pressed = false;
-                    } 
-                    else 
-                    {
-                    sprite.setTexture(textures[currentFrame]);
-                    }
-            }
-        }
-        
+        // Update animation
+        diceRoll.update();
 
         // Render
         window.clear(sf::Color::White);
-        window.draw(sprite);
+        diceRoll.draw(window);
         window.display();
     }
 
