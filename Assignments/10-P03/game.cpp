@@ -7,11 +7,13 @@
 
 int main() {
     // Create a SFML window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "KnuckleBone");
+    int height = 1600;
+    int width = 900;
+    sf::RenderWindow window(sf::VideoMode(height, width), "KnuckleBone");
 
     //(3 x 3, 100.f size cells, start x 200.f start y 100.f, space between cells)
-    Grid grid1(3,3, 75.f, 45.f, 80.f);
-    Grid grid2(3,3, 75.f, 500.f, 80.f);
+    Grid grid1(3,3, 125.f, 300.f, 80.f);
+    Grid grid2(3,3, 125.f, width, 80.f);
 
 
      // Load a texture
@@ -23,7 +25,7 @@ int main() {
     }
 
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
-    button.setPosition(275.f,450.f);
+    button.setPosition(700.f,660.f);
 
     button.setTexture(&buttonTexture);
 
@@ -36,7 +38,7 @@ int main() {
     }
 
     sf::Text roll("Space", font, 50);
-    roll.setPosition(302.f, 468.f);
+    roll.setPosition(730.f, 670.f);
     roll.setFillColor(sf::Color::White);
 
     sf::Text instructionText("Enter your Players name:", font, 24);
@@ -47,12 +49,12 @@ int main() {
     nameText.setPosition(350, 200);
     nameText.setFillColor(sf::Color::Green);
 
-    sf::Text displayName("", font, 30);
-    displayName.setPosition(55, 25);
+    sf::Text displayName("", font, 45);
+    displayName.setPosition(450, 25);
     displayName.setFillColor(sf::Color::Yellow);
 
-    sf::Text displayName2("", font, 30);
-    displayName2.setPosition(525, 25);
+    sf::Text displayName2("", font, 45);
+    displayName2.setPosition(1050, 25);
     displayName2.setFillColor(sf::Color::Yellow);
 
     // Variables for input handling
@@ -71,7 +73,7 @@ int main() {
     }
     
     // Set initial position for the dice animation
-    diceRoll.setPosition(550.f, 400.f);
+    diceRoll.setPosition(1000.f, 620.f);
 
     // Main game loop
     while (window.isOpen()) {
