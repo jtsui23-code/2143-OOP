@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -20,7 +21,7 @@ private:
 
 public:
     // Constructor
-    DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration)
+    DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration = sf::milliseconds(1))
         : folderPath(folderPath), framePrefix(framePrefix), frameDuration(frameDuration), currentFrame(0), isAnimating(false), randomFrame(0) {}
 
     // Load frames into textures
@@ -82,40 +83,40 @@ public:
     }
 };
 
-// Main function to demonstrate usage
-int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Dice Roll Animation");
+// // Main function to demonstrate usage
+// int main() {
+//     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice Roll Animation");
 
-    // Seed the random number generator
-    std::srand(static_cast<unsigned>(std::time(nullptr)));
+//     // Seed the random number generator
+//     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
-    // Create a DiceRollAnimation instance
-    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(12));
-    if (!diceRoll.loadFrames(1, 24)) {
-        return -1; // Exit if frame loading fails
-    }
-    diceRoll.setPosition(300.f, 200.f);
+//     // Create a DiceRollAnimation instance
+//     DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(12));
+//     if (!diceRoll.loadFrames(1, 24)) {
+//         return -1; // Exit if frame loading fails
+//     }
+//     diceRoll.setPosition(300.f, 200.f);
 
-    // Main game loop
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-                diceRoll.startAnimation(); // Start animation on Space key press
-            }
-        }
+//     // Main game loop
+//     while (window.isOpen()) {
+//         sf::Event event;
+//         while (window.pollEvent(event)) {
+//             if (event.type == sf::Event::Closed) {
+//                 window.close();
+//             }
+//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+//                 diceRoll.startAnimation(); // Start animation on Space key press
+//             }
+//         }
 
-        // Update animation
-        diceRoll.update();
+//         // Update animation
+//         diceRoll.update();
 
-        // Render
-        window.clear(sf::Color::White);
-        diceRoll.draw(window);
-        window.display();
-    }
+//         // Render
+//         window.clear(sf::Color::White);
+//         diceRoll.draw(window);
+//         window.display();
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
