@@ -40,6 +40,10 @@ int main() {
     std:: vector< sf::Text> grid1Num;
     std:: vector< sf::Text> grid2Num;
 
+    //Fills in 9 indexs with empty text
+    grid1Num.resize(9, sf::Text());
+    grid2Num.resize(9, sf::Text());
+
     sf::Text roll("Space", font, 50);
     roll.setPosition(530.f, 640.f);
     roll.setFillColor(sf::Color::White);
@@ -97,35 +101,57 @@ int main() {
             {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
-                if(firstTurn)
+                if(diceNum > 0)
                 {
-                    firstTurn = !firstTurn;
 
-                    auto cell1 = grid1.getCellPos(mousePos);
-                    if(cell1.first != -1 && cell1.second != -1)
+                    if(firstTurn)
                     {
-                        //draw randomNumber on the cell
-                        grid1Num[g1].setPosition(cell1.first, cell1.second);
-                        grid1Num[g1].setString(std::to_string(diceNum));
-                        grid1Num[g1].setFont(font);
-                        grid1Num[g1].setCharacterSize(25);
-                        g1++;
-                    }
-                }
-                else
-                {
-                    firstTurn = !firstTurn;
+                        firstTurn = !firstTurn;
 
-                    auto cell2 = grid2.getCellPos(mousePos);
-                    if(cell2.first != -1 && cell2.second != -1)
-                    {
-                        //draw randomNumber on cell
-                        grid2Num[g2].setPosition(cell2.first, cell2.second);
-                        grid2Num[g2].setString(std::to_string(diceNum));
-                        grid2Num[g2].setFont(font);
-                        grid2Num[g2].setCharacterSize(25);
-                        g2++;
+                        auto cell1 = grid1.getCellPos(mousePos);
+                        if(cell1.first != -1 && cell1.second != -1)
+                        {
+                            std::cout << diceNum << std:: endl;
+                            
+                            grid1Num[g1].setPosition(cell1.first, cell1.second);
+                            grid1Num[g1].setString(std::to_string(diceNum));
+                            grid1Num[g1].setFont(font);
+                            grid1Num[g1].setCharacterSize(50);
+                            grid1Num[g1].setFillColor(sf::Color::White);
+
+                            if ( g1 < 9)
+                            {
+                                g1++;
+                            }
+                            diceNum = 0;
+                        }
                     }
+                    else
+                    {
+                        firstTurn = !firstTurn;
+                        
+
+                        auto cell2 = grid2.getCellPos(mousePos);
+                        if(cell2.first != -1 && cell2.second != -1)
+                        {
+                            std::cout << diceNum << std:: endl;
+
+                            
+                            grid2Num[g2].setPosition(cell2.first, cell2.second);
+                            grid2Num[g2].setString(std::to_string(diceNum));
+                            grid2Num[g2].setFont(font);
+                            grid2Num[g2].setCharacterSize(50);
+                            grid2Num[g2].setFillColor(sf::Color::White);
+                            
+                            if(g2 < 9)
+                            {
+                                g2++;
+                            }
+
+                            diceNum = 0;
+                        }
+                    }
+
                 }
 
             }
@@ -195,11 +221,11 @@ int main() {
             window.draw(displayName);
             window.draw(displayName2);
             diceRoll.draw(window);           // Draw the dice animation
-            for(int a; a < grid1Num.size(); a++)
+            for(int a = 0; a < grid1Num.size(); a++)
             {
                 window.draw(grid1Num[a]);
             }
-            for (int b; b < grid2Num.size(); b++)
+            for (int b = 0; b < grid2Num.size(); b++)
             {
                 window.draw(grid2Num[b]);
 

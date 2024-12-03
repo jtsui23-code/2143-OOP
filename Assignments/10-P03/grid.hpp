@@ -43,13 +43,13 @@ public:
     {
         for (int row = 0; row < rows; ++row)
         {
-            for (int col; col < cols; ++col)
+            for (int col = 0; col < cols; ++col)
             {
                 // x is the left side of cell
                 // y is the top side of the cell
                 // (0,0) is at top left of window & cell
-                float x = gridStartX + col * (cols + cellSpacing);
-                float y = gridStartY + row * (rows + cellSpacing); 
+                float x = gridStartX + col * (cellSize + cellSpacing);
+                float y = gridStartY + row * (cellSize + cellSpacing); 
                 
                 if (pos.x >= x && pos.x <= x + cellSize 
                     && pos.y >= y && pos.y <= y + cellSize)
