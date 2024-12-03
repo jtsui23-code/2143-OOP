@@ -7,13 +7,13 @@
 
 int main() {
     // Create a SFML window
-    int height = 1600;
-    int width = 900;
+    int height = 1200;
+    int width = 800;
     sf::RenderWindow window(sf::VideoMode(height, width), "KnuckleBone");
 
     //(3 x 3, 100.f size cells, start x 200.f start y 100.f, space between cells)
-    Grid grid1(3,3, 125.f, 300.f, 80.f);
-    Grid grid2(3,3, 125.f, width, 80.f);
+    Grid grid1(3,3, 125.f, 120.f, 80.f);
+    Grid grid2(3,3, 125.f, width - 25.f, 80.f);
 
 
      // Load a texture
@@ -25,7 +25,7 @@ int main() {
     }
 
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
-    button.setPosition(700.f,660.f);
+    button.setPosition(500.f,630.f);
 
     button.setTexture(&buttonTexture);
 
@@ -38,7 +38,7 @@ int main() {
     }
 
     sf::Text roll("Space", font, 50);
-    roll.setPosition(730.f, 670.f);
+    roll.setPosition(530.f, 640.f);
     roll.setFillColor(sf::Color::White);
 
     sf::Text instructionText("Enter your Players name:", font, 24);
@@ -50,11 +50,11 @@ int main() {
     nameText.setFillColor(sf::Color::Green);
 
     sf::Text displayName("", font, 45);
-    displayName.setPosition(450, 25);
+    displayName.setPosition(300, 25);
     displayName.setFillColor(sf::Color::Yellow);
 
     sf::Text displayName2("", font, 45);
-    displayName2.setPosition(1050, 25);
+    displayName2.setPosition(950, 25);
     displayName2.setFillColor(sf::Color::Yellow);
 
     // Variables for input handling
@@ -66,14 +66,14 @@ int main() {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     // Create a DiceRollAnimation instance
-    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(1));  // Adjust frame duration here
+    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(25));  // Adjust frame duration here
     if (!diceRoll.loadFrames(1, 24)) {  // Adjust the frame range to match your dice frames
         std::cerr << "Failed to load dice roll frames!" << std::endl;
         return -1; // Exit if frame loading fails
     }
     
     // Set initial position for the dice animation
-    diceRoll.setPosition(1000.f, 620.f);
+    diceRoll.setPosition(900.f, 570.f);
 
     // Main game loop
     while (window.isOpen()) {

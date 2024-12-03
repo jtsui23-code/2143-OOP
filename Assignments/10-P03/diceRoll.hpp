@@ -56,7 +56,7 @@ public:
 
     // Update the animation state
     void update() {
-        if (isAnimating && clock.getElapsedTime() >= frameDuration) {
+        if (isAnimating) {
             clock.restart();
             ++currentFrame;
 
