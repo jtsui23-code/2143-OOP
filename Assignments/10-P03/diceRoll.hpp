@@ -54,23 +54,25 @@ public:
         }
     }
 
-    // Update the animation state
-    void update() {
+        void update() {
         if (isAnimating) {
-            clock.restart();
-            ++currentFrame;
+            if (clock.getElapsedTime() >= frameDuration) {
+                clock.restart();
+                currentFrame += 3;
 
-            if (currentFrame >= textures.size()) {
-                isAnimating = false; // Stop the animation after the last frame
+                if (currentFrame >= textures.size()) {
+                    isAnimating = false; // Stop the animation after the last frame
 
-                ranText.loadFromFile("media/images/" + std:: to_string(randomFrame) + ".png");
-
-                sprite.setTexture(ranText); // Set to the random dice frame
-            } else {
-                sprite.setTexture(textures[currentFrame]);
+                    // Set to the random dice frame
+                    ranText.loadFromFile("media/images/" + std::to_string(randomFrame) + ".png");
+                    sprite.setTexture(ranText);
+                } else {
+                    sprite.setTexture(textures[currentFrame]);
+                }
             }
         }
     }
+
 
     // Set sprite position
     void setPosition(float x, float y) {
