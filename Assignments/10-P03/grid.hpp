@@ -50,12 +50,14 @@ public:
                 // (0,0) is at top left of window & cell
                 float x = gridStartX + col * (cols + cellSpacing);
                 float y = gridStartY + row * (rows + cellSpacing); 
+                
+                if (pos.x >= x && pos.x <= x + cellSize 
+                    && pos.y >= y && pos.y <= y + cellSize)
+                    {
+                        return {row,col};
+                    }
             }
-            if (pos.x >= x && pos.x <= x + cellSize 
-                && pos.y >= y && pos.y <= y + cellSize)
-                {
-                    return {rol, col};
-                }
+            
         }
         return {-1, -1};
     }

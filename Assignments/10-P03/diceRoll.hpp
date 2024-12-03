@@ -44,7 +44,7 @@ public:
         return true;
     }
 
-    size_t getRandomFrame()
+    int getRandomFrame()
     {
         return randomFrame;
     }
