@@ -44,6 +44,11 @@ public:
         return true;
     }
 
+    size_t getRandomFrame()
+    {
+        return randomFrame;
+    }
+
     // Start the animation
     void startAnimation() {
         if (!textures.empty()) {

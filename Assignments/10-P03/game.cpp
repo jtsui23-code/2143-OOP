@@ -80,7 +80,7 @@ int main() {
     // Set initial position for the dice animation
     diceRoll.setPosition(900.f, 570.f);
 
-    int diceNum = 0;
+    auto diceNum = 0;
     bool firstTurn = true;
 
     // Main game loop
@@ -93,9 +93,9 @@ int main() {
                 window.close();
             }
 
-            if(event.type == sf:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
+            if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
             {
-                sf::Vectorf mousePos(event.mouseButton.button.x, event.mouseButton.button.y);
+                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
                 if(firstTurn)
                 {
@@ -106,6 +106,9 @@ int main() {
                     {
                         //draw randomNumber on the cell
                         grid1Num[g1].setPosition(cell1.first, cell1.second);
+                        grid1Num[g1].setString(std::to_string(diceNum));
+                        grid1Num[g1].setFont(24);
+                        grid1Num[g1].setCharacterSize(25);
                         g1++;
                     }
                 }
@@ -118,6 +121,9 @@ int main() {
                     {
                         //draw randomNumber on cell
                         grid2Num[g2].setPosition(cell2.first, cell2.second);
+                        grid2Num[g2].setString(std::to_string(diceNum)));
+                        grid2Num[g2].setFont(24);
+                        grid2Num[g2].setCharacterSize(25);
                         g2++;
                     }
                 }
@@ -164,7 +170,7 @@ int main() {
             // Start the animation on space key press
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 diceRoll.startAnimation(); // Start the animation when Space is pressed
-                diceNum = diceroll.getRandomFrame;
+                diceNum = diceRoll.getRandomFrame;
             }
 
         }
@@ -198,7 +204,7 @@ int main() {
                 window.draw(grid2Num[b]);
 
             }
-            
+
             window.display(); 
         }
         
