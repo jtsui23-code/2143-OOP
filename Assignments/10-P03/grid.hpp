@@ -39,9 +39,24 @@ public:
 
     // this method checks if the mouse is on any of the 
     // cells in the grid
-    std::pair< int, int> getCellPos(sf::Vector2i pos)
+    std::pair< int, int> getCellPos(const sf::Vector2f& pos)
     {
-
+        for (int row = 0; row < rows; ++row)
+        {
+            for (int col; col < cols; ++col)
+            {
+                // x is the left side of cell
+                // y is the top side of the cell
+                // (0,0) is at top left of window & cell
+                float x = gridStartX + col * (cols + cellSpacing);
+                float y = gridStartY + row * (rows + cellSpacing); 
+            }
+            if (pos.x >= x && pos.x <= x + cellSize 
+                && pos.y >= y && pos.y <= y + cellSize)
+                {
+                    return {rol, col};
+                }
+        }
         return {-1, -1};
     }
 
