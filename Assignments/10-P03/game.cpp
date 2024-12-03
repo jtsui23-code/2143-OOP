@@ -75,6 +75,8 @@ int main() {
     // Set initial position for the dice animation
     diceRoll.setPosition(900.f, 570.f);
 
+    int diceNum = 0;
+
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
@@ -125,6 +127,7 @@ int main() {
             // Start the animation on space key press
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 diceRoll.startAnimation(); // Start the animation when Space is pressed
+                diceNum = diceroll.getRandomFrame;
             }
         }
 

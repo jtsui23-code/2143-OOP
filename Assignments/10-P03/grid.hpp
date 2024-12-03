@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <iostream>
+#include <utility>
+
 
 class Grid {
 private:
@@ -33,6 +35,14 @@ public:
                 grid.push_back(cell);
             }
         }
+    }
+
+    // this method checks if the mouse is on any of the 
+    // cells in the grid
+    std::pair< int, int> getCellPos(sf::Vector2i pos)
+    {
+
+        return {-1, -1};
     }
 
     // Function to draw the grid
