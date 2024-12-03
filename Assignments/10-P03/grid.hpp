@@ -54,7 +54,7 @@ public:
                 if (pos.x >= x && pos.x <= x + cellSize 
                     && pos.y >= y && pos.y <= y + cellSize)
                     {
-                        return {row,col};
+                        return {x,y};
                     }
             }
             
@@ -64,7 +64,7 @@ public:
 
     float getCellSize()
     {
-        return cellSize();
+        return cellSize;
     }
   
 
