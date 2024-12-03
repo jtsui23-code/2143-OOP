@@ -37,6 +37,9 @@ int main() {
         return -1;
     }
 
+    std:: Vector< sf::Text> grid1Num;
+    std:: Vector< sf::Text> grid2Num;
+
     sf::Text roll("Space", font, 50);
     roll.setPosition(530.f, 640.f);
     roll.setFillColor(sf::Color::White);
@@ -61,6 +64,8 @@ int main() {
     std::string userInput[2] = {"", ""};
     bool nameEntered[2] = {false, false};
     int i = 0;
+    int g1 = 0;
+    int g2 = 0;
 
     // Seed the random number generator for the dice roll
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -76,6 +81,7 @@ int main() {
     diceRoll.setPosition(900.f, 570.f);
 
     int diceNum = 0;
+    bool firstTurn = true;
 
     // Main game loop
     while (window.isOpen()) {
@@ -85,6 +91,37 @@ int main() {
             if (event.type == sf::Event::Closed) 
             {
                 window.close();
+            }
+
+            if(event.type == sf:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
+            {
+                sf::Vectorf mousePos(event.mouseButton.button.x, event.mouseButton.button.y);
+
+                if(firstTurn)
+                {
+                    firstTurn = !firstTurn;
+
+                    auto cell1 = grid1.getCellPos(mousePos);
+                    if(cell1.first != -1 && cell1.second != -1)
+                    {
+                        //draw randomNumber on the cell
+                        grid1Num[g1].setPosition(cell1.first, cell1.second);
+                        g1++;
+                    }
+                }
+                else
+                {
+                    firstTurn = !firstTurn;
+
+                    auto cell2 = grid2.getCellPos(mousePos);
+                    if(cell2.first != -1 && cell2.second != -1)
+                    {
+                        //draw randomNumber on cell
+                        grid2Num[g2].setPosition(cell2.first, cell2.second);
+                        g2++;
+                    }
+                }
+
             }
                 if (!nameEntered[i] && i < 2) 
                 {
@@ -129,6 +166,7 @@ int main() {
                 diceRoll.startAnimation(); // Start the animation when Space is pressed
                 diceNum = diceroll.getRandomFrame;
             }
+
         }
 
         // Update the animation
@@ -151,6 +189,16 @@ int main() {
             window.draw(displayName);
             window.draw(displayName2);
             diceRoll.draw(window);           // Draw the dice animation
+            for(int a; a < grid1Num.size(); a++)
+            {
+                window.draw(grid1Num[a]);
+            }
+            for (int b; b < grid2Num.size(); b++)
+            {
+                window.draw(grid2Num[b]);
+
+            }
+            
             window.display(); 
         }
         
