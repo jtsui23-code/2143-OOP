@@ -112,8 +112,11 @@ int main() {
                         if(cell1.first != -1 && cell1.second != -1)
                         {
                             std::cout << diceNum << std:: endl;
+
+                            float cellSize = grid1.getCellSize();
+
                             
-                            grid1Num[g1].setPosition(cell1.first, cell1.second);
+                            grid1Num[g1].setPosition(cell1.first + cellSize/2.0f, cell1.second + cellSize/2.0f);
                             grid1Num[g1].setString(std::to_string(diceNum));
                             grid1Num[g1].setFont(font);
                             grid1Num[g1].setCharacterSize(50);
@@ -136,8 +139,9 @@ int main() {
                         {
                             std::cout << diceNum << std:: endl;
 
-                            
-                            grid2Num[g2].setPosition(cell2.first, cell2.second);
+                            float cellSize = grid2.getCellSize();
+
+                            grid2Num[g2].setPosition(cell2.first + cellSize/2.0f, cell2.second + cellSize/2.0f);
                             grid2Num[g2].setString(std::to_string(diceNum));
                             grid2Num[g2].setFont(font);
                             grid2Num[g2].setCharacterSize(50);

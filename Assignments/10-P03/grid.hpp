@@ -62,6 +62,12 @@ public:
         return {-1, -1};
     }
 
+    float getCellSize()
+    {
+        return cellSize();
+    }
+  
+
     // Function to draw the grid
     void draw(sf::RenderWindow& window) {
         for (const auto& cell : grid) {
