@@ -106,7 +106,7 @@ int main() {
 
                     if(firstTurn)
                     {
-                        firstTurn = !firstTurn;
+                        
 
                         auto cell1 = grid1.getCellPos(mousePos);
                         if(cell1.first != -1 && cell1.second != -1)
@@ -127,11 +127,12 @@ int main() {
                                 g1++;
                             }
                             diceNum = 0;
+                            firstTurn = !firstTurn;
                         }
                     }
-                    else
+                    else if(!firstTurn)
                     {
-                        firstTurn = !firstTurn;
+                        
                         
 
                         auto cell2 = grid2.getCellPos(mousePos);
@@ -153,6 +154,7 @@ int main() {
                             }
 
                             diceNum = 0;
+                            firstTurn = !firstTurn;
                         }
                     }
 
