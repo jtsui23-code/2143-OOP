@@ -24,6 +24,25 @@ int main() {
         return -1;
     }
 
+    std:: vector <sf:: Texture> turnSkin;
+    
+    turnSkin.resize(2, sf::Texture());
+
+    for(int t = 0; t <= 1; t++)
+    {
+        if (!turnSkin[t].loadFromFile("media/turnSprite/Player1.png")) {
+            std::cerr << "Error: Could not load texture 'Player1.png'\n";
+            return -1;
+        }
+    }
+
+
+
+    sf:: RectangleShape turnIndicator(sf:: Vector2f(150.f, 200.f));
+    turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
+
+    turnIndicator.setTexture(&turnSkin[0]);
+
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
     button.setPosition(500.f,630.f);
 
@@ -87,6 +106,9 @@ int main() {
     int diceNum = 0;
     bool firstTurn = true;
 
+    int turnIndex = 0;
+
+
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
@@ -111,6 +133,9 @@ int main() {
                         auto cell1 = grid1.getCellPos(mousePos);
                         if(cell1.first != -1 && cell1.second != -1)
                         {
+
+                            turnIndex = 0;
+
                             std::cout << diceNum << std:: endl;
 
                             float cellSize = grid1.getCellSize();
@@ -138,6 +163,8 @@ int main() {
                         auto cell2 = grid2.getCellPos(mousePos);
                         if(cell2.first != -1 && cell2.second != -1)
                         {
+                            turnIndex = 1;
+
                             std::cout << diceNum << std:: endl;
 
                             float cellSize = grid2.getCellSize();
@@ -220,6 +247,8 @@ int main() {
 
         else
         {
+            turnIndicator.setTexture(&turnSkin[turnIndex]);
+            window.draw(turnIndicator);
             grid1.draw(window);
             grid2.draw(window);
             window.draw(button);
