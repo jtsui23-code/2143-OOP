@@ -4,53 +4,7 @@
 #include "diceRoll.hpp"  // include animation for dice roll
 #include "grid.hpp"      // include grid
 
-class Game
-{
-    private:
-    sf::RenderWindow window();
-    
-    int height;
-    int width;
-    
-
-
-
-
-    public:
-
-    Game()
-    {
-        height = 1200;
-        width = 800;
-        Game::window(sf::VideoMode(height, width), "KnuckleBone")
-        
-
-    }
-
-    // void loadMedia()
-    // {
-    //     if (!buttonTexture.loadFromFile("media/Buttons/Red.png")) 
-    //     {
-
-    //     std::cerr << "Error: Could not load texture 'Red.png'\n";
-    //     }
-
-    //     if (!turnSkin.loadFromFile("media/turnSprite/Player1.png" )) 
-    //     {
-    //     std::cerr << "Error: Could not load texture 'Player1.png'\n";
-    //     }
-
-    // }
-};
-
-class Player
-{
-    private:
-
-    public:
-};
-int main() 
-{
+int main() {
     // Create a SFML window
     int height = 1200;
     int width = 800;
