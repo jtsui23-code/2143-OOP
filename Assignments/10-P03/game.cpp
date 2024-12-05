@@ -24,25 +24,20 @@ int main() {
         return -1;
     }
 
-    std:: vector <sf:: Texture> turnSkin;
+    sf:: Texture turnSkin;
     
-    turnSkin.resize(2, sf::Texture());
-
-
-    for(int t = 0; t <= 1; t++)
-    {
-        if (!turnSkin[t].loadFromFile("media/turnSprite/Player" + std:: to_string(1) + ".png" )) {
-            std::cerr << "Error: Could not load texture 'Player1.png'\n";
-            return -1;
-        }
+    if (!turnSkin.loadFromFile("media/turnSprite/Player1.png" )) {
+        std::cerr << "Error: Could not load texture 'Player1.png'\n";
+        return -1;
     }
+
 
 
 
     sf:: RectangleShape turnIndicator(sf:: Vector2f(150.f, 200.f));
 
     turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
-    turnIndicator.setTexture(&turnSkin[0]);
+    turnIndicator.setTexture(&turnSkin);
 
     
 
@@ -108,8 +103,7 @@ int main() {
 
     int diceNum = 0;
     bool firstTurn = true;
-
-    int turnIndex = 0;
+    int diceRolls = 1;
 
 
     // Main game loop
@@ -131,14 +125,11 @@ int main() {
 
                     if(firstTurn)
                     {
+                        diceRolls++;
                         
-
                         auto cell1 = grid1.getCellPos(mousePos);
                         if(cell1.first != -1 && cell1.second != -1)
                         {
-
-                            // turnIndex = 0;
-                            // window.draw(turnIndicator);
 
                             std::cout << diceNum << std:: endl;
 
@@ -161,14 +152,11 @@ int main() {
                     }
                     else if(!firstTurn)
                     {
-                        
-                        
-
+                        diceRolls++;
+  
                         auto cell2 = grid2.getCellPos(mousePos);
                         if(cell2.first != -1 && cell2.second != -1)
                         {
-                            // turnIndex = 1;
-                            // window.draw(turnIndicator);
 
                             std::cout << diceNum << std:: endl;
 
@@ -234,8 +222,13 @@ int main() {
 
             // Start the animation on space key press
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-                diceRoll.startAnimation(); // Start the animation when Space is pressed
-                diceNum = diceRoll.getRandomFrame();
+                if (diceRolls != 0)
+                {
+
+                    diceRoll.startAnimation(); // Start the animation when Space is pressed
+                    diceNum = diceRoll.getRandomFrame();
+                    diceRolls--;
+                }
             }
 
         }
@@ -257,8 +250,6 @@ int main() {
             {
                 turnIndicator.setScale(1.f,1.f);
                 turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
-
-                
             }
             if (!firstTurn)
             {
@@ -267,7 +258,7 @@ int main() {
                 // then the image will be positioned off to the left
                 turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
             }
-            //turnIndicator.setTexture(&turnSkin[turnIndex]);
+
             window.draw(turnIndicator);
             grid1.draw(window);
             grid2.draw(window);
