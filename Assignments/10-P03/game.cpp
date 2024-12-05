@@ -256,6 +256,7 @@ int main() {
             if (firstTurn)
             {
                 turnIndicator.setScale(1.f,1.f);
+                turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
 
                 
             }
@@ -264,7 +265,7 @@ int main() {
                 turnIndicator.setScale(-1.f, 1.f);
                 // If you don't reoffset the position
                 // then the image will be positioned off to the left
-                //turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
+                turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
             }
             //turnIndicator.setTexture(&turnSkin[turnIndex]);
             window.draw(turnIndicator);
