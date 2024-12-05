@@ -4,6 +4,45 @@
 #include "diceRoll.hpp"  // include animation for dice roll
 #include "grid.hpp"      // include grid
 
+class Game
+{
+    private:
+
+    sf::RenderWindow window;
+    Grid grid1, grid2;
+    Player player1, player2;
+
+    sf::RectangleShape turnIndicator;
+    sf::RectangleShape button;
+
+    sf::Text rollText, nameInputText, instructionText;
+    sf::Font font;
+    sf::Texture buttonTexture, turnSkin;
+
+    DiceRollAnimation diceRoll;
+
+    bool nameEntered[2] = {false, false};
+    std::string userInput[2];
+    int currentPlayerIndex = 0;
+    bool firstTurn = true;
+    int diceRolls = 1;
+    int diceNum = 0;
+
+    public:
+
+};
+
+class Player
+{
+
+    private:
+    std::string name;
+    sf::Text displayName;
+    std::vector<sf::Text> gridNumbers;
+
+    public:
+
+};
 
 int main() {
     // Create a SFML window
