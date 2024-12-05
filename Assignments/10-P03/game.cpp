@@ -28,9 +28,10 @@ int main() {
     
     turnSkin.resize(2, sf::Texture());
 
+
     for(int t = 0; t <= 1; t++)
     {
-        if (!turnSkin[t].loadFromFile("media/turnSprite/Player1.png")) {
+        if (!turnSkin[t].loadFromFile("media/turnSprite/Player" + std:: to_string(1) + ".png" )) {
             std::cerr << "Error: Could not load texture 'Player1.png'\n";
             return -1;
         }
@@ -39,9 +40,11 @@ int main() {
 
 
     sf:: RectangleShape turnIndicator(sf:: Vector2f(150.f, 200.f));
-    turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
 
+    turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
     turnIndicator.setTexture(&turnSkin[0]);
+
+    
 
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
     button.setPosition(500.f,630.f);
@@ -134,7 +137,8 @@ int main() {
                         if(cell1.first != -1 && cell1.second != -1)
                         {
 
-                            turnIndex = 0;
+                            // turnIndex = 0;
+                            // window.draw(turnIndicator);
 
                             std::cout << diceNum << std:: endl;
 
@@ -163,7 +167,8 @@ int main() {
                         auto cell2 = grid2.getCellPos(mousePos);
                         if(cell2.first != -1 && cell2.second != -1)
                         {
-                            turnIndex = 1;
+                            // turnIndex = 1;
+                            // window.draw(turnIndicator);
 
                             std::cout << diceNum << std:: endl;
 
@@ -199,6 +204,7 @@ int main() {
                         } else if (event.text.unicode == '\r') {
                             // Handle enter
                             nameEntered[i] = true;
+
                             
                             if (i == 0)
                             {
@@ -247,7 +253,20 @@ int main() {
 
         else
         {
-            turnIndicator.setTexture(&turnSkin[turnIndex]);
+            if (firstTurn)
+            {
+                turnIndicator.setScale(1.f,1.f);
+
+                
+            }
+            if (!firstTurn)
+            {
+                turnIndicator.setScale(-1.f, 1.f);
+                // If you don't reoffset the position
+                // then the image will be positioned off to the left
+                //turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
+            }
+            //turnIndicator.setTexture(&turnSkin[turnIndex]);
             window.draw(turnIndicator);
             grid1.draw(window);
             grid2.draw(window);
@@ -266,7 +285,6 @@ int main() {
 
             }
 
-            window.display(); 
         }
         
 
