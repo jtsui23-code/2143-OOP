@@ -147,6 +147,8 @@ int main()
     // Set initial position for the dice animation
     diceRoll.setPosition(900.f, 570.f);
 
+    diceRoll.setScale(1.2f,1.2f);
+
     int diceNum = 0;
     bool firstTurn = true;
     int diceRolls = 1;

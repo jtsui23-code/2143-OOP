@@ -78,6 +78,11 @@ public:
         }
     }
 
+    void setScale(float x, float y)
+    {
+        sprite.setScale(x,y);
+    }
+
 
     // Set sprite position
     void setPosition(float x, float y) {
