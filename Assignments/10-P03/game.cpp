@@ -6,27 +6,30 @@
 
 int calculateScore(const std::vector<sf::Text>&) ;
 
-// class Game
-// {
-//     private:
-//     int height;
-//     int width;
+class Game
+{
+    private:
+    int height;
+    int width;
  
-//     Grid grid10(3,3, 125.f, 120.f, 80.f);
-//     Grid grid20(3,3, 125.f, 800 - 25.f, 80.f);
+    Grid grid10;
+    Grid grid20;
+    sf::RenderWindow window;
 
 
+    public:
 
-//     public:
-
-//     Game()
-//     {
-//       height = 1200;
-//       width = 800;
-//     }
+    Game(sf::RenderWindow w)
+    {
+      height = 1200;
+      width = 800;
+      grid10(3,3, 125.f, 120.f, 80.f);
+      grid20(3,3, 125.f, 800 - 25.f, 80.f);
+      
+    }
 
   
-// };
+};
 
 // class Player
 // {

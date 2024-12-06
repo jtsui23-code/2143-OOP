@@ -16,6 +16,7 @@ private:
 
 public:
     // Constructor to initialize the grid
+    Grid(){}
     Grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, float cellSpacing = 0.f)
         : rows(rows), cols(cols), cellSize(cellSize), gridStartX(gridStartX), gridStartY(gridStartY), cellSpacing(cellSpacing) {
         // Create the grid cells
