@@ -73,7 +73,7 @@ int main()
     
 
     sf::RectangleShape button(sf:: Vector2f(200.f, 100.f));
-    button.setPosition(500.f,630.f);
+    button.setPosition(535.f,630.f);
 
     button.setTexture(&buttonTexture);
 
@@ -93,7 +93,7 @@ int main()
     grid2Num.resize(9, sf::Text());
 
     sf::Text roll("Space", font, 50);
-    roll.setPosition(530.f, 640.f);
+    roll.setPosition(565.f, 640.f);
     roll.setFillColor(sf::Color::White);
 
     sf::Text instructionText("Enter your Players name:", font, 24);
