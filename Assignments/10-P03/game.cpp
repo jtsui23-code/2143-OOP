@@ -4,6 +4,8 @@
 #include "diceRoll.hpp"  // include animation for dice roll
 #include "grid.hpp"      // include grid
 
+int calculateScore(const std::vector<sf::Text>&) ;
+
 // class Game
 // {
 //     private:
@@ -116,6 +118,21 @@ int main()
     int i = 0;
     int g1 = 0;
     int g2 = 0;
+
+    sf:: Text score1("Score: ", font, 45);
+    sf:: Text score2("Score: ", font, 45);
+    score1.setFillColor(sf::Color:: White);
+    score2.setFillColor(sf::Color::White);
+    score1.setPosition(200.f, 450.f);
+    score2.setPosition(width + 200.f, 450.f);
+
+    sf:: Text score1Display("Score: ", font, 45);
+    sf:: Text score2Display("Score: ", font, 45);
+    score1Display.setFillColor(sf::Color:: White);
+    score2Display.setFillColor(sf::Color::White);
+    score1Display.setPosition(200.f, 450.f);
+    score2Display.setPosition(width + 100.f, 450.f);
+
 
     // Seed the random number generator for the dice roll
     std::srand(static_cast<unsigned>(std::time(nullptr)));
@@ -295,6 +312,8 @@ int main()
             window.draw(roll);
             window.draw(displayName);
             window.draw(displayName2);
+            window.draw(score1Display);
+            window.draw(score2Display);
             diceRoll.draw(window);           // Draw the dice animation
             for(int a = 0; a < grid1Num.size(); a++)
             {
@@ -305,6 +324,15 @@ int main()
                 window.draw(grid2Num[b]);
 
             }
+
+            int sc1 = calculateScore(grid1Num);
+            int sc2 = calculateScore(grid2Num);
+
+            score1.setString(std::to_string(sc1));
+            score2.setString(std::to_string(sc2));
+
+            window.draw(score1);
+            window.draw(score2);
 
         }
         
@@ -319,4 +347,27 @@ int main()
     }
 
     return 0;
+}
+
+int calculateScore(const std::vector<sf::Text>& gridNumbers) 
+{
+    int score = 0;
+
+    for (const auto& text : gridNumbers) 
+    {
+        // Check if the text is not empty
+        if (!text.getString().isEmpty()) 
+        {
+            try 
+            {
+                score += std::stoi(text.getString().toAnsiString());
+            } 
+            catch (const std::exception& e) 
+            {
+                std::cerr << "Error converting text to number: " << e.what() << std::endl;
+            }
+        }
+    }
+
+    return score;
 }
