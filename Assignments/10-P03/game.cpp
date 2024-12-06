@@ -123,14 +123,14 @@ int main()
     sf:: Text score2("Score: ", font, 45);
     score1.setFillColor(sf::Color:: White);
     score2.setFillColor(sf::Color::White);
-    score1.setPosition(200.f, 450.f);
-    score2.setPosition(width + 200.f, 450.f);
+    score1.setPosition(400.f, 455.f);
+    score2.setPosition(width + 250.f, 455.f);
 
     sf:: Text score1Display("Score: ", font, 45);
     sf:: Text score2Display("Score: ", font, 45);
     score1Display.setFillColor(sf::Color:: White);
     score2Display.setFillColor(sf::Color::White);
-    score1Display.setPosition(200.f, 450.f);
+    score1Display.setPosition(250.f, 450.f);
     score2Display.setPosition(width + 100.f, 450.f);
 
 
