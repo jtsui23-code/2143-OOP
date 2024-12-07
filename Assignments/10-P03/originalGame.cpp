@@ -91,7 +91,7 @@ int main() {
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     // Create a DiceRollAnimation instance
-    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(5));  // Adjust frame duration here
+    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(25));  // Adjust frame duration here
     if (!diceRoll.loadFrames(1, 24)) {  // Adjust the frame range to match your dice frames
         std::cerr << "Failed to load dice roll frames!" << std::endl;
         return -1; // Exit if frame loading fails
