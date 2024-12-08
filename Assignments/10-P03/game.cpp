@@ -19,6 +19,12 @@ class Game
     sf:: Texture turnSkin;
     sf:: RectangleShape turnIndicator;    
     sf::RectangleShape button;
+    std:: vector< sf::Text> grid1Num;
+    std:: vector< sf::Text> grid2Num;
+    sf::Text roll;
+    sf::Text instructionText;
+    sf::Text nameText;
+    sf::Font font;
 
 
 
@@ -28,16 +34,29 @@ class Game
     public:
 
     Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
-    turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f))
+    turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
+    ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24)
+
     {
     height = 1200;
     width = 800;
-    
+
     turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
     turnIndicator.setTexture(&turnSkin);
 
     button.setPosition(535.f,630.f);
     button.setTexture(&buttonTexture);
+
+    //Fills in 9 indexs with empty text
+    grid1Num.resize(9, sf::Text());
+    grid2Num.resize(9, sf::Text());
+
+    roll.setPosition(565.f, 640.f);
+    roll.setFillColor(sf::Color::White);
+
+    // Prompts for player name input
+    instructionText.setPosition(50, 200);
+    instructionText.setFillColor(sf::Color::White);
 
     }
 
@@ -52,6 +71,12 @@ class Game
         if (!turnSkin.loadFromFile("media/turnSprite/Player1.png" )) 
         {
         std::cerr << "Error: Could not load texture 'Player1.png'\n";
+        }
+
+        if (!font.loadFromFile("media/fonts/arial.ttf")) 
+        {
+        // Handle error
+        std::cout << "Can't load font";
         }
 
     }
@@ -126,6 +151,7 @@ int main()
     sf::Text roll("Space", font, 50);
     roll.setPosition(565.f, 640.f);
     roll.setFillColor(sf::Color::White);
+
 
     sf::Text instructionText("Enter your Players name:", font, 24);
     instructionText.setPosition(50, 200);
