@@ -27,7 +27,7 @@ class Game
     width = 800;
     }
 
-    void loadAssets
+    void loadAssets()
     {
         if (!buttonTexture.loadFromFile("media/Buttons/Red.png")) 
         {

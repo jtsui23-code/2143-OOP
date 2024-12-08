@@ -40,4 +40,4 @@ if [ $? -eq 0 ]; then
     echo "Compilation successful: ./${OUTPUT}"
 else
     echo "Compilation failed."
-fi.
+fi
