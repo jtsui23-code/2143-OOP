@@ -16,15 +16,29 @@ class Game
     Grid grid20;
     sf::RenderWindow* window;
     sf::Texture buttonTexture;
+    sf:: Texture turnSkin;
+    sf:: RectangleShape turnIndicator;    
+    sf::RectangleShape button;
+
+
+
 
 
 
     public:
 
-    Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w) 
+    Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
+    turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f))
     {
     height = 1200;
     width = 800;
+    
+    turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
+    turnIndicator.setTexture(&turnSkin);
+
+    button.setPosition(535.f,630.f);
+    button.setTexture(&buttonTexture);
+
     }
 
     void loadAssets()
@@ -33,6 +47,11 @@ class Game
         {
         std::cerr << "Error: Could not load texture 'Red.png'\n";
 
+        }
+
+        if (!turnSkin.loadFromFile("media/turnSprite/Player1.png" )) 
+        {
+        std::cerr << "Error: Could not load texture 'Player1.png'\n";
         }
 
     }
