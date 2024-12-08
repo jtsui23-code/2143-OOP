@@ -145,7 +145,7 @@ class Game
 
     void checkMouse(sf::Event event)
     {
-        if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
+        if(event.type == sf:: Event:: MouseButtonPressedIm && event.mouseButton.button == sf:: Mouse::Left)
             {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
@@ -210,6 +210,56 @@ class Game
            }    
 
 
+    }
+
+    void close()
+    {
+        window->close();
+    }
+
+    bool isOpen()
+    {
+        return window->isOpen();
+    }
+
+    void inputNames(sf::Event event)
+    {
+        if (!nameEntered[i] && i < 2) 
+            {
+                if (event.type == sf::Event::TextEntered) {
+                    if (event.text.unicode == '\b') {
+                        // Handle backspace
+                        if (!userInput[i].empty()) {
+                            userInput[i].pop_back();
+                        }
+                    } else if (event.text.unicode == '\r') {
+                        // Handle enter
+                        nameEntered[i] = true;
+
+                        
+                        if (i == 0)
+                        {
+
+                        
+                            displayName.setString(userInput[0]);
+                        }
+                        if (i == 1)
+                        {
+                            displayName2.setString(userInput[1]);
+                        }
+
+                        if (i < 1)
+                        {
+                            i++;
+                        }
+                    } else if (event.text.unicode < 128) {
+                        // Handle valid characters
+                        userInput[i] += static_cast<char>(event.text.unicode);
+                    }
+
+                    nameText.setString(userInput[i]);
+                }
+            }
     }
 
   
@@ -417,42 +467,43 @@ int main()
                 }
 
             }
-                if (!nameEntered[i] && i < 2) 
-                {
-                    if (event.type == sf::Event::TextEntered) {
-                        if (event.text.unicode == '\b') {
-                            // Handle backspace
-                            if (!userInput[i].empty()) {
-                                userInput[i].pop_back();
-                            }
-                        } else if (event.text.unicode == '\r') {
-                            // Handle enter
-                            nameEntered[i] = true;
 
-                            
-                            if (i == 0)
-                            {
+            if (!nameEntered[i] && i < 2) 
+            {
+                if (event.type == sf::Event::TextEntered) {
+                    if (event.text.unicode == '\b') {
+                        // Handle backspace
+                        if (!userInput[i].empty()) {
+                            userInput[i].pop_back();
+                        }
+                    } else if (event.text.unicode == '\r') {
+                        // Handle enter
+                        nameEntered[i] = true;
 
-                            
-                                displayName.setString(userInput[0]);
-                            }
-                            if (i == 1)
-                            {
-                                displayName2.setString(userInput[1]);
-                            }
+                        
+                        if (i == 0)
+                        {
 
-                            if (i < 1)
-                            {
-                                i++;
-                            }
-                        } else if (event.text.unicode < 128) {
-                            // Handle valid characters
-                            userInput[i] += static_cast<char>(event.text.unicode);
+                        
+                            displayName.setString(userInput[0]);
+                        }
+                        if (i == 1)
+                        {
+                            displayName2.setString(userInput[1]);
                         }
 
-                        nameText.setString(userInput[i]);
+                        if (i < 1)
+                        {
+                            i++;
+                        }
+                    } else if (event.text.unicode < 128) {
+                        // Handle valid characters
+                        userInput[i] += static_cast<char>(event.text.unicode);
                     }
+
+                    nameText.setString(userInput[i]);
                 }
+            }
             
 
 
