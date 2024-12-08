@@ -112,9 +112,9 @@ class Game
     g1 = 0;
     g2 = 0;
 
-    int diceNum = 0;
-    bool firstTurn = true;
-    int diceRolls = 1;
+     diceNum = 0;
+     firstTurn = true;
+     diceRolls = 1;
 
 
     }
@@ -291,7 +291,6 @@ class Game
     void updateGame()
     {
 
-        std:: cout << firstTurn;
 
          if (!nameEntered[i] && i < 2) 
         {
