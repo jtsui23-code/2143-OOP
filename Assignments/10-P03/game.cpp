@@ -14,18 +14,27 @@ class Game
  
     Grid grid10;
     Grid grid20;
-    sf::RenderWindow window;
+    sf::RenderWindow* window;
+    sf::Texture buttonTexture;
+
 
 
     public:
 
-    Game(sf::RenderWindow w)
+    Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w) 
     {
-      height = 1200;
-      width = 800;
-      grid10(3,3, 125.f, 120.f, 80.f);
-      grid20(3,3, 125.f, 800 - 25.f, 80.f);
-      
+    height = 1200;
+    width = 800;
+    }
+
+    void loadAssets
+    {
+        if (!buttonTexture.loadFromFile("media/Buttons/Red.png")) 
+        {
+        std::cerr << "Error: Could not load texture 'Red.png'\n";
+
+        }
+
     }
 
   

@@ -33,11 +33,11 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Run the compilation
-echo "Compiling: ${SOURCE_FILES[@]}"
+echo "Compiling: ${SOURCE_FILES[@]}".
 $CXX ${CXXFLAGS} "${SOURCE_FILES[@]}" -o "${OUTPUT}" ${LDFLAGS}
 
 if [ $? -eq 0 ]; then
     echo "Compilation successful: ./${OUTPUT}"
 else
     echo "Compilation failed."
-fi
+fi.
