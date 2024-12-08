@@ -145,7 +145,7 @@ class Game
 
     void checkMouse(sf::Event event)
     {
-        if(event.type == sf:: Event:: MouseButtonPressedIm && event.mouseButton.button == sf:: Mouse::Left)
+        if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
             {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
@@ -260,6 +260,96 @@ class Game
                     nameText.setString(userInput[i]);
                 }
             }
+    }
+
+    void rollDice(sf::Event event)
+    {
+        // Start the animation on space key press
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                if (diceRolls != 0)
+                {
+
+                    diceRoll.startAnimation(); // Start the animation when Space is pressed
+                    diceNum = diceRoll.getRandomFrame();
+                    diceRolls--;
+                }
+            }
+    }
+
+    void updateDice()
+    {
+        diceRoll.update();
+    }
+
+    void clear()
+    {
+    window->clear(sf::Color::Black);
+    }
+
+    void updateGame()
+    {
+
+         if (!nameEntered[i] && i < 2) 
+        {
+            window->draw(instructionText);
+            window->draw(nameText);
+        } 
+
+        else
+        {
+            if (firstTurn)
+            {
+                turnIndicator.setScale(1.f,1.f);
+                turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
+            }
+            if (!firstTurn)
+            {
+                turnIndicator.setScale(-1.f, 1.f);
+                // If you don't reoffset the position
+                // then the image will be positioned off to the left
+                turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
+            }
+
+            window->draw(turnIndicator);
+            grid1.draw(*window);
+            grid2.draw(*window);
+            window->draw(button);
+            window->draw(roll);
+            window->draw(displayName);
+            window->draw(displayName2);
+            window->draw(score1Display);
+            window->draw(score2Display);
+            diceRoll.draw(*window);           // Draw the dice animation
+
+            for(int a = 0; a < grid1Num.size(); a++)
+            {
+                window->draw(grid1Num[a]);
+            }
+            for (int b = 0; b < grid2Num.size(); b++)
+            {
+                window->draw(grid2Num[b]);
+
+            }
+
+            int sc1 = calculateScore(grid1Num);
+            int sc2 = calculateScore(grid2Num);
+
+            score1.setString(std::to_string(sc1));
+            score2.setString(std::to_string(sc2));
+
+            window->draw(score1);
+            window->draw(score2);
+
+        }
+        
+
+        // Display everything
+        window->display();
+
+        // Render the window
+        //window.clear(sf::Color::White);  // Clear the window with a white color
+        
+        
     }
 
   
