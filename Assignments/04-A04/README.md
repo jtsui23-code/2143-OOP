@@ -1,7 +1,7 @@
 ## 04-A04 - Basic OOP terminology
 ### Jack Tsui
 ### Description:
-I have done my OOP Primer within my wiki tab in this repository below is a link to my wiki home page. 
+I have done my OOP Primer within my wiki tab below is a link to my wiki home page. 
 
 ### Files:
 |   #   | Link           | Description                                        |
