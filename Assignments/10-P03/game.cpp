@@ -25,8 +25,9 @@ class Game
     sf::Text instructionText;
     sf::Text nameText;
     sf::Font font;
-
-
+    sf::Text displayName;
+    sf::Text displayName2;
+    std::string userInput[2];
 
 
 
@@ -35,7 +36,8 @@ class Game
 
     Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
     turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
-    ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24)
+    ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24), displayName("", font, 45)
+    , displayName2("", font, 45)
 
     {
     height = 1200;
@@ -57,6 +59,19 @@ class Game
     // Prompts for player name input
     instructionText.setPosition(50, 200);
     instructionText.setFillColor(sf::Color::White);
+
+    nameText.setPosition(350, 200);
+    nameText.setFillColor(sf::Color::Green);
+
+    displayName.setPosition(300, 25);
+    displayName.setFillColor(sf::Color::Yellow);
+
+    displayName2.setPosition(950, 25);
+    displayName2.setFillColor(sf::Color::Yellow);
+
+    userInput[0] = {""};
+    userInput[1] = {""};
+
 
     }
 
