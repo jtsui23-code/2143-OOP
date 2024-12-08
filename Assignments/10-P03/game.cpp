@@ -12,8 +12,8 @@ class Game
     int height;
     int width;
  
-    Grid grid10;
-    Grid grid20;
+    Grid grid1;
+    Grid grid2;
     sf::RenderWindow* window;
     sf::Texture buttonTexture;
     sf:: Texture turnSkin;
@@ -41,11 +41,15 @@ class Game
     // Create a DiceRollAnimation instance
     DiceRollAnimation diceRoll;  
 
+    int diceNum;
+    bool firstTurn;
+    int diceRolls;
+
 
 
     public:
 
-    Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
+    Game(sf::RenderWindow &w) : grid1(3, 3, 125.f, 120.f, 80.f), grid2(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
     turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
     ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24), displayName("", font, 45)
     , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
@@ -100,6 +104,15 @@ class Game
     score1Display.setPosition(250.f, 450.f);
     score2Display.setPosition(width + 100.f, 450.f);
 
+    // Set initial position for the dice animation
+    diceRoll.setPosition(900.f, 560.f);
+
+    diceRoll.setScale(1.2f,1.2f);
+
+    int diceNum = 0;
+    bool firstTurn = true;
+    int diceRolls = 1;
+
 
     }
 
@@ -123,10 +136,79 @@ class Game
         }
 
         if (!diceRoll.loadFrames(1, 24)) 
-        
+
         {  
         std::cerr << "Failed to load dice roll frames!" << std::endl;
         }
+
+    }
+
+    void checkMouse(sf::Event event)
+    {
+        if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
+            {
+                sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+
+                if(diceNum > 0)
+                {
+
+                    if(firstTurn)
+                    {
+                        diceRolls++;
+                        
+                        auto cell1 = grid1.getCellPos(mousePos);
+                        if(cell1.first != -1 && cell1.second != -1)
+                        {
+
+                            std::cout << diceNum << std:: endl;
+
+                            float cellSize = grid1.getCellSize();
+
+                            
+                            grid1Num[g1].setPosition(cell1.first + cellSize/2.0f - 18.f, cell1.second + cellSize/2.0f - 35.f);
+                            grid1Num[g1].setString(std::to_string(diceNum));
+                            grid1Num[g1].setFont(font);
+                            grid1Num[g1].setCharacterSize(50);
+                            grid1Num[g1].setFillColor(sf::Color::White);
+
+                            if ( g1 < 9)
+                            {
+                                g1++;
+                            }
+                            diceNum = 0;
+                            firstTurn = !firstTurn;
+                        }
+                    }
+                    else if(!firstTurn)
+                    {
+                        diceRolls++;
+  
+                        auto cell2 = grid2.getCellPos(mousePos);
+                        if(cell2.first != -1 && cell2.second != -1)
+                        {
+
+                            std::cout << diceNum << std:: endl;
+
+                            float cellSize = grid2.getCellSize();
+
+                            grid2Num[g2].setPosition(cell2.first + cellSize/2.0f - 18.f, cell2.second + cellSize/2.0f - 28.f);
+                            grid2Num[g2].setString(std::to_string(diceNum));
+                            grid2Num[g2].setFont(font);
+                            grid2Num[g2].setCharacterSize(50);
+                            grid2Num[g2].setFillColor(sf::Color::White);
+                            
+                            if(g2 < 9)
+                            {
+                                g2++;
+                            }
+
+                            diceNum = 0;
+                            firstTurn = !firstTurn;
+                        }
+                    }
+                }
+           }    
+
 
     }
 
