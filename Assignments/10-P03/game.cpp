@@ -3,30 +3,80 @@
 #include <SFML/System.hpp>
 #include "diceRoll.hpp"  // include animation for dice roll
 #include "grid.hpp"      // include grid
+#include<string>
+
+
 
 int calculateScore(const std::vector<sf::Text>&) ;
+
+
+class Player {
+private:
+    std::string name;
+    int score;
+
+public:
+
+    Player() : score(0) {}
+
+    // Setters and Getters
+    void setName(std:: string playerName) 
+    {
+        name = playerName;
+    }
+
+    std::string getName()
+    {
+        return name;
+    }
+
+    void setScore(int playerScore) {
+        score = playerScore;
+    }
+
+    int getScore() const {
+        return score;
+    }
+
+    void increaseScore(int points) 
+    {
+        score += points;
+    }
+
+    
+};
+
 
 class Game
 {
     private:
+
+    Player player[2];
+
     int height;
     int width;
  
     Grid grid1;
     Grid grid2;
+
     sf::RenderWindow* window;
+
     sf::Texture buttonTexture;
     sf:: Texture turnSkin;
     sf:: RectangleShape turnIndicator;    
     sf::RectangleShape button;
+
     std:: vector< sf::Text> grid1Num;
     std:: vector< sf::Text> grid2Num;
+
     sf::Text roll;
+
     sf::Text instructionText;
     sf::Text nameText;
     sf::Font font;
     sf::Text displayName;
     sf::Text displayName2;
+
     std::string userInput[2];
     bool nameEntered[2] = {false, false};
     int i;
@@ -149,6 +199,8 @@ class Game
     void checkMouse(sf::Event event)
     {
         
+
+        
         if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
             {
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
@@ -164,7 +216,6 @@ class Game
                         if(cell1.first != -1 && cell1.second != -1)
                         {
 
-                            std::cout << diceNum << std:: endl;
 
                             float cellSize = grid1.getCellSize();
 
@@ -343,6 +394,13 @@ class Game
             window->draw(score1);
             window->draw(score2);
 
+            player[0].setScore(std::stoi(score1.getString().toAnsiString()));
+            player[0].setName(displayName.getString());
+
+            player[1].setScore(std::stoi(score2.getString().toAnsiString()));
+            player[1].setName(displayName2.getString());
+
+
         }
         
 
@@ -381,12 +439,7 @@ class Game
   
 };
 
-// class Player
-// {
-//     private:
 
-//     public:
-// };
 
 int main() 
 {
