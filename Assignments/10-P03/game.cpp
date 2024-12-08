@@ -28,7 +28,18 @@ class Game
     sf::Text displayName;
     sf::Text displayName2;
     std::string userInput[2];
+    bool nameEntered[2] = {false, false};
+    int i;
+    int g1;
+    int g2;
+    sf:: Text score1;
+    sf:: Text score2;
 
+    sf:: Text score1Display;
+    sf:: Text score2Display;   
+
+    // Create a DiceRollAnimation instance
+    DiceRollAnimation diceRoll;  
 
 
 
@@ -37,7 +48,8 @@ class Game
     Game(sf::RenderWindow &w) : grid10(3, 3, 125.f, 120.f, 80.f), grid20(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
     turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
     ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24), displayName("", font, 45)
-    , displayName2("", font, 45)
+    , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
+    ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(5))
 
     {
     height = 1200;
@@ -72,6 +84,22 @@ class Game
     userInput[0] = {""};
     userInput[1] = {""};
 
+    nameEntered[0] = {false};
+    nameEntered[1] = {false};
+    i = 0;
+    g1 = 0;
+    g2 = 0;
+
+    score1.setFillColor(sf::Color:: White);
+    score2.setFillColor(sf::Color::White);
+    score1.setPosition(400.f, 455.f);
+    score2.setPosition(width + 250.f, 455.f);
+
+    score1Display.setFillColor(sf::Color:: White);
+    score2Display.setFillColor(sf::Color::White);
+    score1Display.setPosition(250.f, 450.f);
+    score2Display.setPosition(width + 100.f, 450.f);
+
 
     }
 
@@ -92,6 +120,12 @@ class Game
         {
         // Handle error
         std::cout << "Can't load font";
+        }
+
+        if (!diceRoll.loadFrames(1, 24)) 
+        
+        {  
+        std::cerr << "Failed to load dice roll frames!" << std::endl;
         }
 
     }
@@ -210,8 +244,8 @@ int main()
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
     // Create a DiceRollAnimation instance
-    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(5));  // Adjust frame duration here
-    if (!diceRoll.loadFrames(1, 24)) {  // Adjust the frame range to match your dice frames
+    DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(5));  
+    if (!diceRoll.loadFrames(1, 24)) {  
         std::cerr << "Failed to load dice roll frames!" << std::endl;
         return -1; // Exit if frame loading fails
     }
