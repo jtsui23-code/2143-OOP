@@ -416,6 +416,40 @@ class Game
     int calculateScore(const std::vector<sf::Text>& gridNumbers) 
     {
         int score = 0;
+        int gridRow = 3;
+        int gridCol = 3;
+
+        // An array of maps 
+        // the key of the map is the number that 
+        // appears in the colmn and its pair is the frequency 
+        // of that number appearing in a colmn
+        // ex) a colmn of 2 2 5
+        // the map would look like {2: 2, 5:1}
+        std::map<int, int> frequencyCounter[gridCol];
+
+        // Loops through the grid and count frequncy of numbers
+        // per column
+
+        for (int r = 0; r < gridRow; r++)
+        {
+            for(int c = 0; c < gridCol; c++)
+            {
+                int index = r * gridCol + c;
+
+                if (!gridNumbers[index].getString().isEmpty()) 
+                {
+                    try 
+                    {
+                        int value = std::stoi(gridNumbers[index].getString().toAnsiString());
+                        columnCount[col][value]++;
+                    } 
+                    catch (const std::exception& e) 
+                    {
+                        std::cerr << "Error converting text to number: " << e.what() << std::endl;
+                    }
+                }
+            }
+        }
 
         for (const auto& text : gridNumbers) 
         {
