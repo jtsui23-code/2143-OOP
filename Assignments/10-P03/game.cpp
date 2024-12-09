@@ -465,7 +465,7 @@ class Game
             // then goes through the whole map that its focuses on 
             // first iteration it will go through the first map 
             // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            for(const auto& pair: frequencyCounter[c])
+            for( auto& pair: frequencyCounter[c])
             {
                 
                 
@@ -473,14 +473,26 @@ class Game
                 int number = pair.first;
                 int frequency = pair.second;
 
-                // Multiplier = frequency
-                int temp = number * frequency; 
-                score += temp;
+                if (frequency == 2) 
+                {
+                    // Double the sum if the number appears twice
+                    score += (number * 2) * 2; // (sum) * 2
+                } 
+                else if (frequency >= 3) 
+                {
+                    // Triple the sum if the number appears three or more times
+                    score += (number * 3) * 3; // (sum) * 3
+                } 
+                else 
+                {
+                    // Add the number as is if it appears only once
+                    score += number;
+                }
 
-                std:: cout 
+                std:: cout << "Column: " << c
                     << ", Number: " << number 
                     << ", Frequency: " << frequency 
-                     << ", Points: " << temp << std::endl;
+                     << ", score:" << score << std::endl;
 
 
             }
