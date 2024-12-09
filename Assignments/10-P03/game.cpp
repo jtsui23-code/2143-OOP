@@ -434,7 +434,8 @@ class Game
         {
             for(int c = 0; c < gridCol; c++)
             {
-                int index = r * gridCol + c;
+
+                int index = r * gridRow + c;
 
                 if (!gridNumbers[index].getString().isEmpty()) 
                 {
@@ -465,10 +466,13 @@ class Game
         }
 
         
+
         // Calucate score based on multiplier 
 
         for(int col = 0; col < gridCol; col++)
         {
+
+
 
             // Iterates through the array of maps 
             // then goes through the whole map that its focuses on 
@@ -476,22 +480,19 @@ class Game
             // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
             for(const auto& pair: frequencyCounter[col])
             {
-                
-                int value = pair.first;
+                int number = pair.first;
                 int frequency = pair.second;
 
-                if (frequency == 1)
+                if (frequency > 1) // Apply multiplier if the number appears more than once
                 {
-                    score += value;
+                    score += number * frequency;
                 }
-                else if (frequency == 2)
+
+                else
                 {
-                    score += 2 * value;
+                    score += number; // Add the number directly if it appears only once
                 }
-                else if (frequency == 3)
-                {
-                    score += 3* value;
-                }
+                
             }
         }
 
