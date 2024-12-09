@@ -416,7 +416,6 @@ class Game
     int calculateScore(const std::vector<sf::Text>& gridNumbers) 
     {
         int score = 0;
-        int gridRow = 3;
         int gridCol = 3;
 
         // An array of maps 
@@ -429,52 +428,38 @@ class Game
 
         // Loops through the grid and count frequncy of numbers
         // per column
-
-        for (int r = 0; r < gridRow; r++)
+        for (int i = 0; i < gridNumbers.size(); i++) 
+    {
+        // Check if grid cell has a valid number
+        if (!gridNumbers[i].getString().isEmpty()) 
         {
-            for(int c = 0; c < gridCol; c++)
-            {
+            int number = std::stoi(gridNumbers[i].getString().toAnsiString());
+            
+            // Determine the column of this grid cell
+            int column = i % gridCol;
 
-                int index = r * gridRow + c;
-
-                if (!gridNumbers[index].getString().isEmpty()) 
-                {
-                    try 
-                    {
-                        int value = std::stoi(gridNumbers[index].getString().toAnsiString());
+            // Increment the frequency of the number in this column
 
 
-                        // [c] access a specific index in the array of maps
-                        // so in the first iteration of the nested for loop 
-                        // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-                        // then it will set the key of that map to the value of the cell in the grid
-                        // then it will increment the how many times it has seen that value in the map by 1
-                        // which is indicated by the ++ in frequencyCounter[c][value]++;
+            // Exlanation: [column] access a specific index in the array of maps
+             // so in the first iteration of the for loop 
+            // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+            // then it will set the key of that map to the value of the cell in the grid
+            // then it will increment how many times it has seen that value in the map by 1
+            // which is indicated by the ++ in frequencyCounter[column][number]++;
 
-                        // Ex) the second column filled with 3 4 3 
-                        // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-                        // then it would make a key {3:2, 4:1} and having incremented it twice
-                        frequencyCounter[r][value]++;
+            // Ex) If the second column is filled with 3 4 3 
+            // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+            // then it would make a key {3:2, 4:1} 
 
-
-
-                    } 
-                    catch (const std::exception& e) 
-                    {
-                        std::cerr << "Error converting text to number: " << e.what() << std::endl;
-                    }
-                }
-
-            }
-
+            frequencyCounter[column][number]++;
         }
+    }
+
 
         // Calucate score based on multiplier 
         for(int col = 0; col < gridCol; col++)
         {
-            int columnSum = 0;
-
-
 
             // Iterates through the array of maps 
             // then goes through the whole map that its focuses on 
@@ -485,11 +470,32 @@ class Game
                 
                 
 
-            columnSum += (number * frequency);
+                int multiplier = 1;
 
+                if (frequency == 2) 
+                {
+                    multiplier = 2; 
+                }
+
+                else if (frequency == 3) 
+                {
+                    multiplier = 3; 
+                }
+
+                int temp = number * frequency * multiplier;
+
+                std::cout << "Column: " << col 
+                    << ", Number: " << number 
+                    << ", Frequency: " << frequency 
+                    << ", Multiplier: " << multiplier 
+                    << ", Points: " << temp << std::endl;
+
+                score += temp;
             }
             
-            score += columnSum;
+
+            
+
         }
 
         
