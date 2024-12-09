@@ -386,10 +386,10 @@ class Game
             }
 
             auto countColumnFreq1 = countColumnFrequencies(grid1Num);
-            auto countColumnFreq1 = countColumnFrequencies(grid1Num);
+            auto countColumnFreq2 = countColumnFrequencies(grid2Num);
 
             int sc1 = calculateScore(countColumnFreq1);
-            int sc2 = calculateScore(countColumnFreq1);
+            int sc2 = calculateScore(countColumnFreq2);
 
             score1.setString(std::to_string(sc1));
             score2.setString(std::to_string(sc2));
@@ -465,8 +465,10 @@ class Game
 
     }
 
-    int calculateScore(std::vector<std::map<int, int>> &frequencyCounter(gridCol))
+    int calculateScore(std::vector<std::map<int, int>> &frequencyCounter)
     {
+        int gridCol = 3;
+
         int score = 0;
          // Calucate score based on multiplier 
         for(int c = 0; c < gridCol; ++c)
