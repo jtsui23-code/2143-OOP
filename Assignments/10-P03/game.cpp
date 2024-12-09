@@ -457,21 +457,22 @@ class Game
                         frequencyCounter[r][value]++;
 
 
+
                     } 
                     catch (const std::exception& e) 
                     {
                         std::cerr << "Error converting text to number: " << e.what() << std::endl;
                     }
                 }
+
             }
+
         }
 
-        
-
         // Calucate score based on multiplier 
-
         for(int col = 0; col < gridCol; col++)
         {
+            int columnSum = 0;
 
 
 
@@ -479,24 +480,21 @@ class Game
             // then goes through the whole map that its focuses on 
             // first iteration it will go through the first map 
             // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            for(const auto& pair: frequencyCounter[col])
+            for(const auto& [number, frequency]: frequencyCounter[col])
             {
-                int number = pair.first;
-                int frequency = pair.second;
-
-                if (frequency > 1) // Apply multiplier if the number appears more than once
-                {
-                    score += number * frequency;
-                }
-
-                else
-                {
-                    score += number; // Add the number directly if it appears only once
-                }
                 
+                
+
+            columnSum += (number * frequency);
+
             }
+            
+            score += columnSum;
         }
 
+        
+
+        
         return score;
     }
 
