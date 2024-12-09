@@ -458,47 +458,35 @@ class Game
 
 
         // Calucate score based on multiplier 
-        for(int col = 0; col < gridCol; col++)
+        for(int c = 0; c < gridCol; c++)
         {
 
             // Iterates through the array of maps 
             // then goes through the whole map that its focuses on 
             // first iteration it will go through the first map 
             // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            for(const auto& [number, frequency]: frequencyCounter[col])
+            for(const auto& pair: frequencyCounter[c])
             {
                 
                 
 
-                int multiplier = 1;
+                int number = pair.first;
+                int frequency = pair.second;
 
-                if (frequency == 2) 
-                {
-                    multiplier = 2; 
-                }
+                // Multiplier = frequency
+                int temp = number * frequency; 
+                score += temp;
 
-                else if (frequency == 3) 
-                {
-                    multiplier = 3; 
-                }
-
-                int temp = number * frequency * multiplier;
-
-                std::cout << "Column: " << col 
+                std:: cout 
                     << ", Number: " << number 
                     << ", Frequency: " << frequency 
-                    << ", Multiplier: " << multiplier 
-                    << ", Points: " << temp << std::endl;
+                     << ", Points: " << temp << std::endl;
 
-                score += temp;
+
             }
             
 
-            
-
         }
-
-        
 
         
         return score;
