@@ -454,7 +454,8 @@ class Game
                         // Ex) the second column filled with 3 4 3 
                         // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
                         // then it would make a key {3:2, 4:1} and having incremented it twice
-                        frequencyCounter[c][value]++;
+                        frequencyCounter[r][value]++;
+
 
                     } 
                     catch (const std::exception& e) 
