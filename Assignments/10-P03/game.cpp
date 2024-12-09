@@ -385,8 +385,11 @@ class Game
 
             }
 
-            int sc1 = calculateScore(grid1Num);
-            int sc2 = calculateScore(grid2Num);
+            auto countColumnFreq1 = countColumnFrequencies(grid1Num);
+            auto countColumnFreq1 = countColumnFrequencies(grid1Num);
+
+            int sc1 = calculateScore(countColumnFreq1);
+            int sc2 = calculateScore(countColumnFreq1);
 
             score1.setString(std::to_string(sc1));
             score2.setString(std::to_string(sc2));
@@ -413,9 +416,8 @@ class Game
         
     }
 
-    int calculateScore(const std::vector<sf::Text>& gridNumbers) 
+    std::vector<std::map<int, int>> countColumnFrequencies(const std::vector<sf::Text>& gridNumbers) 
     {
-        int score = 0;
         int gridCol = 3;
 
         // An array of maps 
@@ -424,41 +426,50 @@ class Game
         // of that number appearing in a colmn
         // ex) a colmn of 2 2 5
         // the map would look like {2: 2, 5:1}
-        std::map<int, int> frequencyCounter[gridCol];
+        std::vector<std::map<int, int>> frequencyCounter(gridCol);
 
         // Loops through the grid and count frequncy of numbers
         // per column
-        for (int i = 0; i < gridNumbers.size(); i++) 
-    {
-        // Check if grid cell has a valid number
-        if (!gridNumbers[i].getString().isEmpty()) 
+        for (int i = 0; i < gridNumbers.size(); ++i) 
         {
-            int number = std::stoi(gridNumbers[i].getString().toAnsiString());
-            
-            // Determine the column of this grid cell
-            int column = i % gridCol;
+            // Check if grid cell has a valid number
+            if (!gridNumbers[i].getString().isEmpty()) 
+            {
+                int number = std::stoi(gridNumbers[i].getString().toAnsiString());
+                
+                // Determine the column of this grid cell
+                int column = i % gridCol;
 
-            // Increment the frequency of the number in this column
+                // Increment the frequency of the number in this column
 
 
-            // Exlanation: [column] access a specific index in the array of maps
-             // so in the first iteration of the for loop 
-            // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            // then it will set the key of that map to the value of the cell in the grid
-            // then it will increment how many times it has seen that value in the map by 1
-            // which is indicated by the ++ in frequencyCounter[column][number]++;
+                // Exlanation: [column] access a specific index in the array of maps
+                // so in the first iteration of the for loop 
+                // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+                // then it will set the key of that map to the value of the cell in the grid
+                // then it will increment how many times it has seen that value in the map by 1
+                // which is indicated by the ++ in frequencyCounter[column][number]++;
 
-            // Ex) If the second column is filled with 3 4 3 
-            // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            // then it would make a key {3:2, 4:1} 
+                // Ex) If the second column is filled with 3 4 3 
+                // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+                // then it would make a key {3:2, 4:1} 
 
-            frequencyCounter[column][number]++;
+                frequencyCounter[column][number]++;
+            }
+
+
         }
+
+        return frequencyCounter;
+       
+
     }
 
-
-        // Calucate score based on multiplier 
-        for(int c = 0; c < gridCol; c++)
+    int calculateScore(std::vector<std::map<int, int>> &frequencyCounter(gridCol))
+    {
+        int score = 0;
+         // Calucate score based on multiplier 
+        for(int c = 0; c < gridCol; ++c)
         {
 
             // Iterates through the array of maps 
@@ -468,8 +479,6 @@ class Game
             for( auto& pair: frequencyCounter[c])
             {
                 
-                
-
                 int number = pair.first;
                 int frequency = pair.second;
 
@@ -492,18 +501,17 @@ class Game
                 std:: cout << "Column: " << c
                     << ", Number: " << number 
                     << ", Frequency: " << frequency 
-                     << ", score:" << score << std::endl;
-
-
+                    << ", score:" << score << std::endl;
             }
-            
-
+        
         }
 
         
         return score;
     }
 
+
+    
   
 };
 
