@@ -8,6 +8,6 @@
 | 4 | [P02B](https://github.com/jtsui23-code/2143-OOP/tree/main/Assignments/P02B) | This my outline of pseudo-code for Knucklebone. |
 | 5 | [08-P02C](https://github.com/jtsui23-code/2143-OOP/tree/main/Assignments/08-P02C) | This is the folder for Knucklebone game. |
 | 6 | [10-P03](https://github.com/jtsui23-code/2143-OOP/tree/main/Assignments/10-P03) | This is the folder for SFML knucklebone game. |
-
+|   7   | [04-A404](https://github.com/jtsui23-code/2143-OOP/tree/main/Assignments/04-A04)        | This is a link to the OOP Wiki.      |
 
 
