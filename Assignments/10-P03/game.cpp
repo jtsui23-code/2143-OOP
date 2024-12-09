@@ -101,9 +101,9 @@ class Game
 
     Game(sf::RenderWindow &w) : grid1(3, 3, 125.f, 120.f, 80.f), grid2(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
     turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
-    ,instructionText("Enter your Players name:", font, 24), nameText("", font, 24), displayName("", font, 45)
+    ,instructionText("Enter your Players' name:", font, 24), nameText("", font, 24), displayName("", font, 45)
     , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
-    ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(25))
+    ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(50))
 
     {
     height = 1200;
@@ -171,13 +171,13 @@ class Game
 
     void loadAssets()
     {
-        if (!buttonTexture.loadFromFile("media/Buttons/Red.png")) 
+        if (!buttonTexture.loadFromFile("media/extra/Red.png")) 
         {
         std::cerr << "Error: Could not load texture 'Red.png'\n";
 
         }
 
-        if (!turnSkin.loadFromFile("media/turnSprite/Player1.png" )) 
+        if (!turnSkin.loadFromFile("media/extra/Player1.png" )) 
         {
         std::cerr << "Error: Could not load texture 'Player1.png'\n";
         }
@@ -470,10 +470,7 @@ int main()
             game.inputNames(event);
             // Start the animation on space key press
             game.rollDice(event);
-
-            
         }
-
 
         // Update the animation
         game.updateDice();
