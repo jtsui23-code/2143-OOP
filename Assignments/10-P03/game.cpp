@@ -441,7 +441,20 @@ class Game
                     try 
                     {
                         int value = std::stoi(gridNumbers[index].getString().toAnsiString());
-                        columnCount[col][value]++;
+
+
+                        // [c] access a specific index in the array of maps
+                        // so in the first iteration of the nested for loop 
+                        // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+                        // then it will set the key of that map to the value of the cell in the grid
+                        // then it will increment the how many times it has seen that value in the map by 1
+                        // which is indicated by the ++ in frequencyCounter[c][value]++;
+
+                        // Ex) the second column filled with 3 4 3 
+                        // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+                        // then it would make a key {3:2, 4:1} and having incremented it twice
+                        frequencyCounter[c][value]++;
+
                     } 
                     catch (const std::exception& e) 
                     {
@@ -451,18 +464,33 @@ class Game
             }
         }
 
-        for (const auto& text : gridNumbers) 
+        
+        // Calucate score based on multiplier 
+
+        for(int col = 0; col < gridCol; col++)
         {
-            // Check if the text is not empty
-            if (!text.getString().isEmpty()) 
+
+            // Iterates through the array of maps 
+            // then goes through the whole map that its focuses on 
+            // first iteration it will go through the first map 
+            // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+            for(const auto& pair: frequencyCounter[col])
             {
-                try 
+                
+                int value = pair.first;
+                int frequency = pair.second;
+
+                if (frequency == 1)
                 {
-                    score += std::stoi(text.getString().toAnsiString());
-                } 
-                catch (const std::exception& e) 
+                    score += value;
+                }
+                else if (frequency == 2)
                 {
-                    std::cerr << "Error converting text to number: " << e.what() << std::endl;
+                    score += 2 * value;
+                }
+                else if (frequency == 3)
+                {
+                    score += 3* value;
                 }
             }
         }
