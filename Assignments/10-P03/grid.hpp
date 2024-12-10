@@ -106,7 +106,7 @@ public:
      * Public: putNumOnClickedCell(const sf::Vector2f& pos, int diceNum)
      * 
      * Description:
-     *      Checks if the mouse click is on any cell and places the dice number in the first available empty cell in the clicked column.
+     *      - Checks if the mouse click is on any cell and places the dice number in the first available empty cell in the clicked column.
      * 
      * Params:
      *      - const sf::Vector2f& pos: The mouse click position.
@@ -160,6 +160,8 @@ public:
                     }
                 }
             }
+
+            shiftCellsDown();
         }
 
         return false;
@@ -169,7 +171,7 @@ public:
      * Public: getLastClickedCellIndex()
      * 
      * Description:
-     *      Retrieves the index of the lasted clicked cell on the grid.
+     *      - Retrieves the index of the lasted clicked cell on the grid.
      * 
      * Params:
      *      - None
@@ -187,8 +189,8 @@ public:
      * Public: checkCanDestroyColumn()
      * 
      * Description:
-     *      Checks if the enemy places the same dice number on the same cell 
-     *      if so the player loses their cell number.
+     *      - Checks if the enemy places the same dice number on the same cell 
+     *        if so the player loses their cell number.
      * 
      * Params:
      *      - Two integer variables
@@ -241,7 +243,7 @@ public:
      * Public: countFillGrid()
      * 
      * Description:
-     *      Checks how many cells in the grid have values.
+     *      - Checks how many cells in the grid have values.
      * 
      * Params:
      *      - None
@@ -260,6 +262,33 @@ public:
             }
         }
         return count;
+    }
+
+    /**
+     * Public: shiftCellsDown()
+     * 
+     * Description:
+     *      - Checks there is an empty cell under each cell after doing destroyColumn.
+     * 
+     * Params:
+     *      - None
+     * 
+     * Returns:
+     *      - Void: Return Nothing.
+     */
+
+    void shiftCellsDown()
+    {
+        
+        for(int i = 0; i < gridNum.size(); i++)
+        {
+            if(gridNum[i - cols].getString() == "0")
+            {
+                gridNum[i - cols].setString(gridNum[i].getString());
+                gridNum[i].setString.setString("0");
+            }
+            
+        }
     }
 
 
