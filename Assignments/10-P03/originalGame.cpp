@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -214,6 +216,7 @@ class Game
                         diceRolls++;
                         
                         auto cell1 = grid1.getCellPos(mousePos);
+                        
                         if(cell1.first != -1 && cell1.second != -1)
                         {
 

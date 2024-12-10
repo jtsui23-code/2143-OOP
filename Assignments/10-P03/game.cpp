@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -118,9 +120,9 @@ class Game
     button.setPosition(535.f,630.f);
     button.setTexture(&buttonTexture);
 
-    //Fills in 9 indexs with empty text
-    grid1Num.resize(9, sf::Text());
-    grid2Num.resize(9, sf::Text());
+    //Fills in 9 indexs with empty text 
+    grid1Num.resize(9, sf::Text("0", font, 45));
+    grid2Num.resize(9, sf::Text("0", font, 45));
 
     roll.setPosition(565.f, 640.f);
     roll.setFillColor(sf::Color::White);
@@ -213,23 +215,17 @@ class Game
                     {
                         diceRolls++;
                         
-                        auto cell1 = grid1.getCellPos(mousePos);
+                        grid1.putNumOnClickedCell(mousePos, diceNum);
                         
                         if(cell1.first != -1 && cell1.second != -1)
                         {
 
 
-                            float cellSize = grid1.getCellSize();
-
                             
-                            grid1Num[g1].setPosition(cell1.first + cellSize/2.0f - 18.f, cell1.second + cellSize/2.0f - 35.f);
-                            grid1Num[g1].setString(std::to_string(diceNum));
-                            grid1Num[g1].setFont(font);
-                            grid1Num[g1].setCharacterSize(50);
-                            grid1Num[g1].setFillColor(sf::Color::White);
 
                             if ( g1 < 9)
                             {
+                                grid1Num = grid1.getGridNum();
                                 g1++;
                             }
                             diceNum = 0;
@@ -240,22 +236,17 @@ class Game
                     {
                         diceRolls++;
   
-                        auto cell2 = grid2.getCellPos(mousePos);
+                        grid2.putNumOnClickedCell(mousePos, diceNum);
+
                         if(cell2.first != -1 && cell2.second != -1)
                         {
 
-                            std::cout << diceNum << std:: endl;
-
-                            float cellSize = grid2.getCellSize();
-
-                            grid2Num[g2].setPosition(cell2.first + cellSize/2.0f - 18.f, cell2.second + cellSize/2.0f - 28.f);
-                            grid2Num[g2].setString(std::to_string(diceNum));
-                            grid2Num[g2].setFont(font);
-                            grid2Num[g2].setCharacterSize(50);
-                            grid2Num[g2].setFillColor(sf::Color::White);
+                           
+                            
                             
                             if(g2 < 9)
                             {
+                                grid2Num = grid2.getGridNum();
                                 g2++;
                             }
 

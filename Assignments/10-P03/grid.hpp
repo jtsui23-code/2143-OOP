@@ -58,30 +58,42 @@ public:
         }
     }
 
+    std::vector<sf::Text> getGridNum()
+    {
+        return gridNum;
+    }
+
     // this method checks if the mouse is on any of the 
     // cells in the grid
-    std::pair< int, int> getCellPos(const sf::Vector2f& pos)
+    void putNumOnClickedCell(const sf::Vector2f& pos, int diceNum)
     {
         for (int row = 0; row < rows; ++row)
         {
             for (int col = 0; col < cols; ++col)
             {
+                int index = row * cols + col;
                 // x is the left side of cell
                 // y is the top side of the cell
                 // (0,0) is at top left of window & cell
                 float x = gridStartX + col * (cellSize + cellSpacing);
                 float y = gridStartY + row * (cellSize + cellSpacing); 
                 
+                //If where the mouse clicked exists a cell then put
+                // the dice number in that cell.
+
                 if (pos.x >= x && pos.x <= x + cellSize 
                     && pos.y >= y && pos.y <= y + cellSize)
                     {
-                        return {x,y};
+                        gridNum[index] = diceNum;
                     }
+
             }
             
         }
         return {-1, -1};
     }
+
+    
 
     float getCellSize()
     {
@@ -100,7 +112,10 @@ public:
         
         for(const auto& value:gridNum)
         {
-            window.draw(value);
+            if(value != "0")
+            {
+                window.draw(value);
+            }
 
         }
     }
