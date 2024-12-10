@@ -15,7 +15,7 @@ and player2 has a 5 on any cell on their own column 2, then they lose that cell 
 |   2   | [game.exe](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/game)          | This is the compiled Knucklebone game.                       |
 |   3   | [grid.hpp](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/grid.hpp)        | Hpp file for Grid Class.      |
 |   4  | [diceRoll.hpp](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/diceRoll.hpp)        | Hpp file for DiceRollAnimation Class.      |
-|   5  | [diceRoll.exe](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/diceRoll)        | Compile DiceRollAnimation do not run.      |
+|   5  | [diceRoll.exe](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/diceRoll)        | Compile DiceRollAnimation (do not run).      |
 |   6  | [s.sh](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/s.sh)        | Bash script for making compiling SFML easier.      |
 
 
