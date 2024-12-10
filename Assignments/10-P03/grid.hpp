@@ -15,6 +15,8 @@ private:
     std::vector<sf::Text> gridNum;         // Vector to hold the text (numbers) for the grid
     std::string fontPath;                  // Path to the font file
     sf::Font font;                         // Font object for rendering text
+    int lastClickedCellIndex;              // Keeps track of the last cell that was clicked on the grid
+                                           // needed for destroy enemy column mechanic
 
 public:
     /**
@@ -133,17 +135,22 @@ public:
                     if (gridNum[index + cols + cols].getString() == "0") 
                     {
                         gridNum[index + cols + cols].setString(std::to_string(diceNum));
+                        lastClickedCellIndex = index + cols + cols;
                         return true;
                     }
                     else if (gridNum[index + cols].getString() == "0") 
                     {
                         gridNum[index + cols].setString(std::to_string(diceNum));
+                        lastClickedCellIndex = index + cols;
+
                         return true;
                     }
 
                     else if (gridNum[index].getString() == "0")
                     {
                         gridNum[index].setString(std::to_string(diceNum));
+                        lastClickedCellIndex = index;
+
                         return true;
                     }
 
@@ -156,6 +163,77 @@ public:
         }
 
         return false;
+    }
+
+    /**
+     * Public: getLastClickedCellIndex()
+     * 
+     * Description:
+     *      Retrieves the index of the lasted clicked cell on the grid.
+     * 
+     * Params:
+     *      - None
+     * 
+     * Returns:
+     *      - Int: Index of the lasted clicked cell on the grid.
+     */
+
+    int getLastClickedCellIndex()
+    {
+        return lastClickedCellIndex;
+    }
+
+     /**
+     * Public: checkCanDestroyColumn()
+     * 
+     * Description:
+     *      Checks if the enemy places the same dice number on the same cell 
+     *      if so the player loses their cell number.
+     * 
+     * Params:
+     *      - Two integer variables
+     * 
+     * Returns:
+     *      - Void: Return Nothing.
+     */
+    void checkCanDestroyColumn(int enemyLastClickedIndex, int cellNum)
+    {
+
+        //Checks if the enemy places the same dice number on the same cell 
+        // if so the player loses their cell number
+        if(gridNum[enemyLastClickedIndex].getString() == std::to_string(cellNum))
+        {
+            gridNum[enemyLastClickedIndex].setString("0");
+        }
+
+        //Checks if the enemy places the same dice number on the same column 
+        // if so the player loses any cell on that column with the same dice number
+        if(gridNum[enemyLastClickedIndex + 1].getString() == std::to_string(cellNum))
+        {
+            gridNum[enemyLastClickedIndex + 1].setString("0");
+        }
+
+        //Checks if the enemy places the same dice number on the same column 
+        // if so the player loses any cell on that column with the same dice number
+        if(gridNum[enemyLastClickedIndex + 1 + 1].getString() == std::to_string(cellNum))
+        {
+            gridNum[enemyLastClickedIndex + 1 + 1].setString("0");
+        }
+
+        //Checks if the enemy places the same dice number on the same column 
+        // if so the player loses any cell on that column with the same dice number
+        if(gridNum[enemyLastClickedIndex - 1].getString() == std::to_string(cellNum))
+        {
+            gridNum[enemyLastClickedIndex - 1].setString("0");
+        }
+
+        //Checks if the enemy places the same dice number on the same column 
+        // if so the player loses any cell on that column with the same dice number
+        if(gridNum[enemyLastClickedIndex - 1 - 1].getString() == std::to_string(cellNum))
+        {
+            gridNum[enemyLastClickedIndex - 1 - 1].setString("0");
+        }
+
     }
 
 

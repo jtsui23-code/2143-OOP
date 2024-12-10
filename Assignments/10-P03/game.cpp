@@ -220,6 +220,8 @@ class Game
                             if ( g1 < 9)
                             {
                                 grid1Num = grid1.getGridNum();
+                                int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
+                                grid1.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
                                 g1++;
                             }
                             diceNum = 0;
@@ -236,6 +238,8 @@ class Game
                             if(g2 < 9)
                             {
                                 grid2Num = grid2.getGridNum();
+                                int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
+                                grid2.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
                                 g2++;
                             }
 
