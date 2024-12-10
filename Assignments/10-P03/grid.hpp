@@ -91,7 +91,25 @@ public:
                         // put into the gridNum Text
                         // can only put a dice number in the cell 
                         // if the cell is empty 
-                        if(gridNum[index].getString() == "0")
+
+                        //This checks if the bottom most cell of the column 
+                        // is empty. If the bottom most cell of the column is 
+                        // empty then place the number there instead
+                        if (gridNum[index + cols + cols].getString() == "0")
+                        {
+                            gridNum[index + cols + cols].setString(std::to_string(diceNum));
+                            return true;
+                        }
+
+                        // This checks if the middle cell of the column is empty if the 
+                        // midle cell of the column is empty then 
+                        // place the dice number there instead
+                        else if(gridNum[index + cols].getString() == "0")
+                        {
+                            gridNum[index + cols].setString(std::to_string(diceNum));
+                            return true;
+                        }
+                        else if(gridNum[index].getString() == "0")
                         {
                             gridNum[index].setString(std::to_string(diceNum));
                             return true;
