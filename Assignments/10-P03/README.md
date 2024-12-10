@@ -1,4 +1,4 @@
-## 10-P03 - Knucklebone Game IN 
+## 10-P03 - Knucklebone Game In SFML
 ### Jack Tsui
 ### Description:
 This program displays a Knucklebone game window using the SFML library. Both players are prompted to enter their names.
