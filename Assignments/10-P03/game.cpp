@@ -391,7 +391,7 @@ class Game
                 window->draw(displayName);
                 window->draw(displayName2);
 
-                // Displays both players' score
+                // Displays both players' score on the bottom of their grid
                 window->draw(score1Display);
                 window->draw(score2Display);
 
@@ -443,10 +443,38 @@ class Game
                 window->draw(displayName);
                 window->draw(displayName2);
 
-                // Displays both players' score
+                // Displays both players' score on the bottom of their grid
                 window->draw(score1Display);
                 window->draw(score2Display);
 
+
+                // Gets the calculated scores for each player with the 
+                // multiplier for any of the same numbers in the common column
+                int sc1 = calculateScore(grid1Num);
+                int sc2 = calculateScore(grid2Num);
+
+
+                // This converts the int scores into strings 
+                // so they are in a data type that can by displayed on
+                // the window
+                score1.setString(std::to_string(sc1));
+                score2.setString(std::to_string(sc2));
+
+                // Displays the scores
+                window->draw(score1);
+                window->draw(score2);
+
+                if(player[0].getScore > player[1].getScore)
+                {
+                    declareWinner.setString(player[0].getName + " has won the game.");
+                }
+
+                else if(player[0].getScore < player[1].getScore)
+                {
+                    declareWinner.setString(player[1].getName + " has won the game.");
+                }
+
+                window.draw(declareWinner);
 
             }
             
