@@ -199,6 +199,7 @@ public:
     void checkCanDestroyColumn(int enemyLastClickedIndex, int cellNum)
     {
 
+        int gridWidth = 3;
         //Checks if the enemy places the same dice number on the same cell 
         // if so the player loses their cell number
         if(gridNum[enemyLastClickedIndex].getString() == std::to_string(cellNum))
@@ -208,30 +209,30 @@ public:
 
         //Checks if the enemy places the same dice number on the same column 
         // if so the player loses any cell on that column with the same dice number
-        if(gridNum[enemyLastClickedIndex + 1].getString() == std::to_string(cellNum))
+        if(gridNum[enemyLastClickedIndex + gridWidth].getString() == std::to_string(cellNum))
         {
-            gridNum[enemyLastClickedIndex + 1].setString("0");
+            gridNum[enemyLastClickedIndex + gridWidth].setString("0");
         }
 
         //Checks if the enemy places the same dice number on the same column 
         // if so the player loses any cell on that column with the same dice number
-        if(gridNum[enemyLastClickedIndex + 1 + 1].getString() == std::to_string(cellNum))
+        if(gridNum[enemyLastClickedIndex + gridWidth + gridWidth].getString() == std::to_string(cellNum))
         {
-            gridNum[enemyLastClickedIndex + 1 + 1].setString("0");
+            gridNum[enemyLastClickedIndex + gridWidth + gridWidth].setString("0");
         }
 
         //Checks if the enemy places the same dice number on the same column 
         // if so the player loses any cell on that column with the same dice number
-        if(gridNum[enemyLastClickedIndex - 1].getString() == std::to_string(cellNum))
+        if(gridNum[enemyLastClickedIndex - gridWidth].getString() == std::to_string(cellNum))
         {
-            gridNum[enemyLastClickedIndex - 1].setString("0");
+            gridNum[enemyLastClickedIndex - gridWidth].setString("0");
         }
 
         //Checks if the enemy places the same dice number on the same column 
         // if so the player loses any cell on that column with the same dice number
-        if(gridNum[enemyLastClickedIndex - 1 - 1].getString() == std::to_string(cellNum))
+        if(gridNum[enemyLastClickedIndex - gridWidth - gridWidth].getString() == std::to_string(cellNum))
         {
-            gridNum[enemyLastClickedIndex - 1 - 1].setString("0");
+            gridNum[enemyLastClickedIndex - gridWidth - gridWidth].setString("0");
         }
 
     }
