@@ -91,6 +91,11 @@ public:
                         if(gridNum[index].getString() == "0")
                         {
                             gridNum[index].setString(std::to_string(diceNum));
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
 

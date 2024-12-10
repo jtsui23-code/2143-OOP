@@ -215,32 +215,33 @@ class Game
                     {
                         diceRolls++;
                         
-                        grid1.putNumOnClickedCell(mousePos, diceNum);  
-
-                        if ( g1 < 9)
+                        if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            grid1Num = grid1.getGridNum();
-                            g1++;
+                            if ( g1 < 9)
+                            {
+                                grid1Num = grid1.getGridNum();
+                                g1++;
+                            }
+                            diceNum = 0;
+                            firstTurn = !firstTurn;
                         }
-                        diceNum = 0;
-                        firstTurn = !firstTurn;
                         
                     }
                     else if(!firstTurn)
                     {
                         diceRolls++;
   
-                        grid2.putNumOnClickedCell(mousePos, diceNum); 
-                                
-                        if(g2 < 9)
+                        if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            grid2Num = grid2.getGridNum();
-                            g2++;
-                        }
+                            if(g2 < 9)
+                            {
+                                grid2Num = grid2.getGridNum();
+                                g2++;
+                            }
 
-                        diceNum = 0;
-                        firstTurn = !firstTurn;
-                        
+                            diceNum = 0;
+                            firstTurn = !firstTurn;
+                        }
                     }
                 }
            }    
