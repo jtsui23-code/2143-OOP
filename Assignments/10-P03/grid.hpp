@@ -206,7 +206,6 @@ public:
         if(gridNum[enemyLastClickedIndex].getString() == std::to_string(cellNum))
         {
             gridNum[enemyLastClickedIndex].setString("0");
-            shiftCellsDown();
 
         }
 
@@ -215,7 +214,6 @@ public:
         if(gridNum[enemyLastClickedIndex + gridWidth].getString() == std::to_string(cellNum))
         {
             gridNum[enemyLastClickedIndex + gridWidth].setString("0");
-            shiftCellsDown();
 
         }
 
@@ -224,7 +222,6 @@ public:
         if(gridNum[enemyLastClickedIndex + gridWidth + gridWidth].getString() == std::to_string(cellNum))
         {
             gridNum[enemyLastClickedIndex + gridWidth + gridWidth].setString("0");
-            shiftCellsDown();
   
         }
 
@@ -233,7 +230,6 @@ public:
         if(gridNum[enemyLastClickedIndex - gridWidth].getString() == std::to_string(cellNum))
         {
             gridNum[enemyLastClickedIndex - gridWidth].setString("0");
-            shiftCellsDown();
 
         }
 
@@ -242,7 +238,6 @@ public:
         if(gridNum[enemyLastClickedIndex - gridWidth - gridWidth].getString() == std::to_string(cellNum))
         {
             gridNum[enemyLastClickedIndex - gridWidth - gridWidth].setString("0");
-            shiftCellsDown();
 
         }
         shiftCellsDown();

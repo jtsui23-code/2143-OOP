@@ -226,7 +226,7 @@ class Game
 
 
     // Setting up the win declaration text.
-    declareWinner.setPosition(425.f,630.f);
+    declareWinner.setPosition(380.f,630.f);
     declareWinner.setFillColor(sf::Color::White);
 
     // Sets up the position and color of the score that 
@@ -353,6 +353,10 @@ class Game
                                 // can destroy the opponents column
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
                                 grid2.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
+
+                                // Have to check if cells in column can be shifted down or there will
+                                // be floating cells after a destroyed column
+                                grid2.shiftCellsDown();
                             }
                             grid1Num = grid1.getGridNum();
                             diceNum = 0;
@@ -383,6 +387,11 @@ class Game
                                 // can destroy the opponents column
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
                                 grid1.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
+
+                                // Have to check if cells in column can be shifted down or there will
+                                // be floating cells after a destroyed column
+                                grid1.shiftCellsDown();
+
                             }
 
                             grid2Num = grid2.getGridNum();
