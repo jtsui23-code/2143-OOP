@@ -161,7 +161,6 @@ public:
                 }
             }
 
-            shiftCellsDown();
         }
 
         return false;
@@ -236,6 +235,8 @@ public:
         {
             gridNum[enemyLastClickedIndex - gridWidth - gridWidth].setString("0");
         }
+        shiftCellsDown();
+
 
     }
 
@@ -282,9 +283,9 @@ public:
         
         for(int i = 0; i < gridNum.size(); i++)
         {
-            if(gridNum[i - cols].getString() == "0")
+            if(gridNum[i + cols].getString() == "0")
             {
-                gridNum[i - cols].setString(gridNum[i].getString());
+                gridNum[i + cols].setString(gridNum[i].getString());
                 gridNum[i].setString("0");
             }
             
