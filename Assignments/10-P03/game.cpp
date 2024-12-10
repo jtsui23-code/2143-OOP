@@ -464,17 +464,17 @@ class Game
                 window->draw(score1);
                 window->draw(score2);
 
-                if(player[0].getScore > player[1].getScore)
+                if(player[0].getScore() > player[1].getScore())
                 {
-                    declareWinner.setString(player[0].getName + " has won the game.");
+                    declareWinner.setString(player[0].getName() + " has won the game.");
                 }
 
-                else if(player[0].getScore < player[1].getScore)
+                else if(player[0].getScore() < player[1].getScore())
                 {
-                    declareWinner.setString(player[1].getName + " has won the game.");
+                    declareWinner.setString(player[1].getName() + " has won the game.");
                 }
 
-                window.draw(declareWinner);
+                window->draw(declareWinner);
 
             }
             
