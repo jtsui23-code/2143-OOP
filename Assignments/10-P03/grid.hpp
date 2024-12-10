@@ -84,13 +84,15 @@ public:
                 if (pos.x >= x && pos.x <= x + cellSize 
                     && pos.y >= y && pos.y <= y + cellSize)
                     {
-                        gridNum[index] = std::to_string(diceNum);
+                        // Turns the dice number into a string so it can be 
+                        // put into the gridNum Text
+                        gridNum[index].SetString(std::to_string(diceNum));
                     }
 
             }
             
         }
-        return {-1, -1};
+        
     }
 
     
@@ -112,7 +114,10 @@ public:
         
         for(const auto& value:gridNum)
         {
-            if(value != "0")
+            // This will only print the numbers 
+            // on the grid if they are 1 - 6
+            
+            if(value.getString != "0")
             {
                 window.draw(value);
             }
