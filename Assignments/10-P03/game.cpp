@@ -303,10 +303,13 @@ class Game
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 if (diceRolls != 0)
                 {
+                    if(g2 > 9)
+                    {
 
-                    diceRoll.startAnimation(); // Start the animation when Space is pressed
-                    diceNum = diceRoll.getRandomFrame();
-                    diceRolls--;
+                        diceRoll.startAnimation(); // Start the animation when Space is pressed
+                        diceNum = diceRoll.getRandomFrame();
+                        diceRolls--;
+                    }
                 }
             }
     }
