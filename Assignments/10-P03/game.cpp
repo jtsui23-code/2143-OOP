@@ -217,7 +217,7 @@ class Game
                         
                         if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if ( grid1.countFillGrid() < 9)
+                            if ( grid1.countFillGrid() < 9 || grid2.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
                                 grid2.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
@@ -235,7 +235,7 @@ class Game
   
                         if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if(grid2.countFillGrid() < 9)
+                            if(grid2.countFillGrid() < 9 || grid1.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
                                 grid1.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
