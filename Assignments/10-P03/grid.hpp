@@ -13,13 +13,21 @@ private:
     float gridStartX, gridStartY;          // Starting position of the grid
     float cellSpacing;                     // Spacing between cells
     std::vector<sf::RectangleShape> grid;  // Vector to hold the grid cells
+    std::vector<sf::Text> gridNum;
+    std::string fontPath;
+    sf::Font font;
 
 public:
     // Constructor to initialize the grid
     Grid(){}
-    Grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, float cellSpacing = 0.f)
-        : rows(rows), cols(cols), cellSize(cellSize), gridStartX(gridStartX), gridStartY(gridStartY), cellSpacing(cellSpacing) {
+    Grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, std::string fontPath = "media/fonts/Arial.ttf",float cellSpacing = 0.f)
+        : rows(rows), cols(cols), cellSize(cellSize), gridStartX(gridStartX), gridStartY(gridStartY), cellSpacing(cellSpacing)
+        , fontPath(fontPath)
+         {
         // Create the grid cells
+        loadAssets();
+        
+
         for (int row = 0; row < rows; ++row) {
             for (int col = 0; col < cols; ++col) {
                 sf::RectangleShape cell(sf::Vector2f(cellSize, cellSize));
@@ -31,10 +39,22 @@ public:
                 float x = gridStartX + col * (cellSize + cellSpacing);
                 float y = gridStartY + row * (cellSize + cellSpacing);
                 cell.setPosition(x, y);
+                gridNum.push_back(sf::Text("0", font, 45));
+                gridNum.back().setPosition(x,y);
+                gridNum.back().setFillColor(sf::Color::White);
 
                 // Add the cell to the grid
                 grid.push_back(cell);
             }
+        }
+    }
+
+    void loadAssets()
+    {
+        if (!font.loadFromFile(fontPath)) 
+        {
+        // Handle error
+        std::cout << "Can't load font";
         }
     }
 
@@ -70,9 +90,18 @@ public:
   
 
     // Function to draw the grid
-    void draw(sf::RenderWindow& window) {
-        for (const auto& cell : grid) {
+    void draw(sf::RenderWindow& window) 
+    {
+        for (const auto& cell : grid)
+         {
             window.draw(cell);
+            
+        }
+        
+        for(const auto& value:gridNum)
+        {
+            window.draw(value);
+
         }
     }
 };

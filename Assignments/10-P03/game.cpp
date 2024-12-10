@@ -4,10 +4,11 @@
 #include "diceRoll.hpp"  // include animation for dice roll
 #include "grid.hpp"      // include grid
 #include<string>
+#include <map> 
+#include<vector>
 
 
 
-int calculateScore(const std::vector<sf::Text>&) ;
 
 
 class Player {
@@ -213,6 +214,7 @@ class Game
                         diceRolls++;
                         
                         auto cell1 = grid1.getCellPos(mousePos);
+                        
                         if(cell1.first != -1 && cell1.second != -1)
                         {
 
@@ -385,11 +387,10 @@ class Game
 
             }
 
-            auto countColumnFreq1 = countColumnFrequencies(grid1Num);
-            auto countColumnFreq2 = countColumnFrequencies(grid2Num);
+        
 
-            int sc1 = calculateScore(countColumnFreq1);
-            int sc2 = calculateScore(countColumnFreq2);
+            int sc1 = calculateScore(grid1Num);
+            int sc2 = calculateScore(grid2Num);
 
             score1.setString(std::to_string(sc1));
             score2.setString(std::to_string(sc2));
@@ -415,102 +416,95 @@ class Game
         
         
     }
+    
 
-    std::vector<std::map<int, int>> countColumnFrequencies(const std::vector<sf::Text>& gridNumbers) 
+    int calculateScore(const std::vector<sf::Text>& gridNumbers) 
     {
-        int gridCol = 3;
+        int score = 0;
+        int gridCol = 3;  // Number of columns in the grid
+        int gridRow = 3;  // Number of rows in the grid
 
+        // Map to store frequencies of numbers per column
         // An array of maps 
         // the key of the map is the number that 
         // appears in the colmn and its pair is the frequency 
         // of that number appearing in a colmn
         // ex) a colmn of 2 2 5
         // the map would look like {2: 2, 5:1}
-        std::vector<std::map<int, int>> frequencyCounter(gridCol);
+        std::map<int, int> frequencyCounter[gridCol];
 
-        // Loops through the grid and count frequncy of numbers
-        // per column
-        for (int i = 0; i < gridNumbers.size(); ++i) 
+        // Count frequencies per column
+        for (int i = 0; i < gridNumbers.size(); i++) 
         {
-            // Check if grid cell has a valid number
             if (!gridNumbers[i].getString().isEmpty()) 
             {
                 int number = std::stoi(gridNumbers[i].getString().toAnsiString());
-                
-                // Determine the column of this grid cell
-                int column = i % gridCol;
+
+                // Calculate the column index
+                int colIndex = i % gridCol;
 
                 // Increment the frequency of the number in this column
 
 
-                // Exlanation: [column] access a specific index in the array of maps
+                // Exlanation: [colIndex] access a specific index in the array of maps
                 // so in the first iteration of the for loop 
                 // this will access the first map in the array of maps { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
                 // then it will set the key of that map to the value of the cell in the grid
                 // then it will increment how many times it has seen that value in the map by 1
-                // which is indicated by the ++ in frequencyCounter[column][number]++;
+                // which is indicated by the ++ in frequencyCounter[colIndex][number]++;
 
                 // Ex) If the second column is filled with 3 4 3 
                 // this would pick the second map in the array { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
                 // then it would make a key {3:2, 4:1} 
 
-                frequencyCounter[column][number]++;
+
+                frequencyCounter[colIndex][number] = frequencyCounter[colIndex][number] + 1;
             }
-
-
         }
 
-        return frequencyCounter;
-       
+        // Calculate the score based on frequencies        
 
-    }
-
-    int calculateScore(std::vector<std::map<int, int>> &frequencyCounter)
-    {
-        int gridCol = 3;
-
-        int score = 0;
-         // Calucate score based on multiplier 
-        for(int c = 0; c < gridCol; ++c)
+        // Iterates through the array of maps 
+        // then goes through the whole map that its focuses on 
+        // first iteration it will go through the first map 
+        // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
+        for (int col = 0; col < gridCol; col++) 
         {
-
-            // Iterates through the array of maps 
-            // then goes through the whole map that its focuses on 
-            // first iteration it will go through the first map 
-            // { 1.{_:_, _:_}, 2.{_:_, _:_}, 3.{_:_, _:_}}
-            for( auto& pair: frequencyCounter[c])
+            for (const auto& pair : frequencyCounter[col]) 
             {
-                
-                int number = pair.first;
-                int frequency = pair.second;
+                int number = pair.first;   // The number in the column
+                int frequency = pair.second; // How many times it appears
 
                 if (frequency == 2) 
                 {
+                    std:: cout << "Found a double" << std::endl;
                     // Double the sum if the number appears twice
-                    score += (number * 2) * 2; // (sum) * 2
+                    score += (number * 2); // (sum) * 2
                 } 
-                else if (frequency >= 3) 
+                else if (frequency == 3) 
                 {
+                    std:: cout << "Found a triple" << std::endl;
+
                     // Triple the sum if the number appears three or more times
-                    score += (number * 3) * 3; // (sum) * 3
+                    score += (number * 3); // (sum) * 3
                 } 
                 else 
                 {
+                    std:: cout << "Found a single" << std::endl;
+
                     // Add the number as is if it appears only once
                     score += number;
                 }
 
-                std:: cout << "Column: " << c
-                    << ", Number: " << number 
-                    << ", Frequency: " << frequency 
-                    << ", score:" << score << std::endl;
+                
             }
-        
         }
 
-        
         return score;
     }
+
+
+   
 
 
     
