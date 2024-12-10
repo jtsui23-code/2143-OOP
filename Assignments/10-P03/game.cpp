@@ -1,4 +1,34 @@
-
+/*****************************************************************************
+*                    
+*  Author:           Jack Tsui
+*  Email:            jtsui1110@my.msutexas.edu
+*  Label:            10-P03
+*  Title:            Knucklebone Game
+*  Course:           2143 OOP
+*  Semester:         Fall 2024
+* 
+*  Description:
+*        This program displays a Knucklebone game window using SFMLL library.
+*        Both players are prompted to enter their names. Once both names are entered,
+*        the window transitions from the title screen to the game screen with two boards.
+*        To roll, the player must press space on their respective turn. Then place their 
+*        dice number on their grid which is labeled with their name. Once one of the two 
+*        grids are filled, the winner is displayed. Players can destroy enmey columns if they
+*        place a dice number on the same column as their opponent with the same dice number. 
+*        Example) If player1 rolls a 5 and places it on column 2 and player2 has a 5 on any 
+*        cell on their own column 2, then they lose that cell number with a 5 in it.
+* 
+*  Usage:
+*       ./s.sh game.cpp -o game
+*      ./game [filename]
+* 
+*  Files:            game.cpp
+*                    game.exe 
+*                    grid.hpp
+*                    diceRoll.hpp
+*                    diceRoll.exe (Do not need to run)
+*               
+*****************************************************************************/
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -48,6 +78,37 @@ public:
 
     
 };
+
+/**
+ * Knucklebone Game Class
+ * 
+ * Description:
+ *      This class represents the Knucklebone game, handling game logic, 
+ *      user input, and graphics rendering.
+ * 
+ * Public Methods:
+ *      - void checkMouse(sf::Event event)
+ *      - void close()
+ *      - bool isOpen()
+ *      - void inputNames(sf::Event event)
+ *      - void loadAssets()
+ *      - void rollDice()
+ *      - void updateDice()
+ *      - void updateGame()
+ *      - int calculateScore()
+ *
+ * 
+ * Usage: 
+ *      - Game game(sf::RenderWindow &w);
+ *      - game.checkMouse(sf::Event event);
+ *      - game.close();
+ *      - game.isOpen();
+ *      - game.inputNames(sf::Event event);
+ *      - game.rollDice();
+ *      - game.loadAssets();
+ *      - game.updateDice();
+ *      - callculateScore(std::vector<sf::Text>& grid1);
+ */
 
 
 class Game
@@ -168,6 +229,19 @@ class Game
 
     public:
 
+     /**
+     * Public: Constructor
+     * 
+     * Description:
+     *      Initializes the game with a reference to the SFML window.
+     * 
+     * Params:
+     *      - sf::RenderWindow &w: Reference to the SFML window.
+     * 
+     * Return:
+     *      Void
+     */
+
     Game(sf::RenderWindow &w) : grid1(3, 3, 125.f, 120.f, 80.f), grid2(3, 3, 125.f, 800.f - 25.f, 80.f), window(&w),
     turnIndicator(sf:: Vector2f(150.f, 200.f)), button(sf:: Vector2f(200.f, 100.f)), roll("Space", font, 50)
     ,instructionText("Enter your Players' name:", font, 24), nameText("", font, 24), displayName("", font, 45)
@@ -277,6 +351,16 @@ class Game
 
     }
 
+    /**
+     * Public: loadAssets()
+     * 
+     * Description:
+     *      Loads the font file specified in fontPath.
+     * 
+     * Returns:
+     *      - void: No return value.
+     */
+
     void loadAssets()
     {
 
@@ -312,6 +396,20 @@ class Game
         }
 
     }
+
+     /**
+     * Public: checkMouse
+     * 
+     * Description:
+     *      Checks for mouse input and places dice number on grid and 
+     *      handles destroy column mechanic.
+     * 
+     * Params:
+     *      - sf::Event event: SFML event object.
+     * 
+     * Returns:
+     *      Void
+     */
 
     void checkMouse(sf::Event event)
     {
@@ -405,15 +503,54 @@ class Game
 
     }
 
+     /**
+     * Public: close
+     * 
+     * Description:
+     *      Closes the game window.
+     * 
+     * Para:
+     *      None
+     * 
+     * Returns:
+     *      Void
+     */
+
     void close()
     {
         window->close();
     }
 
+    /**
+     * Public: isOpen
+     * 
+     * Description:
+     *      Checks if the game window is open.
+     * 
+     * Para: 
+     *      - None
+     * 
+     * Returns:
+     *      - bool: True if the window is open, false otherwise.
+     */
+
     bool isOpen()
     {
         return window->isOpen();
     }
+
+    /**
+     * Public: inputNames
+     * 
+     * Description:
+     *      Handles user input for player names.
+     * 
+     * Params:
+     *      - sf::Event event: SFML event object.
+     * 
+     * Returns:
+     *      - None
+     */
 
     void inputNames(sf::Event event)
     {
