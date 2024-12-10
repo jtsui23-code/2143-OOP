@@ -149,7 +149,7 @@ class Game
     displayName2.setFillColor(sf::Color::Yellow);
 
     // Setting up the win declaration text.
-    declareWinner.setPosition(450.f,630.f);
+    declareWinner.setPosition(425.f,630.f);
     declareWinner.setFillColor(sf::Color::White);
 
 
