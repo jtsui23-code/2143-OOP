@@ -62,6 +62,11 @@ class Game
     Grid grid1;
     Grid grid2;
 
+    // Variable for storing fonts used in the game
+    sf::Font font;
+    sf::Font titleFont;
+
+
     sf::RenderWindow* window;
 
     sf::Texture buttonTexture;
@@ -76,7 +81,6 @@ class Game
 
     sf::Text instructionText;
     sf::Text nameText;
-    sf::Font font;
     sf::Text displayName;
     sf::Text displayName2;
 
@@ -102,7 +106,13 @@ class Game
     bool firstTurn;
     int diceRolls;
 
+    // Text used to display text of the 
+    // winner of the game.
     sf:: Text declareWinner;
+    
+    // Text used to display the game name
+    // on the title screen.
+    sf:: Text titleName;
 
 
 
@@ -114,7 +124,7 @@ class Game
     ,instructionText("Enter your Players' name:", font, 24), nameText("", font, 24), displayName("", font, 45)
     , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
     ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(50))
-    , declareWinner("", font, 60)
+    , declareWinner("", font, 60), titleName("Knucklebone", titleFont, 80)
 
     {
     height = 1200;
@@ -185,6 +195,15 @@ class Game
 
     void loadAssets()
     {
+
+        
+        
+        if (!titleFont.loadFromFile("media/extra/titleFont.png")) 
+        {
+        std::cerr << "Error: Could not load texture 'Red.png'\n";
+
+        }
+
         if (!buttonTexture.loadFromFile("media/extra/Red.png")) 
         {
         std::cerr << "Error: Could not load texture 'Red.png'\n";
@@ -340,11 +359,12 @@ class Game
     void updateGame()
     {
 
-        // This will make the game remain on the 
-        // player input screen until both player has entered their 
+        // This will make the game remain on the title screen or
+        //  until both player has entered their 
         // names
          if (!nameEntered[i] && i < 2) 
         {
+            window->draw(titleName);
             window->draw(instructionText);
             window->draw(nameText);
         } 
