@@ -114,6 +114,10 @@ class Game
     // on the title screen.
     sf:: Text titleName;
 
+    // Text ovrehead above the turn indicator
+    // to explain what the turn indicator image
+    // means
+    sf:: Text turnText;
 
 
 
@@ -124,7 +128,7 @@ class Game
     ,instructionText("Enter your Players' name:", font, 24), nameText("", font, 24), displayName("", font, 45)
     , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
     ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(50))
-    , declareWinner("", font, 60), titleName("Knucklebone", titleFont, 80)
+    , declareWinner("", font, 60), titleName("Knucklebone", titleFont, 150), turnText("Turn", font, 45)
 
     {
     height = 1200;
@@ -132,9 +136,19 @@ class Game
 
     loadAssets();
 
+    // Set sthe position and color of the game tile
+    titleName.setPosition(sf::Vector2f(200.f, 10.f));
+    titleName.setFillColor(sf::Color::White);
+
+    // Set sthe position and color of the turn indicator text
+    turnText.setPosition(sf::Vector2f(550.f, 400.f))
+    turnText.setFillColor(sf::Color::White);
+
+    // Set sthe position and texture of the turn indicator 
     turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
     turnIndicator.setTexture(&turnSkin);
 
+    // Set sthe position and texture of the roll button 
     button.setPosition(535.f,630.f);
     button.setTexture(&buttonTexture);
 
@@ -142,6 +156,7 @@ class Game
     grid1Num.resize(9, sf::Text("0", font, 45));
     grid2Num.resize(9, sf::Text("0", font, 45));
 
+    // Set sthe position and texture of the roll button text
     roll.setPosition(565.f, 640.f);
     roll.setFillColor(sf::Color::White);
 
@@ -149,6 +164,8 @@ class Game
     instructionText.setPosition(50, 200);
     instructionText.setFillColor(sf::Color::White);
 
+    // Set sthe position and color of the typed text in the 
+    // player input screen 
     nameText.setPosition(350, 200);
     nameText.setFillColor(sf::Color::Green);
 
@@ -198,9 +215,9 @@ class Game
 
         
         
-        if (!titleFont.loadFromFile("media/extra/titleFont.png")) 
+        if (!titleFont.loadFromFile("media/extra/titleFont.ttf")) 
         {
-        std::cerr << "Error: Could not load texture 'Red.png'\n";
+        std::cerr << "Error: Could not load texture 'titleFont.ttf'\n";
 
         }
 
@@ -442,8 +459,7 @@ class Game
                 player[1].setScore(std::stoi(score2.getString().toAnsiString()));
                 player[1].setName(displayName2.getString());
 
-                std:: cout << player[0].getName() << std:: endl;
-                std:: cout << player[0].getScore() << std:: endl;
+                
 
 
             }
@@ -488,6 +504,16 @@ class Game
                 window->draw(score1);
                 window->draw(score2);
 
+
+                 // Stores the name of the player and their score in player class
+                player[0].setScore(std::stoi(score1.getString().toAnsiString()));
+                player[0].setName(displayName.getString());
+
+                player[1].setScore(std::stoi(score2.getString().toAnsiString()));
+                player[1].setName(displayName2.getString());
+
+                // Checks which player has the higher score and 
+                // declares them the winner through the text display.
                 if(player[0].getScore() > player[1].getScore())
                 {
                     declareWinner.setString(player[0].getName() + " has won the game.");
