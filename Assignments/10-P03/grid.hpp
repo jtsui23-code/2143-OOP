@@ -15,6 +15,7 @@ private:
     std::vector<sf::RectangleShape> grid;  // Vector to hold the grid cells
     std::vector<sf::Text> gridNum;
     std::string fontPath;
+    std::vector<bool> checkIfFilled;
     sf::Font font;
 
 public:
@@ -26,6 +27,8 @@ public:
          {
         // Create the grid cells
         loadAssets();
+
+        checkIfFilled.resize(9, false);
         
 
         for (int row = 0; row < rows; ++row) {
@@ -82,11 +85,12 @@ public:
                 // the dice number in that cell.
 
                 if (pos.x >= x && pos.x <= x + cellSize 
-                    && pos.y >= y && pos.y <= y + cellSize)
+                    && pos.y >= y && pos.y <= y + cellSize && checkIfFilled[index] == false)
                     {
                         // Turns the dice number into a string so it can be 
                         // put into the gridNum Text
                         gridNum[index].setString(std::to_string(diceNum));
+                        checkIfFilled[index] = true;
                     }
 
             }
