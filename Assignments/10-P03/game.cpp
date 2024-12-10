@@ -217,7 +217,7 @@ class Game
                         
                         if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if ( g1 < 9)
+                            if ( grid1.countFillGrid() < 9)
                             {
                                 grid1Num = grid1.getGridNum();
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
@@ -235,7 +235,7 @@ class Game
   
                         if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if(g2 < 9)
+                            if(grid2.countFillGrid() < 9)
                             {
                                 grid2Num = grid2.getGridNum();
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();

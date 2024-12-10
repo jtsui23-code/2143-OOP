@@ -237,6 +237,31 @@ public:
 
     }
 
+    /**
+     * Public: countFillGrid()
+     * 
+     * Description:
+     *      Checks how many cells in the grid have values.
+     * 
+     * Params:
+     *      - None
+     * 
+     * Returns:
+     *      - Int: Return count of number of filled cells in grid.
+     */
+    int countFillGrid()
+    {
+        int count = 0;
+        for (const auto& value:gridNum)
+        {
+            if(value.getString() != "0") 
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
     /**
      * Public: draw(sf::RenderWindow& window)
