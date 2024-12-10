@@ -66,23 +66,42 @@ class Game
     sf::Font font;
     sf::Font titleFont;
 
-
+    // This is a pointer to a sfml window
     sf::RenderWindow* window;
 
+    // This texture is what gives the roll button its
+    // red gradiant 
     sf::Texture buttonTexture;
     sf:: Texture turnSkin;
     sf:: RectangleShape turnIndicator;    
     sf::RectangleShape button;
 
+    // These are vectors that store all of the 
+    // numbers on each respective grid
     std:: vector< sf::Text> grid1Num;
     std:: vector< sf::Text> grid2Num;
 
+    // This is text that overlays the 
+    // roll button to 
+    // prompt the user to 
+    // press space to roll the dice
     sf::Text roll;
 
+    // This text prompts the user to input their name on
+    // the title screen.
     sf::Text instructionText;
+
+    // This text stores the text that is being 
+    // typed dynamically
     sf::Text nameText;
+
+    // This is text for displaying each player's name 
+    // on their respective grid
     sf::Text displayName;
     sf::Text displayName2;
+
+
+    
 
     std::string userInput[2];
     bool nameEntered[2] = {false, false};
@@ -93,11 +112,17 @@ class Game
     // Transition to game screen.
     int i;
 
-    sf:: Text score1;
-    sf:: Text score2;
-
+    
+    // This is text for display this "Score: " 
+    // on the screen to indicate a scorer on 
+    // each grid
     sf:: Text score1Display;
     sf:: Text score2Display;   
+
+    // While this is the acutal number that is displayed 
+    // after "Score:"
+    sf:: Text score1;
+    sf:: Text score2;
 
     // Create a DiceRollAnimation instance
     DiceRollAnimation diceRoll;  
@@ -279,11 +304,18 @@ class Game
                         // if it is emepty 
                         if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
-
+                            
+                            //This gives the player a dice roll allow them to roll
+                            // otherwise the roll animation/function would not run
+                            // this is in place to prevent rerolling dices
                             diceRolls++;
 
+                            // This onlys players to place numbers on cells while
+                            // no grid are fully filled
                             if ( grid1.countFillGrid() < 9  && grid2.countFillGrid() < 9)
                             {
+                                // This logic check if the lastly dice number placement 
+                                // can destroy the opponents column
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
                                 grid2.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
                             }
@@ -293,15 +325,27 @@ class Game
                         }
                         
                     }
+
+                    //This runs whenever its the second player's turn
                     else if(!firstTurn)
                     {
   
+                        // Places the dice number the player roll onto an cell
+                        // if it is emepty 
                         if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
+
+                            //This gives the player a dice roll allow them to roll
+                            // otherwise the roll animation/function would not run
+                            // this is in place to prevent rerolling dices
                             diceRolls++;
 
+                            // This onlys players to place numbers on cells while
+                            // no grid are fully filled
                             if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
                             {
+                                // This logic check if the lastly dice number placement 
+                                // can destroy the opponents column
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
                                 grid1.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
                             }
@@ -503,8 +547,8 @@ class Game
                 window->draw(displayName2);
 
                 // Displays both players' score on the bottom of their grid
-                // window->draw(score1Display);
-                // window->draw(score2Display);
+                window->draw(score1Display);
+                window->draw(score2Display);
 
 
                 // Gets the calculated scores for each player with the 
