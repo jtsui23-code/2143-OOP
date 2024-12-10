@@ -285,7 +285,7 @@ public:
             if(gridNum[i - cols].getString() == "0")
             {
                 gridNum[i - cols].setString(gridNum[i].getString());
-                gridNum[i].setString.setString("0");
+                gridNum[i].setString("0");
             }
             
         }
