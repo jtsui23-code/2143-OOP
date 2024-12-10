@@ -422,6 +422,10 @@ class Game
                 player[1].setScore(std::stoi(score2.getString().toAnsiString()));
                 player[1].setName(displayName2.getString());
 
+                std:: cout << player[0].getName() << std:: endl;
+                std:: cout << player[0].getScore() << std:: endl;
+
+
             }
 
             // If one of the grids are filled, 
