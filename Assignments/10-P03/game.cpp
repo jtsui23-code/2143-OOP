@@ -221,7 +221,7 @@ class Game
                             {
                                 grid1Num = grid1.getGridNum();
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
-                                grid1.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
+                                grid2.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
                                 g1++;
                             }
                             diceNum = 0;
@@ -239,7 +239,7 @@ class Game
                             {
                                 grid2Num = grid2.getGridNum();
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
-                                grid2.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
+                                grid1.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
                                 g2++;
                             }
 
