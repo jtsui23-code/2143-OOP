@@ -84,7 +84,7 @@ public:
                 if (pos.x >= x && pos.x <= x + cellSize 
                     && pos.y >= y && pos.y <= y + cellSize)
                     {
-                        gridNum[index] = diceNum;
+                        gridNum[index] = std::to_string(diceNum);
                     }
 
             }

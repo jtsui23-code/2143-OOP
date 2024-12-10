@@ -215,44 +215,32 @@ class Game
                     {
                         diceRolls++;
                         
-                        grid1.putNumOnClickedCell(mousePos, diceNum);
-                        
-                        if(cell1.first != -1 && cell1.second != -1)
+                        grid1.putNumOnClickedCell(mousePos, diceNum);  
+
+                        if ( g1 < 9)
                         {
-
-
-                            
-
-                            if ( g1 < 9)
-                            {
-                                grid1Num = grid1.getGridNum();
-                                g1++;
-                            }
-                            diceNum = 0;
-                            firstTurn = !firstTurn;
+                            grid1Num = grid1.getGridNum();
+                            g1++;
                         }
+                        diceNum = 0;
+                        firstTurn = !firstTurn;
+                        
                     }
                     else if(!firstTurn)
                     {
                         diceRolls++;
   
-                        grid2.putNumOnClickedCell(mousePos, diceNum);
-
-                        if(cell2.first != -1 && cell2.second != -1)
+                        grid2.putNumOnClickedCell(mousePos, diceNum); 
+                                
+                        if(g2 < 9)
                         {
-
-                           
-                            
-                            
-                            if(g2 < 9)
-                            {
-                                grid2Num = grid2.getGridNum();
-                                g2++;
-                            }
-
-                            diceNum = 0;
-                            firstTurn = !firstTurn;
+                            grid2Num = grid2.getGridNum();
+                            g2++;
                         }
+
+                        diceNum = 0;
+                        firstTurn = !firstTurn;
+                        
                     }
                 }
            }    
@@ -368,17 +356,6 @@ class Game
             window->draw(score2Display);
             diceRoll.draw(*window);           // Draw the dice animation
 
-            for(int a = 0; a < grid1Num.size(); a++)
-            {
-                window->draw(grid1Num[a]);
-            }
-            for (int b = 0; b < grid2Num.size(); b++)
-            {
-                window->draw(grid2Num[b]);
-
-            }
-
-        
 
             int sc1 = calculateScore(grid1Num);
             int sc2 = calculateScore(grid2Num);
