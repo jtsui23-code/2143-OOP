@@ -54,11 +54,19 @@ class Game
 {
     private:
 
+    // Array size 2 of Player objects
+    // They represent the player1 and player2
     Player player[2];
 
+    // This is the dimension of the 
+    // window screen.
     int height;
     int width;
- 
+    
+
+    // This creates two Grid objects
+    // that are displayed on the screen
+    // and that perform the gridNum logic
     Grid grid1;
     Grid grid2;
 
@@ -70,10 +78,20 @@ class Game
     sf::RenderWindow* window;
 
     // This texture is what gives the roll button its
-    // red gradiant 
+    // red gradient 
     sf::Texture buttonTexture;
+
+    // This stores the lamb image
+    // to be the turn indicator
     sf:: Texture turnSkin;
-    sf:: RectangleShape turnIndicator;    
+
+    // This is the turn indicator
+    // object itself that gets the lamb image
+    // texture
+    sf:: RectangleShape turnIndicator;   
+
+    // This is the rectangle object that 
+    // is the roll button 
     sf::RectangleShape button;
 
     // These are vectors that store all of the 
@@ -102,8 +120,10 @@ class Game
 
 
     
-
+    // This stores the player names 
     std::string userInput[2];
+
+    // This checks if each player has entered their names
     bool nameEntered[2] = {false, false};
     
     // Index for player names that are inputed 
@@ -224,14 +244,20 @@ class Game
 
     // Set initial position for the dice animation
     diceRoll.setPosition(900.f, 560.f);
-
     diceRoll.setScale(1.2f,1.2f);
 
+
+    // Sets names of players to nothing and
+    // their checker to false to indicate
+    // no names have been entered
     userInput[0] = {""};
     userInput[1] = {""};
-
     nameEntered[0] = {false};
     nameEntered[1] = {false};
+
+    // Index for which player has entered their name
+    // 0 representing player1
+    // 1 repsenting player2
     i = 0;
    
 
