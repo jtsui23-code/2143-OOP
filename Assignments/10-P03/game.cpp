@@ -27,6 +27,7 @@
 *                    grid.hpp
 *                    diceRoll.hpp
 *                    diceRoll.exe (Do not need to run)
+*                    s.sh (The bash file for compiling SFML faster)
 *               
 *****************************************************************************/
 
