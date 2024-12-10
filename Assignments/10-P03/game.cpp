@@ -82,9 +82,13 @@ class Game
 
     std::string userInput[2];
     bool nameEntered[2] = {false, false};
+    
+    // Index for player names that are inputed 
+    // Will increment when Player1 has their name inputed and 
+    // INcrement again when player2 has their name inputed to 
+    // Transition to game screen.
     int i;
-    int g1;
-    int g2;
+
     sf:: Text score1;
     sf:: Text score2;
 
@@ -162,8 +166,7 @@ class Game
     nameEntered[0] = {false};
     nameEntered[1] = {false};
     i = 0;
-    g1 = 0;
-    g2 = 0;
+   
 
      diceNum = 0;
      firstTurn = true;
@@ -217,11 +220,10 @@ class Game
                         
                         if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if ( grid1.countFillGrid() < 9 || grid2.countFillGrid() < 9)
+                            if ( grid1.countFillGrid() < 9  && grid2.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
                                 grid2.checkCanDestroyColumn(lastClickedCellIndexP1, diceNum);
-                                g1++;
                             }
                             grid1Num = grid1.getGridNum();
                             diceNum = 0;
@@ -235,11 +237,10 @@ class Game
   
                         if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
-                            if(grid2.countFillGrid() < 9 || grid1.countFillGrid() < 9)
+                            if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
                                 grid1.checkCanDestroyColumn(lastClickedCellIndexP2, diceNum);
-                                g2++;
                             }
 
                             grid2Num = grid2.getGridNum();
@@ -307,7 +308,7 @@ class Game
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 if (diceRolls != 0)
                 {
-                    if(g2 < 9)
+                    if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
                     {
 
                         diceRoll.startAnimation(); // Start the animation when Space is pressed
