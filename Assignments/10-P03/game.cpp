@@ -449,20 +449,17 @@ class Game
 
                 if (frequency == 2) 
                 {
-                    std:: cout << "Found a double" << std::endl;
                     // Double the sum if the number appears twice
                     score += (number * 2 * 2); // (sum) * 2
                 } 
                 else if (frequency == 3) 
                 {
-                    std:: cout << "Found a triple" << std::endl;
 
                     // Triple the sum if the number appears three or more times
                     score += (number * 3 * 3); // (sum) * 3
                 } 
                 else 
                 {
-                    std:: cout << "Found a single" << std::endl;
 
                     // Add the number as is if it appears only once
                     score += number;

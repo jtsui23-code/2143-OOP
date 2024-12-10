@@ -109,6 +109,9 @@ public:
                             gridNum[index + cols].setString(std::to_string(diceNum));
                             return true;
                         }
+
+                        // This places the dice number on the clicked cell 
+                        // because the cells under it in the same column are filled
                         else if(gridNum[index].getString() == "0")
                         {
                             gridNum[index].setString(std::to_string(diceNum));
