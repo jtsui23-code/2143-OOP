@@ -141,7 +141,7 @@ class Game
     titleName.setFillColor(sf::Color::White);
 
     // Set sthe position and color of the turn indicator text
-    turnText.setPosition(sf::Vector2f(550.f, 400.f))
+    turnText.setPosition(sf::Vector2f(550.f, 400.f));
     turnText.setFillColor(sf::Color::White);
 
     // Set sthe position and texture of the turn indicator 
@@ -169,17 +169,24 @@ class Game
     nameText.setPosition(350, 200);
     nameText.setFillColor(sf::Color::Green);
 
+
+    // Set sthe position and color of the  player names 
+    // that will be displayed above their respective 
+    // grid during the game
     displayName.setPosition(300, 25);
     displayName.setFillColor(sf::Color::Yellow);
 
     displayName2.setPosition(950, 25);
     displayName2.setFillColor(sf::Color::Yellow);
 
+
     // Setting up the win declaration text.
     declareWinner.setPosition(425.f,630.f);
     declareWinner.setFillColor(sf::Color::White);
 
-
+    // Sets up the position and color of the score that 
+    // will be displayed under each grid. 
+    // the score is displaying each player's total score
     score1.setFillColor(sf::Color:: White);
     score2.setFillColor(sf::Color::White);
     score1.setPosition(400.f, 455.f);
@@ -250,20 +257,31 @@ class Game
     {
         
 
-        
+        // Checks for mouse input
         if(event.type == sf:: Event:: MouseButtonPressed && event.mouseButton.button == sf:: Mouse::Left)
             {
+
+                // Stores the mouse posiiton of the mouse click
                 sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
 
+                // This ensures that the player
+                // has rolled a new dice because once a player has rolled
+                // and placed the number down diceNum becomes 0 
+                // making it to where a player cannot use their opponets last 
+                // dice roll on their own grid
                 if(diceNum > 0)
                 {
-
+                    // This checks if it is the first player's turn
                     if(firstTurn)
                     {
-                        diceRolls++;
                         
+                        // Places the dice number the player roll onto an cell
+                        // if it is emepty 
                         if(grid1.putNumOnClickedCell(mousePos, diceNum))
                         {
+
+                            diceRolls++;
+
                             if ( grid1.countFillGrid() < 9  && grid2.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP1 = grid1.getLastClickedCellIndex();
@@ -277,10 +295,11 @@ class Game
                     }
                     else if(!firstTurn)
                     {
-                        diceRolls++;
   
                         if(grid2.putNumOnClickedCell(mousePos, diceNum))
                         {
+                            diceRolls++;
+
                             if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
                             {
                                 int lastClickedCellIndexP2 = grid2.getLastClickedCellIndex();
@@ -484,8 +503,8 @@ class Game
                 window->draw(displayName2);
 
                 // Displays both players' score on the bottom of their grid
-                window->draw(score1Display);
-                window->draw(score2Display);
+                // window->draw(score1Display);
+                // window->draw(score2Display);
 
 
                 // Gets the calculated scores for each player with the 
