@@ -65,6 +65,9 @@ public:
 
     // this method checks if the mouse is on any of the 
     // cells in the grid
+    // This method also checks if the player 
+    // clicked on an empty cell so there is no 
+    // overriding of current cell numbers.
     bool putNumOnClickedCell(const sf::Vector2f& pos, int diceNum)
     {
         for (int row = 0; row < rows; ++row)
@@ -102,6 +105,8 @@ public:
             }
             
         }
+
+        return false;
         
     }
 
