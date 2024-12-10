@@ -5,6 +5,36 @@
 #include <cstdlib>  // For std::rand and std::srand
 #include <ctime>    // For seeding random number generator
 
+
+
+/**
+ * DiceRollAnimation Class
+ * 
+ * Description:
+ *      This class represents a dice roll animation, handling the loading of animation frames, 
+ *      updating the animation, and rendering the current frame.
+ * 
+ * Public Methods:
+ *      - DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration)
+ *      - bool loadFrames(int start, int end)
+ *      - void startAnimation()
+ *      - void update()
+ *      - void setScale(float x, float y)
+ *      - void setPosition(float x, float y)
+ *      - void draw(sf::RenderWindow& window)
+ *      - int getRandomFrame()
+ *
+ * 
+ * Usage: 
+ *      - DiceRollAnimation diceRoll(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration);
+ *      - diceRoll.loadFrames(int start, int end);
+ *      - diceRoll.startAnimation();
+ *      - diceRoll.update();
+ *      - diceRoll.setScale(float x, float y);
+ *      - diceRoll.setPosition(float x, float y);
+ *      - diceRoll.draw(sf::RenderWindow& window);
+ *      - diceRoll.getRandomFrame();
+ */
 class DiceRollAnimation {
 private:
     std::vector<sf::Texture> textures; // Stores textures for animation frames
@@ -20,11 +50,37 @@ private:
 
 
 public:
-    // Constructor
+    
+    /**
+     * Public: DiceRollAnimation
+     * 
+     * Description:
+     *      Constructor for the DiceRollAnimation class.
+     * 
+     * Parameters:
+     *      - const std::string& folderPath: Path to the folder containing the animation frames.
+     *      - const std::string& framePrefix: Prefix for the animation frame file names.
+     *      - sf::Time frameDuration: Duration of each animation frame (default is 1 millisecond).
+     * 
+     * Returns:
+     *      - None
+     */
     DiceRollAnimation(const std::string& folderPath, const std::string& framePrefix, sf::Time frameDuration = sf::milliseconds(1))
         : folderPath(folderPath), framePrefix(framePrefix), frameDuration(frameDuration), currentFrame(0), isAnimating(false), randomFrame(0) {}
 
-    // Load frames into textures
+    /**
+     * Public: loadFrames
+     * 
+     * Description:
+     *      Loads the animation frames from the specified folder.
+     * 
+     * Parameters:
+     *      - int start: Starting frame number.
+     *      - int end: Ending frame number.
+     * 
+     * Returns:
+     *      - bool: True if the frames were loaded successfully, false otherwise.
+     */
     bool loadFrames(int start, int end) {
         std::string frameNum[2] = {"00", "0"};
         int g = 0;
@@ -44,12 +100,37 @@ public:
         return true;
     }
 
+
+    /**
+     * Public: getRandomFrame
+     * 
+     * Description:
+     *      Returns the randomly selected dice side (1-6).
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - int: The randomly selected dice side.
+     */
     int getRandomFrame()
     {
         return randomFrame;
     }
 
-    // Start the animation
+
+    /**
+     * Public: startAnimation
+     * 
+     * Description:
+     *      Starts the dice roll animation.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - None
+     */
     void startAnimation() {
         if (!textures.empty()) {
             isAnimating = true;
@@ -59,6 +140,19 @@ public:
         }
     }
 
+
+        /**
+         * Public: update
+         * 
+         * Description:
+         *      Updates the animation state.
+         * 
+         * Parameters:
+         *      - None
+         * 
+         * Returns:
+         *      - None
+         */
         void update() {
         if (isAnimating) {
             if (clock.getElapsedTime() >= frameDuration) {
@@ -78,57 +172,57 @@ public:
         }
     }
 
+
+
+    /**
+     * Public: setScale
+     * 
+     * Description:
+     *      Sets the scale of the sprite.
+     * 
+     * Parameters:
+     *      - float x: Horizontal scale factor.
+     *      - float y: Vertical scale factor.
+     * 
+     * Returns:
+     *      - None
+     */
     void setScale(float x, float y)
     {
         sprite.setScale(x,y);
     }
 
 
-    // Set sprite position
+    /**
+     * Public: setPosition
+     * 
+     * Description:
+     *      Sets the position of the sprite.
+     * 
+     * Parameters:
+     *      - float x: X-coordinate of the position.
+     *      - float y: Y-coordinate of the position.
+     * 
+     * Returns:
+     *      - None
+     */
     void setPosition(float x, float y) {
         sprite.setPosition(x, y);
     }
 
-    // Draw the sprite
+    /**
+     * Public: draw
+     * 
+     * Description:
+     *      Draws the sprite on the specified window.
+     * 
+     * Parameters:
+     *      - sf::RenderWindow& window: Window to draw the sprite on.
+     * 
+     * Returns:
+     *      - None
+     */
     void draw(sf::RenderWindow& window) {
         window.draw(sprite);
     }
 };
-
-// // Main function to demonstrate usage
-// int main() {
-//     sf::RenderWindow window(sf::VideoMode(800, 600), "Dice Roll Animation");
-
-//     // Seed the random number generator
-//     std::srand(static_cast<unsigned>(std::time(nullptr)));
-
-//     // Create a DiceRollAnimation instance
-//     DiceRollAnimation diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(12));
-//     if (!diceRoll.loadFrames(1, 24)) {
-//         return -1; // Exit if frame loading fails
-//     }
-//     diceRoll.setPosition(300.f, 200.f);
-
-//     // Main game loop
-//     while (window.isOpen()) {
-//         sf::Event event;
-//         while (window.pollEvent(event)) {
-//             if (event.type == sf::Event::Closed) {
-//                 window.close();
-//             }
-//             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-//                 diceRoll.startAnimation(); // Start animation on Space key press
-//             }
-//         }
-
-//         // Update animation
-//         diceRoll.update();
-
-//         // Render
-//         window.clear(sf::Color::White);
-//         diceRoll.draw(window);
-//         window.display();
-//     }
-
-//     return 0;
-// }

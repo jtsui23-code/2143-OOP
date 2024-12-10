@@ -138,7 +138,7 @@ public:
     int getScore() const {
         return score;
     }
-    
+
     /**
      * Public: increaseScore
      * 
@@ -160,7 +160,7 @@ public:
 };
 
 /**
- * Knucklebone Game Class
+ *  Game Class
  * 
  * Description:
  *      This class represents the Knucklebone game, handling game logic, 

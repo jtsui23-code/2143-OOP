@@ -5,6 +5,41 @@
 #include <iostream>
 #include <utility>
 
+
+
+
+/**
+ * Grid Class
+ * 
+ * Description:
+ *      This class represents a grid in the Knucklebone game, 
+ *      handling grid logic, cell rendering, and user input.
+ * 
+ * Public Methods:
+ *      - Grid()
+ *      - Grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, std::string fontPath, float cellSpacing)
+ *      - void loadAssets()
+ *      - std::vector<sf::Text> getGridNum()
+ *      - bool putNumOnClickedCell(const sf::Vector2f& pos, int diceNum)
+ *      - int getLastClickedCellIndex()
+ *      - void checkCanDestroyColumn(int enemyLastClickedIndex, int cellNum)
+ *      - int countFillGrid()
+ *      - void shiftCellsDown()
+ *      - void draw(sf::RenderWindow& window)
+ *
+ * 
+ * Usage: 
+ *      - Grid grid();
+ *      - Grid grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, std::string fontPath, float cellSpacing);
+ *      - grid.loadAssets();
+ *      - grid.getGridNum();
+ *      - grid.putNumOnClickedCell(const sf::Vector2f& pos, int diceNum);
+ *      - grid.getLastClickedCellIndex();
+ *      - grid.checkCanDestroyColumn(int enemyLastClickedIndex, int cellNum);
+ *      - grid.countFillGrid();
+ *      - grid.shiftCellsDown();
+ *      - grid.draw(sf::RenderWindow& window);
+ */
 class Grid {
 private:
     int rows, cols;                        // Grid dimensions
@@ -41,6 +76,9 @@ public:
      *      - float gridStartY: The starting Y coordinate for the grid.
      *      - std::string fontPath: The path to the font file.
      *      - float cellSpacing: The spacing between each cell.
+     * 
+     * Return:
+     *      - void
      */
     Grid(int rows, int cols, float cellSize, float gridStartX, float gridStartY, std::string fontPath = "media/fonts/Arial.ttf", float cellSpacing = 0.f)
         : rows(rows), cols(cols), cellSize(cellSize), gridStartX(gridStartX), gridStartY(gridStartY), cellSpacing(cellSpacing), fontPath(fontPath) 
@@ -201,6 +239,7 @@ public:
     {
 
         int gridWidth = 3;
+
         //Checks if the enemy places the same dice number on the same cell 
         // if so the player loses their cell number
         if(gridNum[enemyLastClickedIndex].getString() == std::to_string(cellNum))
@@ -260,6 +299,9 @@ public:
     int countFillGrid()
     {
         int count = 0;
+
+        // Only counts the gridNUm if the 
+        // values are valid 1-6
         for (const auto& value:gridNum)
         {
             if(value.getString() != "0") 
@@ -286,6 +328,8 @@ public:
     void shiftCellsDown()
     {
         
+        // Shifts each cell down if there is 
+        // a empty cell on the same column
         for(int i = 0; i < gridNum.size(); i++)
         {
             if(gridNum[i + cols].getString() == "0")
