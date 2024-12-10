@@ -159,7 +159,7 @@ class Game
     // on the title screen.
     sf:: Text titleName;
 
-    // Text ovrehead above the turn indicator
+    // label above the turn indicator
     // to explain what the turn indicator image
     // means
     sf:: Text turnText;
@@ -185,8 +185,8 @@ class Game
     titleName.setPosition(sf::Vector2f(200.f, 10.f));
     titleName.setFillColor(sf::Color::White);
 
-    // Set sthe position and color of the turn indicator text
-    turnText.setPosition(sf::Vector2f(550.f, 400.f));
+    // Set sthe position and color of the turn indicator label
+    turnText.setPosition(sf::Vector2f(590.f, 350.f));
     turnText.setFillColor(sf::Color::White);
 
     // Set sthe position and texture of the turn indicator 
@@ -260,9 +260,18 @@ class Game
     // 1 repsenting player2
     i = 0;
    
-
+    // Set the dice number to 0 so
+    // player cannot one use 
+    // previous dice roll on their own grid
+    // and forcing player to have to roll once to 
+    // start the game
      diceNum = 0;
+
+     // checker for if its player1's turn
      firstTurn = true;
+
+     // count for how many dice rolls are left per
+     // player so player cannot do infinite dice rolls
      diceRolls = 1;
 
 
@@ -497,6 +506,10 @@ class Game
                     turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
                 }
 
+                // Displays the turn indicator label
+                window->draw(turnText);
+
+                // Displays the turn indicator 
                 window->draw(turnIndicator);
 
                 // Makes a copy of the vector of Text 
