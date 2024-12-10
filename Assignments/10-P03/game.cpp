@@ -102,6 +102,9 @@ class Game
     bool firstTurn;
     int diceRolls;
 
+    sf:: Text declareWinner;
+
+
 
 
     public:
@@ -111,6 +114,7 @@ class Game
     ,instructionText("Enter your Players' name:", font, 24), nameText("", font, 24), displayName("", font, 45)
     , displayName2("", font, 45), score1("Score: ", font, 45), score2("Score: ", font, 45), score1Display("Score: ", font, 45)
     ,score2Display("Score: ", font, 45), diceRoll("media/animations/dice_roll/", "frame_", sf::milliseconds(50))
+    , declareWinner("", font, 60)
 
     {
     height = 1200;
@@ -143,6 +147,10 @@ class Game
 
     displayName2.setPosition(950, 25);
     displayName2.setFillColor(sf::Color::Yellow);
+
+    // Setting up the win declaration text.
+    declareWinner.setPosition(450.f,630.f);
+    declareWinner.setFillColor(sf::Color::White);
 
 
     score1.setFillColor(sf::Color:: White);
@@ -346,70 +354,102 @@ class Game
         // 
         else
         {
-            if (firstTurn)
+            // If none of the grids are filled, 
+            // Continue the game loop
+            if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
             {
-                turnIndicator.setScale(1.f,1.f);
-                turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
+                if (firstTurn)
+                {
+                    turnIndicator.setScale(1.f,1.f);
+                    turnIndicator.setPosition(sf::Vector2f(550.f, 450.f));
+                }
+                if (!firstTurn)
+                {
+                    turnIndicator.setScale(-1.f, 1.f);
+                    // If you don't reoffset the position
+                    // then the image will be positioned off to the left
+                    turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
+                }
+
+                window->draw(turnIndicator);
+
+                // Makes a copy of the vector of Text 
+                // Containing all of the numbers on a single grid
+                grid1Num = grid1.getGridNum();
+                grid2Num = grid2.getGridNum();
+
+                // Displays the grid and the numbers in each of the 
+                // grid cells
+                grid1.draw(*window);
+                grid2.draw(*window);
+
+                // renders the roll button on the screen
+                window->draw(button);
+                window->draw(roll);
+
+                //Displays both players' names
+                window->draw(displayName);
+                window->draw(displayName2);
+
+                // Displays both players' score
+                window->draw(score1Display);
+                window->draw(score2Display);
+
+                diceRoll.draw(*window);           // Draw the dice animation
+
+
+                // Gets the calculated scores for each player with the 
+                // multiplier for any of the same numbers in the common column
+                int sc1 = calculateScore(grid1Num);
+                int sc2 = calculateScore(grid2Num);
+
+
+                // This converts the int scores into strings 
+                // so they are in a data type that can by displayed on
+                // the window
+                score1.setString(std::to_string(sc1));
+                score2.setString(std::to_string(sc2));
+
+                // Displays the scores
+                window->draw(score1);
+                window->draw(score2);
+
+                
+                // Stores the name of the player and their score in player class
+                player[0].setScore(std::stoi(score1.getString().toAnsiString()));
+                player[0].setName(displayName.getString());
+
+                player[1].setScore(std::stoi(score2.getString().toAnsiString()));
+                player[1].setName(displayName2.getString());
+
             }
-            if (!firstTurn)
+
+            // If one of the grids are filled, 
+            // Show who the winner is of the game and stop
+            // the game loop
+            if(grid2.countFillGrid() >= 9 || grid1.countFillGrid() >= 9)
             {
-                turnIndicator.setScale(-1.f, 1.f);
-                // If you don't reoffset the position
-                // then the image will be positioned off to the left
-                turnIndicator.setPosition(sf::Vector2f(550.f + 150.f , 450.f));
+                // Makes a copy of the vector of Text 
+                // Containing all of the numbers on a single grid
+                grid1Num = grid1.getGridNum();
+                grid2Num = grid2.getGridNum();
+
+                // Displays the grid and the numbers in each of the 
+                // grid cells
+                grid1.draw(*window);
+                grid2.draw(*window);
+
+                //Displays both players' names
+                window->draw(displayName);
+                window->draw(displayName2);
+
+                // Displays both players' score
+                window->draw(score1Display);
+                window->draw(score2Display);
+
+
             }
-
-            window->draw(turnIndicator);
-
-            // Makes a copy of the vector of Text 
-            // Containing all of the numbers on a single grid
-            grid1Num = grid1.getGridNum();
-            grid2Num = grid2.getGridNum();
-
-            // Displays the grid and the numbers in each of the 
-            // grid cells
-            grid1.draw(*window);
-            grid2.draw(*window);
-
-            // renders the roll button on the screen
-            window->draw(button);
-            window->draw(roll);
-
-            //Displays both players' names
-            window->draw(displayName);
-            window->draw(displayName2);
-
-            // Displays both players' score
-            window->draw(score1Display);
-            window->draw(score2Display);
-
-            diceRoll.draw(*window);           // Draw the dice animation
-
-
-            // Gets the calculated scores for each player with the 
-            // multiplier for any of the same numbers in the common column
-            int sc1 = calculateScore(grid1Num);
-            int sc2 = calculateScore(grid2Num);
-
-
-            // This converts the int scores into strings 
-            // so they are in a data type that can by displayed on
-            // the window
-            score1.setString(std::to_string(sc1));
-            score2.setString(std::to_string(sc2));
-
-            // Displays the scores
-            window->draw(score1);
-            window->draw(score2);
-
             
-            // Stores the name of the player and their score in player class
-            player[0].setScore(std::stoi(score1.getString().toAnsiString()));
-            player[0].setName(displayName.getString());
-
-            player[1].setScore(std::stoi(score2.getString().toAnsiString()));
-            player[1].setName(displayName2.getString());
-
 
         }
         
