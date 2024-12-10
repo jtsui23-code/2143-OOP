@@ -25,7 +25,7 @@ and player2 has a 5 on any cell on their own column 2, then they lose that cell 
 - Run the program using the terminal
 - Enter the name of the input file as an argument
 - Play game
-- 
+  
 ### Example:
   - ./s.sh game.cpp -o [write the name of exe you want]
   - ./[name of exe] 
