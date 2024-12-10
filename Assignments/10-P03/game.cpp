@@ -39,10 +39,29 @@
 #include <map> 
 #include<vector>
 
-
-
-
-
+/**
+ * Player Class
+ * 
+ * Description:
+ *      This class represents a player in the Knucklebone game, 
+ *      storing the player's name and score.
+ * 
+ * Public Methods:
+ *      - void setName(std::string playerName)
+ *      - std::string getName()
+ *      - void setScore(int playerScore)
+ *      - int getScore() const
+ *      - void increaseScore(int points)
+ *
+ * 
+ * Usage: 
+ *      - Player player();
+ *      - player.setName("Player Name");
+ *      - player.getName();
+ *      - player.setScore(100);
+ *      - player.getScore();
+ *      - player.increaseScore(50);
+ */
 class Player {
 private:
     std::string name;
@@ -52,25 +71,86 @@ public:
 
     Player() : score(0) {}
 
-    // Setters and Getters
+    /**
+     * Public: setName
+     * 
+     * Description:
+     *      Sets the player's name.
+     * 
+     * Parameters:
+     *      - std::string playerName: The player's name.
+     * 
+     * Returns:
+     *      - None
+     */
     void setName(std:: string playerName) 
     {
         name = playerName;
     }
+
+    /**
+     * Public: getName
+     * 
+     * Description:
+     *      Gets the player's name.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - std::string: The player's name.
+     */
 
     std::string getName()
     {
         return name;
     }
 
+    /**
+     * Public: setScore
+     * 
+     * Description:
+     *      Sets the player's score.
+     * 
+     * Parameters:
+     *      - int playerScore: The player's score.
+     * 
+     * Returns:
+     *      - None
+     */
     void setScore(int playerScore) {
         score = playerScore;
     }
 
+
+    /**
+     * Public: getScore
+     * 
+     * Description:
+     *      Gets the player's score.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - int: The player's score.
+     */
     int getScore() const {
         return score;
     }
-
+    
+    /**
+     * Public: increaseScore
+     * 
+     * Description:
+     *      Increases the player's score by a specified amount.
+     * 
+     * Parameters:
+     *      - int points: The amount to increase the score by.
+     * 
+     * Returns:
+     *      - None
+     */
     void increaseScore(int points) 
     {
         score += points;
@@ -456,8 +536,14 @@ class Game
                                 // be floating cells after a destroyed column
                                 grid2.shiftCellsDown();
                             }
+
+                            //Updates vector storing all grid1's numbers
                             grid1Num = grid1.getGridNum();
+                            // Sets diceNum to 0 so other player can't use the same dice roll of their
+                            // grid
                             diceNum = 0;
+
+                            //Switches turn
                             firstTurn = !firstTurn;
                         }
                         
@@ -492,8 +578,14 @@ class Game
 
                             }
 
+                            //Updates vector storing all grid2's numbers
                             grid2Num = grid2.getGridNum();
+
+                            // Sets diceNum to 0 so other player can't use the same dice roll of their
+                            // grid
                             diceNum = 0;
+
+                            //Switches turn
                             firstTurn = !firstTurn;
                         }
                     }
@@ -554,31 +646,44 @@ class Game
 
     void inputNames(sf::Event event)
     {
+        // Checks if both players have entered their name
         if (!nameEntered[i] && i < 2) 
         {
-            if (event.type == sf::Event::TextEntered) {
-                if (event.text.unicode == '\b') {
+            // Checks if key input is a letter, backspace or enter key
+            if (event.type == sf::Event::TextEntered) 
+            {
+                if (event.text.unicode == '\b') 
+                {
                     // Handle backspace
-                    if (!userInput[i].empty()) {
+                    if (!userInput[i].empty()) 
+                    {
                         userInput[i].pop_back();
                     }
-                } else if (event.text.unicode == '\r') {
+                }   
+                else if (event.text.unicode == '\r') 
+                {
                     // Handle enter
                     nameEntered[i] = true;
 
                     if (i == 0) {
                         displayName.setString(userInput[0]);
                     }
+
                     if (i == 1) {
                         displayName2.setString(userInput[1]);
                     }
 
-                    if (i < 1) {
+                    if (i < 1) 
+                    {
                         i++;
                     }
-                } else if (event.text.unicode < 128) {
-                    // Handle valid characters
-                    userInput[i] += static_cast<char>(event.text.unicode);
+                }    
+
+                else if (event.text.unicode < 128) 
+                {
+                // Handle valid characters
+                userInput[i] += static_cast<char>(event.text.unicode);
+
                 }
 
                 nameText.setString(userInput[i]);
@@ -588,14 +693,25 @@ class Game
 
 
     
-    
-
+    /**
+     * Public: rollDice
+     * 
+     * Description:
+     *      Rolls the dice and updates the game state.
+     * 
+     * Parameters:
+     *      - sf::Event event: SFML event object.
+     * 
+     * Returns:
+     *      - None
+     */
     void rollDice(sf::Event event)
     {
         // Start the animation on space key press
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
                 if (diceRolls != 0)
                 {
+                    // Can only roll dice if no grid is fill
                     if(grid2.countFillGrid() < 9 && grid1.countFillGrid() < 9)
                     {
 
@@ -607,16 +723,53 @@ class Game
             }
     }
 
+    /**
+     * Public: updateDice
+     * 
+     * Description:
+     *      Updates the dice animation.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - None
+     */
     void updateDice()
     {
         diceRoll.update();
     }
 
+
+    /**
+     * Public: clear
+     * 
+     * Description:
+     *      Clears the game window.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - None
+     */
     void clear()
     {
     window->clear(sf::Color::Black);
     }
 
+    /**
+     * Public: updateGame
+     * 
+     * Description:
+     *      Updates the game state and renders the game window.
+     * 
+     * Parameters:
+     *      - None
+     * 
+     * Returns:
+     *      - None
+     */
     void updateGame()
     {
 
@@ -789,6 +942,27 @@ class Game
         
         
     }
+
+    /**
+     * Public: calculateScore
+     * 
+     * Description:
+     *      Calculates the score for a given grid. Accounts for the score multiplier 
+     *      if there are many of the same numbers in a common column. 
+     *      If there are two fo the same number then double their sum.
+     *      Ex) If there are two 3's in the same column their score would add up to 
+     *      be 3 + 3 = 6 * 2 so 12. 
+     *      If there are 3 of the same number in a common column then 
+     *      their sum is triples. 
+     *      Ex) If there are four 5's in the same column then the score for those cells would be
+     *      5 + 5 + 5 = 15 * 3 = 45
+     * 
+     * Parameters:
+     *      - const std::vector<sf::Text>& gridNumbers: Vector of Text objects representing the grid numbers.
+     * 
+     * Returns:
+     *      - int: The calculated score.
+     */
     
 
     int calculateScore(const std::vector<sf::Text>& gridNumbers) 
@@ -885,40 +1059,51 @@ class Game
 
 int main() 
 {
-    
+    // Creates game window
     sf::RenderWindow window(sf::VideoMode(1200, 800), "KnuckleBone");
 
+    // Creates game object and passes in the window createdd above
     Game game(window);
 
+    //Load the assets of the game
     game.loadAssets();
 
     // Seed the random number generator for the dice roll
+    // This is so every new game has a different set of dice rolls
     std::srand(static_cast<unsigned>(std::time(nullptr)));
 
 
     // Main game loop
     while (window.isOpen()) 
     {
+        // Game event object used for tracking mouse input/ keyboard input
         sf::Event event;
         while (window.pollEvent(event)) 
         {
+            // Checks if the user clicks x button on the game
+            // If so exit the game
             if (event.type == sf::Event::Closed) 
             {
                 game.close();
             }
             
+            // Checks for mouse input 
             game.checkMouse(event);
 
+            // Checks for keyboard input
             game.inputNames(event);
+
             // Start the animation on space key press
             game.rollDice(event);
         }
 
-        // Update the animation
+        // Rolls the dice
         game.updateDice();
 
+        // Clears screen to remove old displayed objects
         game.clear();       
         
+        // Updates the game logic and window
         game.updateGame();
 
 
