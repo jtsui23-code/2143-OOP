@@ -324,13 +324,18 @@ class Game
     void updateGame()
     {
 
-
+        // This will make the game remain on the 
+        // player input screen until both player has entered their 
+        // names
          if (!nameEntered[i] && i < 2) 
         {
             window->draw(instructionText);
             window->draw(nameText);
         } 
-
+        
+        // This is the game screen
+        // that appears after both players have entered their names 
+        // 
         else
         {
             if (firstTurn)
@@ -348,28 +353,49 @@ class Game
 
             window->draw(turnIndicator);
 
+            // Makes a copy of the vector of Text 
+            // Containing all of the numbers on a single grid
             grid1Num = grid1.getGridNum();
             grid2Num = grid2.getGridNum();
+
+            // Displays the grid and the numbers in each of the 
+            // grid cells
             grid1.draw(*window);
             grid2.draw(*window);
+
+            // renders the roll button on the screen
             window->draw(button);
             window->draw(roll);
+
+            //Displays both players' names
             window->draw(displayName);
             window->draw(displayName2);
+
+            // Displays both players' score
             window->draw(score1Display);
             window->draw(score2Display);
+
             diceRoll.draw(*window);           // Draw the dice animation
 
 
+            // Gets the calculated scores for each player with the 
+            // multiplier for any of the same numbers in the common column
             int sc1 = calculateScore(grid1Num);
             int sc2 = calculateScore(grid2Num);
 
+
+            // This converts the int scores into strings 
+            // so they are in a data type that can by displayed on
+            // the window
             score1.setString(std::to_string(sc1));
             score2.setString(std::to_string(sc2));
 
+            // Displays the scores
             window->draw(score1);
             window->draw(score2);
 
+            
+            // Stores the name of the player and their score in player class
             player[0].setScore(std::stoi(score1.getString().toAnsiString()));
             player[0].setName(displayName.getString());
 
@@ -380,6 +406,7 @@ class Game
         }
         
 
+        
         // Display everything
         window->display();
 
