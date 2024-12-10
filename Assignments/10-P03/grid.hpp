@@ -40,7 +40,7 @@ public:
                 float y = gridStartY + row * (cellSize + cellSpacing);
                 cell.setPosition(x, y);
                 gridNum.push_back(sf::Text("0", font, 45));
-                gridNum.back().setPosition(x,y);
+                gridNum.back().setPosition(x + 50.f,y + 35.f);
                 gridNum.back().setFillColor(sf::Color::White);
 
                 // Add the cell to the grid
@@ -86,7 +86,7 @@ public:
                     {
                         // Turns the dice number into a string so it can be 
                         // put into the gridNum Text
-                        gridNum[index].SetString(std::to_string(diceNum));
+                        gridNum[index].setString(std::to_string(diceNum));
                     }
 
             }
@@ -116,8 +116,8 @@ public:
         {
             // This will only print the numbers 
             // on the grid if they are 1 - 6
-            
-            if(value.getString != "0")
+
+            if(value.getString() != "0")
             {
                 window.draw(value);
             }

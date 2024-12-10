@@ -346,6 +346,9 @@ class Game
             }
 
             window->draw(turnIndicator);
+
+            grid1Num = grid1.getGridNum();
+            grid2Num = grid2.getGridNum();
             grid1.draw(*window);
             grid2.draw(*window);
             window->draw(button);
@@ -447,14 +450,14 @@ class Game
                 {
                     std:: cout << "Found a double" << std::endl;
                     // Double the sum if the number appears twice
-                    score += (number * 2); // (sum) * 2
+                    score += (number * 2 * 2); // (sum) * 2
                 } 
                 else if (frequency == 3) 
                 {
                     std:: cout << "Found a triple" << std::endl;
 
                     // Triple the sum if the number appears three or more times
-                    score += (number * 3); // (sum) * 3
+                    score += (number * 3 * 3); // (sum) * 3
                 } 
                 else 
                 {
