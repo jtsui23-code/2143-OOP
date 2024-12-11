@@ -28,7 +28,10 @@
 *                    diceRoll.hpp
 *                    diceRoll.exe (Do not need to run)
 *                    s.sh (The bash file for compiling SFML faster)
-*               
+*                    Player1.png (Turn indicator sprite inside of "media/extra/Player1.png")
+*                    Red.png (Roll button texture inside of "media/extra/Red.png")
+*                    titleFont.ttf (Font for title text of Knucklebone)
+*
 *****************************************************************************/
 
 #include <SFML/Graphics.hpp>
