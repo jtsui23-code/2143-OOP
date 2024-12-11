@@ -22,7 +22,8 @@
 *       ./s.sh game.cpp -o game
 *      ./game [filename]
 * 
-*  Files:            game.cpp
+*  Files:            
+*                     game.cpp
 *                    game.exe 
 *                    grid.hpp
 *                    diceRoll.hpp
