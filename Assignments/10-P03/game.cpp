@@ -23,7 +23,7 @@
 *      ./game [filename]
 * 
 *  Files:            
-*                     game.cpp
+*                    game.cpp
 *                    game.exe 
 *                    grid.hpp
 *                    diceRoll.hpp
