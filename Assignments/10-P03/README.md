@@ -17,7 +17,8 @@ and player2 has a 5 on any cell on their own column 2, then they lose that cell 
 |   4  | [diceRoll.hpp](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/diceRoll.hpp)        | Hpp file for DiceRollAnimation Class.      |
 |   5  | [diceRoll.exe](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/diceRoll)        | Compile DiceRollAnimation (do not run).      |
 |   6  | [s.sh](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/s.sh)        | Bash script for making compiling SFML easier.      |
-|   7  | [Player1.png](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/media/extra/Player1.png)        | Turn indicator sprite that points to which player's turn it is. The image was in "meida/extra/Player1.png" in the game      |
+|   7  | [Player1.png](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/media/extra/Player1.png)        | Turn indicator sprite that points to which player's turn it is. The image is in "meida/extra/Player1.png" in the game      |
+|   8  | [Red.png](https://github.com/jtsui23-code/2143-OOP/blob/main/Assignments/10-P03/media/extra/Red.png)        | Button texture to give the roll button a red gradient color. The image was is in "meida/extra/Player1.png" in the game     |
 
 
 ### Instructions:
